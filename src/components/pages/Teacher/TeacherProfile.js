@@ -15,6 +15,8 @@ const TeacherProfile = props => {
       <ComponentTitle titleText={'Teacher'} />
       <img src={''} alt="teacher" />
       <Label>Name:</Label>
+      <Label>Contact</Label>
+      <Label>Bio:</Label>
       <Label>Education:</Label>
       <Label>Location:</Label>
       <Label>Subjects:</Label>
