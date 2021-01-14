@@ -1,12 +1,14 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 import { ComponentTitle, Button } from '../../common/';
 import { Label } from '../../common/ProfileStyle';
 
 const TeacherProfile = props => {
   /*Make a Teacher Role in State to dynamic change the component. This must get the id of the teacher*/
   /*Labels should be replaced with data from the backend*/
+  const history = useHistory();
 
-  const editProfileHandler = event => {};
+  const editProfileHandler = event => history.push('/teacher/edit');
 
   return (
     <div>
@@ -20,7 +22,7 @@ const TeacherProfile = props => {
       <Button
         classType={'edit-headmaster-profile'}
         buttonText={'Edit Profile'}
-        handleClick={''}
+        handleClick={editProfileHandler}
       />
     </div>
   );
