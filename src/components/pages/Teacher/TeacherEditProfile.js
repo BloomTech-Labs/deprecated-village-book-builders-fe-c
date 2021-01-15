@@ -4,7 +4,12 @@ import { Link } from 'react-router-dom';
 import { ComponentTitle, Button } from '../../common/';
 import { debugLog } from '../../../utils/debugMode';
 import { Form, Input } from 'antd';
-import { layout, FormContainer, tailLayout } from '../../common/FormStyle';
+import {
+  layout,
+  FormContainer,
+  tailLayout,
+  Required,
+} from '../../common/FormStyle';
 
 const TeacherEditProfile = props => {
   const initialFormValues = {
@@ -163,6 +168,9 @@ const TeacherEditProfile = props => {
             classType={'save-changes-button'}
             buttonText={'Save Changes'}
           />
+          <Required id="requiredMsg">
+            Fields with <span id="required">&#42;</span> are required.
+          </Required>
         </Form>
       </FormContainer>
     </div>
