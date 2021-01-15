@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { useParams } from 'react-router-dom';
-import { Link } from 'react-router-dom';
-import { ComponentTitle, Button } from '../../common/';
+import { connect } from 'react-redux';
+import { editTeacherProfile } from '../../../state/actions/teacherActions';
+import { useParams, Link } from 'react-router-dom';
+import { ComponentTitles, Button } from '../../common/';
 import { debugLog } from '../../../utils/debugMode';
 import { Form, Input } from 'antd';
 import {
@@ -12,6 +13,7 @@ import {
 } from '../../common/FormStyle';
 
 const TeacherEditProfile = props => {
+  const { editTeacherProfile } = props;
   const initialFormValues = {
     name: '',
     contact: '',
@@ -27,7 +29,7 @@ const TeacherEditProfile = props => {
 
   const handleSubmit = event => {
     const id = params.id;
-    //editTeacherProfile(id, formData)
+    editTeacherProfile(id, formData);
   };
 
   const handleChange = event => {
@@ -37,7 +39,7 @@ const TeacherEditProfile = props => {
 
   return (
     <div>
-      <ComponentTitle titleText={'Edit Teacher Profile'} />
+      <ComponentTitles titleText={'Edit Teacher Profile'} />
       <FormContainer>
         <Form.item {...tailLayout}>
           <Link to="/teacher">Go Back to your Profile</Link>
@@ -164,17 +166,19 @@ const TeacherEditProfile = props => {
               onChange={event => handleChange(event)}
             />
           </Form.item>
-          <Button
-            classType={'save-changes-button'}
-            buttonText={'Save Changes'}
-          />
-          <Required id="requiredMsg">
-            Fields with <span id="required">&#42;</span> are required.
-          </Required>
+          <Form.item>
+            <Button
+              classType={'save-changes-button'}
+              buttonText={'Save Changes'}
+            />
+            <Required id="requiredMsg">
+              Fields with <span id="required">&#42;</span> are required.
+            </Required>
+          </Form.item>
         </Form>
       </FormContainer>
     </div>
   );
 };
 
-export default TeacherEditProfile;
+export default connect(null, { editTeacherProfile })(TeacherEditProfile);

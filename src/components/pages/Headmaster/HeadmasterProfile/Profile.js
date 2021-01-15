@@ -7,7 +7,7 @@ import { fetchHeadmasterProfile } from '../../../../state/actions';
 
 import { Profile, Label } from '../../../common/ProfileStyle';
 import { Button } from '../../../common/';
-import { ComponentTitle } from '../../../common';
+import { ComponentTitles } from '../../../common';
 
 // const baseURL = 'https://cors-anywhere.herokuapp.com/http://54.158.134.245/api';
 const HeadmasterProfile = props => {
@@ -17,7 +17,7 @@ const HeadmasterProfile = props => {
   }, [fetchHeadmasterProfile]);
   return (
     <Profile>
-      <ComponentTitle titleText="Village" />
+      <ComponentTitles titleText="Village" />
       <img src={`${headmasterProfile.headmasters_picture}`} alt="headmaster" />
       <Label>Name:</Label>
       <p>{`${headmasterProfile.first_name} ${headmasterProfile.last_name}`}</p>

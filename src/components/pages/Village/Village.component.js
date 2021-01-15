@@ -7,7 +7,7 @@ import { fetchVillage } from '../../../state/actions/index';
 import { Profile, Label } from '../../common/ProfileStyle';
 import { Button } from '../../common/';
 import { ThemeProvider } from 'styled-components';
-import { ComponentTitle } from '../../common';
+import { ComponentTitles } from '../../common';
 
 const Village = ({ villageData, userId, fetchVillage }) => {
   // const { villageData, fetchVillage } = props;
@@ -18,7 +18,7 @@ const Village = ({ villageData, userId, fetchVillage }) => {
   // console.log("village component, villageData", villageData);
   return (
     <Profile>
-      <ComponentTitle titleText="Village" />
+      <ComponentTitles titleText="Village" />
       <Label>Headmaster:</Label>
       <p>Mr Headmaster</p>
       <Label>Village Contact:</Label>

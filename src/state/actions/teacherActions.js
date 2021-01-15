@@ -1,4 +1,4 @@
-import { axiosWithAuth } from '../../utils';
+import { axiosWithAuth } from '../../utils/axiosWithAuth';
 import { debugLog } from '../../utils/debugMode.js';
 
 export const EDIT_TEACHER_PROFILE = 'EDIT_TEACHER_PROFILE';

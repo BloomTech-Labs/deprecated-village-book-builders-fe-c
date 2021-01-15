@@ -1,6 +1,6 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
-import { ComponentTitle, Button } from '../../common/';
+import { ComponentTitles, Button } from '../../common/';
 import { Label } from '../../common/ProfileStyle';
 
 const TeacherProfile = props => {
@@ -12,7 +12,7 @@ const TeacherProfile = props => {
 
   return (
     <div>
-      <ComponentTitle titleText={'Teacher'} />
+      <ComponentTitles titleText={'Teacher'} />
       <img src={''} alt="teacher" />
       <Label>Name:</Label>
       <Label>Contact</Label>
