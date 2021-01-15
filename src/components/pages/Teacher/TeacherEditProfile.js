@@ -41,11 +41,11 @@ const TeacherEditProfile = props => {
     <div>
       <ComponentTitles titleText={'Edit Teacher Profile'} />
       <FormContainer>
-        <Form.item {...tailLayout}>
+        <Form.Item {...tailLayout}>
           <Link to="/teacher">Go Back to your Profile</Link>
-        </Form.item>
+        </Form.Item>
         <Form onFinish={handleSubmit} form={form} {...layout}>
-          <Form.item
+          <Form.Item
             label="Name"
             name="name"
             rules={[{ required: true, message: 'Name is required.' }]}
@@ -57,8 +57,8 @@ const TeacherEditProfile = props => {
               value={initialFormValues.name}
               onChange={event => handleChange(event)}
             />
-          </Form.item>
-          <Form.item
+          </Form.Item>
+          <Form.Item
             label="Contact"
             name="contact"
             rules={[
@@ -75,8 +75,8 @@ const TeacherEditProfile = props => {
               value={initialFormValues.contact}
               onChange={event => handleChange(event)}
             />
-          </Form.item>
-          <Form.item
+          </Form.Item>
+          <Form.Item
             label="Bio"
             name="bio"
             rules={[
@@ -93,8 +93,8 @@ const TeacherEditProfile = props => {
               value={initialFormValues.bio}
               onChange={event => handleChange(event)}
             />
-          </Form.item>
-          <Form.item
+          </Form.Item>
+          <Form.Item
             label="Education"
             name="education"
             rules={[
@@ -111,8 +111,8 @@ const TeacherEditProfile = props => {
               value={initialFormValues.education}
               onChange={event => handleChange(event)}
             />
-          </Form.item>
-          <Form.item
+          </Form.Item>
+          <Form.Item
             label="Location"
             name="location"
             rules={[{ required: true, message: 'Where do you teach' }]}
@@ -124,8 +124,8 @@ const TeacherEditProfile = props => {
               value={initialFormValues.location}
               onChange={event => handleChange(event)}
             />
-          </Form.item>
-          <Form.item
+          </Form.Item>
+          <Form.Item
             label="Location"
             name="location"
             rules={[{ required: true, message: 'Where do you teach' }]}
@@ -137,8 +137,8 @@ const TeacherEditProfile = props => {
               value={initialFormValues.location}
               onChange={event => handleChange(event)}
             />
-          </Form.item>
-          <Form.item
+          </Form.Item>
+          <Form.Item
             label="Subjects"
             name="subjects"
             rules={[{ required: true, message: 'What do you teach' }]}
@@ -150,8 +150,8 @@ const TeacherEditProfile = props => {
               value={initialFormValues.subjects}
               onChange={event => handleChange(event)}
             />
-          </Form.item>
-          <Form.item
+          </Form.Item>
+          <Form.Item
             label="Fun Fact"
             name="fun_fact"
             rules={[
@@ -165,8 +165,8 @@ const TeacherEditProfile = props => {
               value={initialFormValues.funFact}
               onChange={event => handleChange(event)}
             />
-          </Form.item>
-          <Form.item>
+          </Form.Item>
+          <Form.Item>
             <Button
               classType={'save-changes-button'}
               buttonText={'Save Changes'}
@@ -174,7 +174,7 @@ const TeacherEditProfile = props => {
             <Required id="requiredMsg">
               Fields with <span id="required">&#42;</span> are required.
             </Required>
-          </Form.item>
+          </Form.Item>
         </Form>
       </FormContainer>
     </div>

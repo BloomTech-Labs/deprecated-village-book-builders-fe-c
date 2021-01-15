@@ -1,5 +1,5 @@
 import React from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import { ComponentTitles, Button } from '../../common/';
 import { Label } from '../../common/ProfileStyle';
 
@@ -7,8 +7,10 @@ const TeacherProfile = props => {
   /*Make a Teacher Role in State to dynamic change the component. This must get the id of the teacher*/
   /*Labels should be replaced with data from the backend*/
   const history = useHistory();
+  const params = useParams();
 
-  const editProfileHandler = event => history.push('/teacher/edit');
+  const editProfileHandler = event =>
+    history.push(`/teacher/edit/${params.id}`);
 
   return (
     <div>
