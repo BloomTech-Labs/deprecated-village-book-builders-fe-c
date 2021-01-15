@@ -20,7 +20,6 @@ const App = ({ role, checkToken }) => {
         <Route path="/login">
           <Login />
         </Route>
-        {/*Temporary so I can see headmaster profile*/}
         <Route path="/headmaster/edit">
           <ProfileForm />
         </Route>
