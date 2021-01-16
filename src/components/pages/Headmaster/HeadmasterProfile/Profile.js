@@ -7,61 +7,60 @@ import { fetchHeadmasterProfile } from '../../../../state/actions';
 
 import { Profile, Label } from '../../../common/ProfileStyle';
 import { Button } from '../../../common/';
-import { ComponentTitle } from '../../../common';
+import { ComponentTitles } from '../../../common';
 
 // const baseURL = 'https://cors-anywhere.herokuapp.com/http://54.158.134.245/api';
 const HeadmasterProfile = props => {
-  const { profile } = props;
+  const { headmasterProfile, fetchHeadmasterProfile } = props;
   useEffect(() => {
-    props.fetchHeadmasterProfile(1); // change this later with login
-  }, []);
-  console.log(profile);
+    fetchHeadmasterProfile(1); // change this later with login
+  }, [fetchHeadmasterProfile]);
   return (
     <Profile>
-      <ComponentTitle titleText="Village" />
-      <img src={`${profile.headmasters_picture}`} />
+      <ComponentTitles titleText="Village" />
+      <img src={`${headmasterProfile.headmasters_picture}`} alt="headmaster" />
       <Label>Name:</Label>
-      <p>{`${profile.first_name} ${profile.last_name}`}</p>
+      <p>{`${headmasterProfile.first_name} ${headmasterProfile.last_name}`}</p>
 
       <Label>Gender:</Label>
-      <p>{profile.gender}</p>
+      <p>{headmasterProfile.gender}</p>
 
       <Label>Address:</Label>
-      <p>{profile.address}</p>
+      <p>{headmasterProfile.address}</p>
 
       <Label>Bio:</Label>
-      <p>{profile.bio}</p>
+      <p>{headmasterProfile.bio}</p>
 
       <Label>Communication App:</Label>
-      <p>{profile.communication_app}</p>
+      <p>{headmasterProfile.communication_app}</p>
 
       <Label>DOB:</Label>
-      <p>{profile.dob}</p>
+      <p>{headmasterProfile.dob}</p>
 
       <Label>General Availability:</Label>
-      <p>{profile.general_availability}</p>
+      <p>{headmasterProfile.general_availability}</p>
 
       <Label>Mentor Advisor Point of Contact:</Label>
-      <p>{profile.mentor_advisor_point_of_contact}</p>
+      <p>{headmasterProfile.mentor_advisor_point_of_contact}</p>
 
       <Label>Mentor Program Goals:</Label>
-      <p>{profile.goals_mentor_program}</p>
+      <p>{headmasterProfile.goals_mentor_program}</p>
 
       <Label>Personal Goals:</Label>
-      <p>{profile.goals_personal}</p>
+      <p>{headmasterProfile.goals_personal}</p>
 
       <Label>School Community Goals:</Label>
-      <p>{profile.goals_school_community}</p>
+      <p>{headmasterProfile.goals_school_community}</p>
 
       <Label>Goals Mentor Program:</Label>
-      <p>{profile.goals_mentor_program}</p>
+      <p>{headmasterProfile.goals_mentor_program}</p>
 
       <p></p>
 
       <Label>Time Zone:</Label>
-      <p>{profile.time_zone}</p>
+      <p>{headmasterProfile.time_zone}</p>
       <div className="villageButtons">
-        <Link to={`/profile/edit/${profile.id}`}>
+        <Link to={`/profile/edit/${headmasterProfile.id}`}>
           <ThemeProvider theme={{ color: '#6ac66b' }}>
             <Button buttonText="Edit Your Profile" />
           </ThemeProvider>
@@ -73,7 +72,7 @@ const HeadmasterProfile = props => {
 
 const mapStateToProps = state => {
   return {
-    profile: state.headmasterReducer.headmasterProfile,
+    headmasterProfile: state.headmasterReducer.headmasterProfile,
   };
 };
 

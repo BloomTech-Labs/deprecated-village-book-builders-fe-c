@@ -5,10 +5,10 @@ import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import App from './components/App';
-
 import 'antd/dist/antd.less';
-
 import reducer from './state/reducers/index';
+import dotenv from 'dotenv';
+dotenv.config();
 
 const store = createStore(reducer, applyMiddleware(thunk));
 

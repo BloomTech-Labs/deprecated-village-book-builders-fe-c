@@ -7,7 +7,11 @@ import '../style.css';
 import { checkToken } from '../state/actions/index';
 import Login from './pages/Login/Login';
 import HeadmasterDashboard from './pages/Headmaster/HeadmasterDashboard';
+import Profile from '../components/pages/Headmaster/HeadmasterProfile/Profile';
+import ProfileForm from '../components/pages/Headmaster/HeadmasterProfile/ProfileForm';
 import AdminDashboard from './pages/Admin/AdminDashboard';
+import TeacherProfile from './pages/Teacher/TeacherProfile';
+import TeacherEditProfile from './pages/Teacher/TeacherEditProfile';
 
 const App = ({ role, checkToken }) => {
   return (
@@ -15,6 +19,19 @@ const App = ({ role, checkToken }) => {
       <Switch>
         <Route path="/login">
           <Login />
+        </Route>
+        <Route path="/headmaster/edit">
+          <ProfileForm />
+        </Route>
+        <Route path="/headmaster">
+          <Profile />
+        </Route>
+        {/*Teacher Routes*/}
+        <Route path="/teacher/edit/:id">
+          <TeacherEditProfile />
+        </Route>
+        <Route path="/teacher/:id">
+          <TeacherProfile />
         </Route>
 
         <Route path="/">

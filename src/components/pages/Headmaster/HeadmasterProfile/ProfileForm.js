@@ -61,7 +61,7 @@ const ProfileForm = props => {
         setFormData(res.data);
       })
       .catch(err => console.dir(err));
-  }, []);
+  }, [form]);
 
   const onChange = e => {
     console.log('radio checked', e.target.value);
