@@ -9,6 +9,14 @@ const MenteeProfile = ({ currentMentee }) => {
   //   currentMentee,
   //   moment.utc(currentMentee.dob).format('dddd, MMMM Do of YYYY')
   // );
+
+  const toDate = date => {
+    const result = moment(`${date}`, 'YYYY-MM-DDTHH:mm:ssZ').format(
+      'MMMM Do YYYY'
+    );
+    console.log(result);
+    return result;
+  };
   const columns = [
     {
       title: 'Contact Hours - From',
@@ -64,8 +72,8 @@ const MenteeProfile = ({ currentMentee }) => {
           <Divider plain>Gender</Divider>
           <p>{currentMentee.gender}</p>
           {/* // commented out for now since there seems to be an error about the Date of Birth */}
-          {/* <Divider plain>Date of Birth</Divider>
-          <p>{moment.utc(currentMentee.dob).format('dddd, MMMM Do of YYYY')}</p> */}
+          <Divider plain>Date of Birth</Divider>
+          <p>{toDate(currentMentee.dob)}</p>
           <Divider plain>Mentor</Divider>
           <p>
             {currentMentee.mentorId ? currentMentee.mentorId : 'Unassigned'}

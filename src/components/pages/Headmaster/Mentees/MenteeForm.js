@@ -104,9 +104,12 @@ const MenteeForm = ({ currentMentee, editHeadmasterProfile }) => {
           label="Date of Birth"
           name="dob"
           rules={[{ required: true, message: 'Date of Birth is required.' }]}
-          defaultValue={currentMentee.dob}
         >
-          <DatePicker name="dob" onChange={e => handleChange(e)} />
+          <DatePicker
+            name="dob"
+            onChange={e => handleChange(e)}
+            defaultValue={moment(`${currentMentee.dob}`)}
+          />
         </Form.Item>
         <Form.Item
           label="email"
