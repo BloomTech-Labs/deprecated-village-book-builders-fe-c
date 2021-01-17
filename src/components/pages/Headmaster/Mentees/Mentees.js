@@ -1,14 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import { axiosWithAuth } from '../../../../utils/axiosWithAuth';
+import { Link } from 'react-router-dom';
 import { Button, Divider, Input, Modal, List, Avatar } from 'antd';
 import { connect } from 'react-redux';
 import { checkToken, fetchMentees } from '../../../../state/actions/index';
 import MenteeForm from './MenteeForm';
 import MenteeProfile from './MenteeProfile';
+import NewMenteeForm from './NewMenteeForm';
 const Mentees = props => {
   let menteesSelection = [...props.mentees];
   const [search, setSearch] = useState('');
   const [showModal, setShowModal] = useState(false);
+  const [showNewMenteeModal, setShowNewMenteeModal] = useState(false);
   const [editing, setEditing] = useState(false);
   const [currentMentee, setCurrentMentee] = useState({});
 
@@ -30,6 +33,10 @@ const Mentees = props => {
       // console.log(menteeData);
     }
   };
+  const newMenteeFormHandler = e => {
+    e.preventDefault();
+    setShowNewMenteeModal(!showNewMenteeModal);
+  };
 
   if (Array.isArray(menteesSelection)) {
     menteesSelection = menteesSelection.filter(
@@ -47,12 +54,22 @@ const Mentees = props => {
     <div className="menteeContainer">
       <h1 id="menteeTittle">Mentee Management</h1>
       <div className="exploreWrapper">
-        <Button
-          style={{ width: '80%', marginBottom: '10pt', alignSelf: 'center' }}
-          align="center"
+        <div
+          style={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignSelf: 'center',
+          }}
         >
-          Create New Library
-        </Button>
+          <Button>Create New Library</Button>
+          <Button
+            onClick={e => {
+              newMenteeFormHandler(e);
+            }}
+          >
+            Create New Mentee
+          </Button>
+        </div>
         <Input.Search
           value={search}
           placeholder="Search by Name"
@@ -134,10 +151,22 @@ const Mentees = props => {
         ]}
       >
         {editing ? (
-          <MenteeForm />
+          // passed in mentee info through component to show values when editing
+          <MenteeForm currentMentee={currentMentee} />
         ) : (
           <MenteeProfile currentMentee={currentMentee} />
         )}
+      </Modal>
+
+      <Modal
+        className="menteeModal"
+        visible={showNewMenteeModal}
+        title=" New Mentee Form"
+        onCancel={newMenteeFormHandler}
+        maskClosable
+        destroyOnClose
+      >
+        <NewMenteeForm />
       </Modal>
     </div>
   );

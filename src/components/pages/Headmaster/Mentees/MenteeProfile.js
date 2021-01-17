@@ -3,11 +3,12 @@ import moment from 'moment';
 import React from 'react';
 import { debugLog } from '../../../../utils/debugMode';
 const MenteeProfile = ({ currentMentee }) => {
-  debugLog(
-    'Prop drilled from Mentees.js',
-    currentMentee,
-    moment.utc(currentMentee.dob).format('dddd, MMMM Do of YYYY')
-  );
+  // commented out for now since there seems to be an error about the Date of Birth
+  // debugLog(
+  //   'Prop drilled from Mentees.js',
+  //   currentMentee,
+  //   moment.utc(currentMentee.dob).format('dddd, MMMM Do of YYYY')
+  // );
   const columns = [
     {
       title: 'Contact Hours - From',
@@ -62,8 +63,9 @@ const MenteeProfile = ({ currentMentee }) => {
           <p>{currentMentee.primary_language}</p>
           <Divider plain>Gender</Divider>
           <p>{currentMentee.gender}</p>
-          <Divider plain>Date of Birth</Divider>
-          <p>{moment.utc(currentMentee.dob).format('dddd, MMMM Do of YYYY')}</p>
+          {/* // commented out for now since there seems to be an error about the Date of Birth */}
+          {/* <Divider plain>Date of Birth</Divider>
+          <p>{moment.utc(currentMentee.dob).format('dddd, MMMM Do of YYYY')}</p> */}
           <Divider plain>Mentor</Divider>
           <p>
             {currentMentee.mentorId ? currentMentee.mentorId : 'Unassigned'}
