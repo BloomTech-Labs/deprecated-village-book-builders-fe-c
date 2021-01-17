@@ -39,7 +39,7 @@ const genders = ['Male', 'Female', 'Other'];
 
 const MenteeForm = ({ currentMentee, editHeadmasterProfile }) => {
   console.log(currentMentee);
-  const [formData, setFormData] = useState(initialState);
+  const [formData, setFormData] = useState(currentMentee);
   //   const [value, setValue] = useState(1);
   const pathname = useHistory().location.pathname;
   const params = useParams().id;
@@ -256,7 +256,26 @@ const MenteeForm = ({ currentMentee, editHeadmasterProfile }) => {
             onChange={e => handleChange(e)}
           />
         </Form.Item>
-        <Form.Item
+
+        {currentMentee.dynamic_questions.map((question, index) => (
+          <Form.Item
+            type="text"
+            label={question.question}
+            name={`question ${index}`}
+          >
+            <span key={question.qId}>
+              <Input
+                type="text"
+                name={`Q ${index} answer`}
+                value={formData.dynamic_questions[question.qId].answer}
+                defaultValue={question.answer}
+                onChange={e => handleChange(e)}
+              />
+            </span>
+          </Form.Item>
+        ))}
+
+        {/* <Form.Item
           label="General Availability"
           name="general_availability"
           rules={[
@@ -334,7 +353,7 @@ const MenteeForm = ({ currentMentee, editHeadmasterProfile }) => {
             defaultValue={currentMentee.mentor_advisor_point_of_contact}
             onChange={e => handleChange(e)}
           />
-        </Form.Item>
+        </Form.Item> */}
 
         <Form.Item {...tailLayout}>
           <Button
