@@ -30,6 +30,59 @@ const initialState = {
   school_lvl: '',
   academic_description: '',
   support_needed: '',
+  availability: {
+    time_zone: '',
+    as_early_as: '',
+    as_late_as: '',
+    methods: [],
+  },
+  dynamic_questions: [
+    {
+      qId: 0,
+      question: 'My favorite thing to do in my free time is',
+      answer: '',
+    },
+    {
+      qId: 1,
+      question: 'When I grow up, I want to be',
+      answer: '',
+    },
+    {
+      qId: 2,
+      question: 'Goals & Dreams Notes',
+      answer: '',
+    },
+    {
+      qId: 3,
+      question: 'Personal Struggles Notes',
+      answer: '',
+    },
+    {
+      qId: 4,
+      question: 'Other interests/hobbies',
+      answer: '',
+    },
+    {
+      qId: 5,
+      question: 'Skills Notes',
+      answer: '',
+    },
+    {
+      qId: 6,
+      question: 'Family Notes',
+      answer: '',
+    },
+    {
+      qId: 7,
+      question: 'Other Notes',
+      answer: '',
+    },
+    {
+      qId: 8,
+      question: 'Admin Notes',
+      answer: '',
+    },
+  ],
 };
 
 const dateFormat = 'MM/DD/YYYY';
@@ -238,7 +291,39 @@ const NewMenteeForm = () => {
             onChange={e => handleChange(e)}
           />
         </Form.Item>
-        <Form.Item
+        {Object.entries(formData.availability).map(([key, val], i) => (
+          // console.log(key, val)
+          <Form.Item type="text" label={key} name={formData.availability.key}>
+            <span key={i}>
+              <Input
+                type="text"
+                name={key}
+                value={formData.availability.key}
+                defaultValue={val}
+                onChange={e => handleChange(e)}
+              />
+            </span>
+          </Form.Item>
+        ))}
+
+        {formData.dynamic_questions.map((question, index) => (
+          <Form.Item
+            type="text"
+            label={question.question}
+            name={`question ${index}`}
+          >
+            <span key={question.qId}>
+              <Input
+                type="text"
+                name={`Q ${index} answer`}
+                value={formData.dynamic_questions[question.qId].answer}
+                defaultValue={question.answer}
+                onChange={e => handleChange(e)}
+              />
+            </span>
+          </Form.Item>
+        ))}
+        {/* <Form.Item
           label="General Availability"
           name="general_availability"
           rules={[
@@ -311,7 +396,7 @@ const NewMenteeForm = () => {
             value={formData.mentor_advisor_point_of_contact}
             onChange={e => handleChange(e)}
           />
-        </Form.Item>
+        </Form.Item> */}
 
         <Form.Item {...tailLayout}>
           <Button
