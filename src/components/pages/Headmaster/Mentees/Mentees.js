@@ -70,7 +70,11 @@ const Mentees = props => {
                   <List.Item.Meta
                     avatar={<Avatar src={item.mentee_picture} />}
                     title={
-                      <a href="https://ant.design">
+                      <a
+                        onClick={e => {
+                          moreInfoHandler(e, item);
+                        }}
+                      >
                         {item.first_name + ' ' + item.last_name}
                       </a>
                     }
