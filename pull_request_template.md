@@ -13,14 +13,14 @@ Please keep a PR:
 
 ## PR Description:
 Please make sure your description:
-* Outlines the motivation for the feature
-* Links to user story / trello card: _____
-* Has properly commented code
-* Includes screenshot of completed state of feature (if applicable)
+- [ ] Outlines the motivation for the feature
+- [ ] Links to user story / trello card: _____
+- [ ] Has properly commented code
+- [ ] Includes screenshot of completed state of feature (if applicable)
 
 
 # Making Commits
-* small, atomic commits
+- [ ] small, atomic commits
 
 ## Commit Name Format:
 "feature/[verb][descriptor]"
@@ -33,10 +33,21 @@ Be explicit.
 
 
 # Reviewing a PR
-* Leave comments and suggestions!
-* Is code formatted properly?
-* Is commented out code deleted?
-* Are functions relatively small?
-* Are console logs removed?
-* Is there duplicate code?
-* Does code have TODO's commited to main? (please don't)
+- [ ] Leave comments and suggestions!
+- [ ] Is code formatted properly?
+- [ ] Is commented out code deleted?
+- [ ] Are functions relatively small?
+- [ ] Are console logs removed?
+- [ ] Is there duplicate code?
+- [ ] Does code have TODO's commited to main? (please don't)
+
+## Type of Change
+- [ ] New feature
+- [ ] Refactoring / Bug fix
+- [ ] Documentation update 
+​
+
+
+## Requester Questions
+
+```Add any questions, comments, or concerns you have as the person initiating the pull request for your reviewers```
