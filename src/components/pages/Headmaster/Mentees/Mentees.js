@@ -33,22 +33,31 @@ const Mentees = props => {
   };
 
   // These are search options that appear to the left of the search bar
-  const { Option } = Select;
+  const { Option, OptGroup } = Select;
 
   function searchOptions(value) {
     setSearchBy(value);
   }
   const selectBefore = (
     <Select
-      defaultValue="Search by:"
+      defaultValue="Name"
       className="select-before"
       onChange={searchOptions}
     >
-      <Option value="Name">Search by name</Option>
-      <Option value="YYYY-MM-DD">Search by DOB</Option>
+      <Option value="Name">Name</Option>
+      <Option value="YYYY-MM-DD">Birthday</Option>
+      <Option value="Email">Email</Option>
+      <Option value="Timezone">Timezone</Option>
+      <OptGroup label="Grades:">
+        <Option value="Min English grade">English</Option>
+        <Option value="Min Math grade">Math</Option>
+        <Option value="Min Reading grade">Reading</Option>
+        <Option value="Min School grade">School</Option>
+      </OptGroup>
     </Select>
   );
 
+  // Search filters go hear 'searchBy' is the field
   if (Array.isArray(menteesSelection) && searchBy == 'name') {
     menteesSelection = menteesSelection.filter(
       item =>
@@ -58,6 +67,27 @@ const Mentees = props => {
   } else if (Array.isArray(menteesSelection) && searchBy == 'YYYY-MM-DD') {
     menteesSelection = menteesSelection.filter(item =>
       item.dob.includes(search)
+    );
+  } else if (Array.isArray(menteesSelection) && searchBy == 'Email') {
+    menteesSelection = menteesSelection.filter(item =>
+      item.email.toLowerCase().includes(search.toLowerCase())
+    );
+  } else if (Array.isArray(menteesSelection) && searchBy == 'Timezone') {
+    menteesSelection = menteesSelection.filter(item =>
+      item.availability.time_zone.toLowerCase().includes(search.toLowerCase())
+    );
+    // english_lvl, math_lvl, reading_lvl, school_lvl
+  } else if (
+    Array.isArray(menteesSelection) &&
+    (searchBy == 'English grade' ||
+      'Math Grade' ||
+      'Reading grade' ||
+      'School grade')
+  ) {
+    let sliced = searchBy.toLowerCase().split(' ');
+    let searchTerm = sliced[1] + '_lvl';
+    menteesSelection = menteesSelection.filter(
+      item => item[searchTerm] >= search
     );
   }
 
