@@ -11,6 +11,7 @@ const Mentees = props => {
   const [showModal, setShowModal] = useState(false);
   const [editing, setEditing] = useState(false);
   const [currentMentee, setCurrentMentee] = useState({});
+  const [searchBy, setSearchBy] = useState('name');
 
   const editingHandler = e => {
     setEditing(!editing);
@@ -31,18 +32,32 @@ const Mentees = props => {
     }
   };
 
+  // These are search options that appear to the left of the search bar
   const { Option } = Select;
+
+  function searchOptions(value) {
+    setSearchBy(value);
+  }
   const selectBefore = (
-    <Select defaultValue="Search by name" className="select-before">
-      <Option value="Search by DOB"></Option>
+    <Select
+      defaultValue="Search by:"
+      className="select-before"
+      onChange={searchOptions}
+    >
+      <Option value="Name">Search by name</Option>
+      <Option value="YYYY-MM-DD">Search by DOB</Option>
     </Select>
   );
 
-  if (Array.isArray(menteesSelection)) {
+  if (Array.isArray(menteesSelection) && searchBy == 'name') {
     menteesSelection = menteesSelection.filter(
       item =>
         item.first_name.toLowerCase().includes(search.toLowerCase()) ||
         item.last_name.toLowerCase().includes(search.toLowerCase())
+    );
+  } else if (Array.isArray(menteesSelection) && searchBy == 'YYYY-MM-DD') {
+    menteesSelection = menteesSelection.filter(item =>
+      item.dob.includes(search)
     );
   }
 
@@ -63,7 +78,7 @@ const Mentees = props => {
         <Input.Search
           addonBefore={selectBefore}
           value={search}
-          placeholder="Search by Name"
+          placeholder={searchBy}
           style={{ width: '80%', alignSelf: 'center' }}
           onChange={searchHandler}
         />
