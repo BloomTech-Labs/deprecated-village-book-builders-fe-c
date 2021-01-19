@@ -28,11 +28,10 @@ const Mentees = props => {
       // Opening Modal
       setShowModal(true);
       setCurrentMentee(menteeData);
-      // console.log(menteeData);
     }
   };
 
-  // These are search options that appear to the left of the search bar
+  // These are the dropdown options for the searchbar
   const { Option, OptGroup } = Select;
 
   function searchOptions(value) {
@@ -43,6 +42,7 @@ const Mentees = props => {
       defaultValue="Name"
       className="select-before"
       onChange={searchOptions}
+      style={{ width: 100 }}
     >
       <Option value="Name">Name</Option>
       <Option value="YYYY-MM-DD">Birthday</Option>
@@ -57,7 +57,7 @@ const Mentees = props => {
     </Select>
   );
 
-  // Search filters go hear 'searchBy' is the field
+  // Search filters go here 'searchBy' is the field we're filtering through
   if (Array.isArray(menteesSelection) && searchBy == 'name') {
     menteesSelection = menteesSelection.filter(
       item =>
@@ -76,13 +76,13 @@ const Mentees = props => {
     menteesSelection = menteesSelection.filter(item =>
       item.availability.time_zone.toLowerCase().includes(search.toLowerCase())
     );
-    // english_lvl, math_lvl, reading_lvl, school_lvl
+    // this dynamically filters grades by the selected class. The 'searchBy' strings must match the corresonding value on the selectBy options as we're just slicing the string as it's passed in.
   } else if (
     Array.isArray(menteesSelection) &&
-    (searchBy == 'English grade' ||
-      'Math Grade' ||
-      'Reading grade' ||
-      'School grade')
+    (searchBy == 'Min English grade' ||
+      'Min Math grade' ||
+      'Min Reading grade' ||
+      'Min School grade')
   ) {
     let sliced = searchBy.toLowerCase().split(' ');
     let searchTerm = sliced[1] + '_lvl';
