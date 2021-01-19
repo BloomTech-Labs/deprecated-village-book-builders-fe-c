@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { axiosWithAuth } from '../../../../utils/axiosWithAuth';
-import { Button, Divider, Input, Modal, List, Avatar } from 'antd';
+import { Button, Divider, Input, Modal, List, Avatar, Select } from 'antd';
 import { connect } from 'react-redux';
 import { checkToken, fetchMentees } from '../../../../state/actions/index';
 import MenteeForm from './MenteeForm';
@@ -31,6 +31,13 @@ const Mentees = props => {
     }
   };
 
+  const { Option } = Select;
+  const selectBefore = (
+    <Select defaultValue="Search by name" className="select-before">
+      <Option value="Search by DOB"></Option>
+    </Select>
+  );
+
   if (Array.isArray(menteesSelection)) {
     menteesSelection = menteesSelection.filter(
       item =>
@@ -54,6 +61,7 @@ const Mentees = props => {
           Create New Library
         </Button>
         <Input.Search
+          addonBefore={selectBefore}
           value={search}
           placeholder="Search by Name"
           style={{ width: '80%', alignSelf: 'center' }}
