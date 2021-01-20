@@ -106,6 +106,7 @@ const Mentees = props => {
           Create New Library
         </Button>
         <Input.Search
+          data-testid="search-bar"
           addonBefore={selectBefore}
           value={search}
           placeholder={searchBy}
