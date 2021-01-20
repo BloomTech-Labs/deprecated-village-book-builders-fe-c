@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { axiosWithAuth } from '../../../../utils/axiosWithAuth';
-import { Button, Divider, Input, Modal, List, Avatar } from 'antd';
+import { Button, Divider, Input, Modal, List, Avatar, Select } from 'antd';
 import { connect } from 'react-redux';
 import { checkToken, fetchMentees } from '../../../../state/actions/index';
 import MenteeForm from './MenteeForm';
@@ -11,6 +11,7 @@ const Mentees = props => {
   const [showModal, setShowModal] = useState(false);
   const [editing, setEditing] = useState(false);
   const [currentMentee, setCurrentMentee] = useState({});
+  const [searchBy, setSearchBy] = useState('name');
 
   const editingHandler = e => {
     setEditing(!editing);
@@ -27,15 +28,66 @@ const Mentees = props => {
       // Opening Modal
       setShowModal(true);
       setCurrentMentee(menteeData);
-      // console.log(menteeData);
     }
   };
 
-  if (Array.isArray(menteesSelection)) {
+  // These are the dropdown options for the searchbar
+  const { Option, OptGroup } = Select;
+
+  function searchOptions(value) {
+    setSearchBy(value);
+  }
+  const selectBefore = (
+    <Select
+      defaultValue="Name"
+      className="select-before"
+      onChange={searchOptions}
+      style={{ width: 100 }}
+    >
+      <Option value="Name">Name</Option>
+      <Option value="YYYY-MM-DD">Birthday</Option>
+      <Option value="Email">Email</Option>
+      <Option value="Timezone">Timezone</Option>
+      <OptGroup label="Grades:">
+        <Option value="Min English grade">English</Option>
+        <Option value="Min Math grade">Math</Option>
+        <Option value="Min Reading grade">Reading</Option>
+        <Option value="Min School grade">School</Option>
+      </OptGroup>
+    </Select>
+  );
+
+  // Search filters go here 'searchBy' is the field we're filtering through
+  if (Array.isArray(menteesSelection) && searchBy == 'name') {
     menteesSelection = menteesSelection.filter(
       item =>
         item.first_name.toLowerCase().includes(search.toLowerCase()) ||
         item.last_name.toLowerCase().includes(search.toLowerCase())
+    );
+  } else if (Array.isArray(menteesSelection) && searchBy == 'YYYY-MM-DD') {
+    menteesSelection = menteesSelection.filter(item =>
+      item.dob.includes(search)
+    );
+  } else if (Array.isArray(menteesSelection) && searchBy == 'Email') {
+    menteesSelection = menteesSelection.filter(item =>
+      item.email.toLowerCase().includes(search.toLowerCase())
+    );
+  } else if (Array.isArray(menteesSelection) && searchBy == 'Timezone') {
+    menteesSelection = menteesSelection.filter(item =>
+      item.availability.time_zone.toLowerCase().includes(search.toLowerCase())
+    );
+    // this dynamically filters grades by the selected class. The 'searchBy' strings must match the corresonding value on the selectBy options as we're just slicing the string as it's passed in.
+  } else if (
+    Array.isArray(menteesSelection) &&
+    (searchBy == 'Min English grade' ||
+      'Min Math grade' ||
+      'Min Reading grade' ||
+      'Min School grade')
+  ) {
+    let sliced = searchBy.toLowerCase().split(' ');
+    let searchTerm = sliced[1] + '_lvl';
+    menteesSelection = menteesSelection.filter(
+      item => item[searchTerm] >= search
     );
   }
 
@@ -54,8 +106,9 @@ const Mentees = props => {
           Create New Library
         </Button>
         <Input.Search
+          addonBefore={selectBefore}
           value={search}
-          placeholder="Search by Name"
+          placeholder={searchBy}
           style={{ width: '80%', alignSelf: 'center' }}
           onChange={searchHandler}
         />
@@ -70,7 +123,11 @@ const Mentees = props => {
                   <List.Item.Meta
                     avatar={<Avatar src={item.mentee_picture} />}
                     title={
-                      <a href="https://ant.design">
+                      <a
+                        onClick={e => {
+                          moreInfoHandler(e, item);
+                        }}
+                      >
                         {item.first_name + ' ' + item.last_name}
                       </a>
                     }
