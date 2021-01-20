@@ -157,7 +157,7 @@ const NewMenteeForm = () => {
           <DatePicker name="dob" onChange={e => handleChange(e)} />
         </Form.Item>
         <Form.Item
-          label="email"
+          label="Email"
           name="email"
           rules={[{ required: true, message: 'email is required.' }]}
         >
@@ -247,7 +247,7 @@ const NewMenteeForm = () => {
         </Form.Item>
 
         <Form.Item
-          label="school Level"
+          label="School Level"
           name="school_lvl"
           rules={[{ required: true, message: 'school level is required.' }]}
         >

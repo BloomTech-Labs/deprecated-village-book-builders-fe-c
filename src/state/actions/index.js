@@ -163,3 +163,26 @@ export const addLibrary = (id, data) => dispatch => {
     })
     .catch(err => console.dir(err));
 };
+
+// // Mentee (Student)
+// export const editMenteeProfile = (id, data) => dispatch => {
+//   axiosWithAuth()
+//     .put(`/mentee/${id}`, data)
+//     .then(res => {
+//       // ? refactor all the window.location.replace's so this doesn't force a refresh. see how login does it for example.
+//       window.location.replace('/profile/');
+//     })
+//     .catch(err => console.dir(err));
+// };
+// export const fetchMenteeProfile = id => dispatch => {
+//   axiosWithAuth()
+//     .get(`/mentee/${id}`) // change this later
+//     .then(res => {
+//       console.log('fetchMenteeProfile action --> ', res.data);
+//       dispatch({
+//         type: actionTypes.FETCH_MENTEE_PROFILE,
+//         payload: res.data,
+//       });
+//     })
+//     .catch(err => console.dir(err));
+// };
