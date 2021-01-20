@@ -12,6 +12,7 @@ import ProfileForm from '../components/pages/Headmaster/HeadmasterProfile/Profil
 import AdminDashboard from './pages/Admin/AdminDashboard';
 import TeacherProfile from './pages/Teacher/TeacherProfile';
 import TeacherEditProfile from './pages/Teacher/TeacherEditProfile';
+import StudentDashboard from './pages/Student/StudentDashboard';
 
 const App = ({ role, checkToken }) => {
   return (
@@ -43,6 +44,9 @@ const App = ({ role, checkToken }) => {
               {/* //once we make a reusable dashboard/sidebar, this is where we would put it, passing in the role as props to fill it out accordingly. */}
               {role === 'headmaster' && <HeadmasterDashboard />}
               {role === 'admin' && <AdminDashboard />}
+
+              {/* checks token to see if role is mentee. credentials to check with -> mentees@mentees.com : password */}
+              {role === 'mentee' && <StudentDashboard />}
             </>
           ) : (
             <Redirect to="/login" />
