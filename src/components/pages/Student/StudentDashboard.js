@@ -74,7 +74,7 @@ function StudentDashboard() {
           width={desktop ? 300 : 500}
           height={500}
         >
-          <h2>Hello, Headmaster!</h2>
+          <h2>Hello, Student!</h2>
 
           <NavLink to="/dashboard" onClick={() => setVisible(true)}>
             <button className="btn l2-btn menuLinks">Home</button>
@@ -93,4 +93,4 @@ function StudentDashboard() {
 
 export default StudentDashboard;
 
-// cloned same format as headmaster dashboard with only visible profile view and ability to edit
+// cloned same format as headmaster dashboard with only visible profile view and ability to edit profile

@@ -17,7 +17,7 @@ import Button from '../../../common/Button';
 import { debugLog } from '../../../../utils/debugMode';
 
 const baseURL = 'https://cors-anywhere.herokuapp.com/http://54.158.134.245/api';
-
+// unusued for now, but will be implmeneted when endpoint is used
 const initialState = {
   id: 0,
   first_name: '',
