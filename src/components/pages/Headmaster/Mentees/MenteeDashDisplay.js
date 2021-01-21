@@ -11,6 +11,7 @@ const DashDisplayContainer = styled.div`
   left: 20%;
   width: 80%;
   height: auto;
+  background: #fffff6;
 `;
 
 export default function MenteeDashDisplay(props) {
