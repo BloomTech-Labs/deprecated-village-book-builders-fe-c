@@ -38,12 +38,10 @@ const timeFormat = 'HH:mm';
 const genders = ['Male', 'Female', 'Other'];
 
 const MenteeForm = props => {
-  console.log('HELLO TOM', props);
   const { editing, currentMentee } = props;
   const [formData, setFormData] = useState(
     editing ? currentMentee : initialState
   );
-  //   const [value, setValue] = useState(1);
   const pathname = useHistory().location.pathname;
   const params = useParams().id;
   const [form] = Form.useForm();
@@ -59,7 +57,6 @@ const MenteeForm = props => {
 
   // this converts dob to populate form when editing
   let dobData = currentMentee.dob.split('T');
-  console.log('DOB data:', dobData[0]);
   currentMentee.dob = dobData[0];
 
   // this sets the form data to the current mentee card headmaster is editing
@@ -70,13 +67,6 @@ const MenteeForm = props => {
       setFormData(initialState);
     }
   }, [editing]);
-
-  console.log(editing, formData);
-
-  //   const onChange = e => {
-  //     console.log('radio checked', e.target.value);
-  //     setValue(e.target.value);
-  //   };
 
   const handleSubmit = async () => {
     debugLog(formData);
@@ -94,9 +84,7 @@ const MenteeForm = props => {
       setFormData({ ...formData, [e.target.name]: e.target.value });
     }
   };
-  //   const handleChange = e => {
-  //     debugLog(moment.isMoment(e));
-  //   };
+
   return (
     <FormContainer>
       <Form.Item {...tailLayout}></Form.Item>
