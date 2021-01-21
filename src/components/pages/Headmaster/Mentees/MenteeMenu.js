@@ -36,7 +36,7 @@ export default function MenteeMenu(props) {
       visible={true}
       closeIcon={false}
       mask={false}
-      width="300px"
+      width="20%"
       zIndex={1}
     >
       <NavLink to="/">

@@ -8,7 +8,9 @@ import MenteeHome from './MenteeHome';
 const DashDisplayContainer = styled.div`
   z-index: 1;
   position: absolute;
-  left: 300px;
+  left: 20%;
+  width: 80%;
+  height: auto;
 `;
 
 export default function MenteeDashDisplay(props) {
