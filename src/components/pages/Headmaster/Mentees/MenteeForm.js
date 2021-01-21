@@ -16,7 +16,7 @@ import {
 import Button from '../../../common/Button';
 import { debugLog } from '../../../../utils/debugMode';
 
-const initialState = {
+let initialState = {
   first_name: '',
   last_name: '',
   gender: '',
@@ -38,11 +38,21 @@ const timeFormat = 'HH:mm';
 const genders = ['Male', 'Female', 'Other'];
 
 const MenteeForm = props => {
+  console.log('HELLO TOM', props);
+  const { editing, currentMentee } = props;
   const [formData, setFormData] = useState(initialState);
   //   const [value, setValue] = useState(1);
   const pathname = useHistory().location.pathname;
   const params = useParams().id;
   const [form] = Form.useForm();
+
+  useEffect(() => {
+    if (editing) {
+      setFormData(currentMentee);
+    }
+  }, []);
+
+  console.log(editing, formData);
 
   //   const onChange = e => {
   //     console.log('radio checked', e.target.value);
