@@ -12,7 +12,7 @@ import ProfileForm from '../components/pages/Headmaster/HeadmasterProfile/Profil
 import AdminDashboard from './pages/Admin/AdminDashboard';
 import TeacherProfile from './pages/Teacher/TeacherProfile';
 import TeacherEditProfile from './pages/Teacher/TeacherEditProfile';
-import MenteeDashboard from './pages/Mentee/MenteeDashboard';
+import MenteeDashboard from './pages/Headmaster/Mentees/MenteeDashboard';
 
 const App = ({ role, checkToken }) => {
   return (
