@@ -48,6 +48,16 @@ const MenteeForm = props => {
   const params = useParams().id;
   const [form] = Form.useForm();
 
+  // this converts gender from string to value to populate form when editing
+  if (currentMentee.gender === 'Male') {
+    currentMentee.gender = 0;
+  } else if (currentMentee.gender === 'Female') {
+    currentMentee.gender = 1;
+  } else {
+    currentMentee.gender = 2;
+  }
+
+  // this sets the form data to the current mentee card headmaster is editing
   useEffect(() => {
     if (editing) {
       setFormData(currentMentee);
