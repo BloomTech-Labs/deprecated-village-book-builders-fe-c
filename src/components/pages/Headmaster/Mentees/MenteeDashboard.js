@@ -1,16 +1,13 @@
 import React from 'react';
-import { Switch, Route } from 'react-router-dom';
 
 import MenteeMenu from './MenteeMenu';
-import Logout from '../../../Logout';
+import MenteeDashDisplay from './MenteeDashDisplay';
 
 export default function MenteeDashboard(props) {
   return (
     <div>
-      <Switch>
-        <Route path="/Logout" component={Logout} />
-      </Switch>
       <MenteeMenu />
+      <MenteeDashDisplay />
     </div>
   );
 }

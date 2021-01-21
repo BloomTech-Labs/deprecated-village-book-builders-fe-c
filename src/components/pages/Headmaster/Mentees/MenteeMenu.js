@@ -37,8 +37,9 @@ export default function MenteeMenu(props) {
       closeIcon={false}
       mask={false}
       width="300px"
+      zIndex={1}
     >
-      <NavLink to="/Dashboard">
+      <NavLink to="/">
         <Button>Home</Button>
       </NavLink>
       <NavLink to="/Calendar">
