@@ -47,7 +47,7 @@ const App = ({ role, checkToken }) => {
               {role === 'admin' && <AdminDashboard />}
 
               {/* checks token to see if role is mentee. credentials to check with -> mentees@mentees.com : password */}
-              {role === 'mentee' && <StudentDashboard />}
+              {role === 'student' && <StudentDashboard />}
               {role === 'mentee' && <MenteeDashboard />}
             </>
           ) : (
