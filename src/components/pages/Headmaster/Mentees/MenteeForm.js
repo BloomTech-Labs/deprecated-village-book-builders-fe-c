@@ -57,6 +57,11 @@ const MenteeForm = props => {
     currentMentee.gender = 2;
   }
 
+  // this converts dob to populate form when editing
+  let dobData = currentMentee.dob.split('T');
+  console.log('DOB data:', dobData[0]);
+  currentMentee.dob = dobData[0];
+
   // this sets the form data to the current mentee card headmaster is editing
   useEffect(() => {
     if (editing) {
@@ -128,7 +133,11 @@ const MenteeForm = props => {
           name="dob"
           rules={[{ required: true, message: 'Date of Birth is required.' }]}
         >
-          <DatePicker name="dob" onChange={e => handleChange(e)} />
+          <DatePicker
+            name="dob"
+            onChange={e => handleChange(e)}
+            defaultValue={moment(formData.dob, 'YYYY-MM-DD')}
+          />
         </Form.Item>
         <Form.Item
           label="email"
