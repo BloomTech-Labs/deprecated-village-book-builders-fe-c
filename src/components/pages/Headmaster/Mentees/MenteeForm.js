@@ -40,7 +40,9 @@ const genders = ['Male', 'Female', 'Other'];
 const MenteeForm = props => {
   console.log('HELLO TOM', props);
   const { editing, currentMentee } = props;
-  const [formData, setFormData] = useState(initialState);
+  const [formData, setFormData] = useState(
+    editing ? currentMentee : initialState
+  );
   //   const [value, setValue] = useState(1);
   const pathname = useHistory().location.pathname;
   const params = useParams().id;
@@ -49,8 +51,10 @@ const MenteeForm = props => {
   useEffect(() => {
     if (editing) {
       setFormData(currentMentee);
+    } else {
+      setFormData(initialState);
     }
-  }, []);
+  }, [editing]);
 
   console.log(editing, formData);
 
@@ -91,6 +95,7 @@ const MenteeForm = props => {
             type="text"
             name="first_name"
             value={formData.first_name}
+            defaultValue={formData.first_name}
             onChange={e => handleChange(e)}
           />
         </Form.Item>
@@ -104,6 +109,7 @@ const MenteeForm = props => {
             type="text"
             name="last_name"
             value={formData.last_name}
+            defaultValue={formData.last_name}
             onChange={e => handleChange(e)}
           />
         </Form.Item>
@@ -123,6 +129,7 @@ const MenteeForm = props => {
             type="text"
             name="email"
             value={formData.email}
+            defaultValue={formData.email}
             onChange={e => handleChange(e)}
           />
         </Form.Item>
@@ -136,6 +143,7 @@ const MenteeForm = props => {
             type="text"
             name="primary_language"
             value={formData.primary_language}
+            defaultValue={formData.primary_language}
             onChange={e => handleChange(e)}
           />
         </Form.Item>
@@ -144,6 +152,7 @@ const MenteeForm = props => {
           <Radio.Group
             name="gender"
             value={formData.gender}
+            defaultValue={formData.gender}
             onChange={e => handleChange(e)}
           >
             <Radio value={0}>Male</Radio>
@@ -161,6 +170,7 @@ const MenteeForm = props => {
             type="text"
             name="mentee_picture"
             value={formData.mentee_picture}
+            defaultValue={formData.mentee_picture}
             onChange={e => handleChange(e)}
           />
         </Form.Item>
@@ -174,6 +184,7 @@ const MenteeForm = props => {
             type="text"
             name="english_lvl"
             value={formData.english_lvl}
+            defaultValue={formData.english_lvl}
             onChange={e => handleChange(e)}
           />
         </Form.Item>
@@ -187,6 +198,7 @@ const MenteeForm = props => {
             type="text"
             name="math_lvl"
             value={formData.math_lvl}
+            defaultValue={formData.math_lvl}
             onChange={e => handleChange(e)}
           />
         </Form.Item>
@@ -200,6 +212,7 @@ const MenteeForm = props => {
             type="text"
             name="reading_lvl"
             value={formData.reading_lvl}
+            defaultValue={formData.reading_lvl}
             onChange={e => handleChange(e)}
           />
         </Form.Item>
@@ -213,6 +226,7 @@ const MenteeForm = props => {
             type="text"
             name="school_lvl"
             value={formData.school_lvl}
+            defaultValue={formData.school_lvl}
             onChange={e => handleChange(e)}
           />
         </Form.Item>
@@ -231,6 +245,7 @@ const MenteeForm = props => {
             type="text"
             name="academic_description"
             value={formData.academic_description}
+            defaultValue={formData.academic_description}
             onChange={e => handleChange(e)}
           />
         </Form.Item>
@@ -246,6 +261,7 @@ const MenteeForm = props => {
             type="text"
             name="support_needed"
             value={formData.support_needed}
+            defaultValue={formData.support_needed}
             onChange={e => handleChange(e)}
           />
         </Form.Item>
@@ -260,6 +276,7 @@ const MenteeForm = props => {
             type="text"
             name="general_availability"
             value={formData.general_availability}
+            defaultValue={formData.general_availability}
             onChange={e => handleChange(e)}
           />
         </Form.Item>
@@ -274,6 +291,7 @@ const MenteeForm = props => {
           <Input
             type="text"
             value={formData.goals_mentor_program}
+            defaultValue={formData.goals_mentor_program}
             onChange={e => handleChange(e)}
           />
         </Form.Item>
@@ -286,6 +304,7 @@ const MenteeForm = props => {
           <Input
             type="text"
             value={formData.goals_personal}
+            defaultValue={formData.goals_personal}
             onChange={e => handleChange(e)}
           />
         </Form.Item>
@@ -303,6 +322,7 @@ const MenteeForm = props => {
           <Input
             type="text"
             value={formData.goals_school_community}
+            defaultValue={formData.goals_school_community}
             onChange={e => handleChange(e)}
           />
         </Form.Item>
@@ -320,6 +340,7 @@ const MenteeForm = props => {
           <Input
             type="text"
             value={formData.mentor_advisor_point_of_contact}
+            defaultValue={formData.mentor_advisor_point_of_contact}
             onChange={e => handleChange(e)}
           />
         </Form.Item>
