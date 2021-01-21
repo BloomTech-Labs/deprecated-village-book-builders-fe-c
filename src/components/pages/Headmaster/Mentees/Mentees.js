@@ -16,6 +16,7 @@ const Mentees = props => {
   const editingHandler = e => {
     setEditing(!editing);
     console.log(e);
+    console.log(showModal);
   };
   const searchHandler = e => setSearch(e.target.value);
   const moreInfoHandler = (e, menteeData) => {
@@ -191,7 +192,7 @@ const Mentees = props => {
         ]}
       >
         {editing ? (
-          <MenteeForm />
+          <MenteeForm editing={editing} currentMentee={currentMentee} />
         ) : (
           <MenteeProfile currentMentee={currentMentee} />
         )}
