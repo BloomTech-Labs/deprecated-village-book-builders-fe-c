@@ -10,10 +10,10 @@ import HeadmasterDashboard from './pages/Headmaster/HeadmasterDashboard';
 import Profile from '../components/pages/Headmaster/HeadmasterProfile/Profile';
 import ProfileForm from '../components/pages/Headmaster/HeadmasterProfile/ProfileForm';
 import AdminDashboard from './pages/Admin/AdminDashboard';
-import TeacherProfile from './pages/Teacher/TeacherProfile';
-import TeacherEditProfile from './pages/Teacher/TeacherEditProfile';
+// import TeacherProfile from './pages/Teacher/TeacherProfile';
+// import TeacherEditProfile from './pages/Teacher/TeacherEditProfile';
 import StudentDashboard from './pages/Student/StudentDashboard';
-
+import TeacherDashboard from './pages/Teacher/TeacherDashboard';
 const App = ({ role, checkToken }) => {
   return (
     <div className="App">
@@ -28,12 +28,12 @@ const App = ({ role, checkToken }) => {
           <Profile />
         </Route>
         {/*Teacher Routes*/}
-        <Route path="/teacher/edit/:id">
+        {/* <Route path="/teacher/edit/:id">
           <TeacherEditProfile />
         </Route>
         <Route path="/teacher/:id">
           <TeacherProfile />
-        </Route>
+        </Route> */}
 
         <Route path="/">
           {/*//! this needs to be changed to if there is an unexpired token*/}
@@ -47,6 +47,7 @@ const App = ({ role, checkToken }) => {
 
               {/* checks token to see if role is mentee. credentials to check with -> mentees@mentees.com : password */}
               {role === 'mentee' && <StudentDashboard />}
+              {role === 'teacher' && <TeacherDashboard />}
             </>
           ) : (
             <Redirect to="/login" />
