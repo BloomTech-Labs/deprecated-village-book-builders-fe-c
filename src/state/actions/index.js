@@ -7,7 +7,7 @@ import axios from 'axios';
 import { axiosWithAuth } from '../../utils/axiosWithAuth';
 
 import * as actionTypes from './actionTypes';
-const baseURL = process.env.REACT_APP_BASE_URL;
+const baseURL = process.env.REACT_APP_BASE_URL || 'http://localhost:5000';
 
 export const checkToken = data => dispatch => {
   dispatch({
@@ -54,7 +54,15 @@ export const editHeadmasterProfile = (id, data) => dispatch => {
     .put(`/headmaster/${id}`, data)
     .then(res => {
       // ? refactor all the window.location.replace's so this doesn't force a refresh. see how login does it for example.
-      window.location.replace('/profile/');
+      console.log('headmaster edit res.data', res.data);
+      dispatch({
+        type: actionTypes.EDIT_HEADMASTER_PROFILE,
+        payload: res.data,
+      });
+      dispatch({
+        type: actionTypes.FETCH_HEADMASTER_PROFILE,
+        payload: res.data,
+      });
     })
     .catch(err => console.dir(err));
 };
@@ -106,6 +114,16 @@ export const fetchMentees = () => dispatch => {
     .catch(err =>
       dispatch({ type: actionTypes.FETCH_MENTEE_FAILURE, payload: err })
     );
+};
+
+// adding in an action for sending an edited mentee
+export const editMentee = (id, data) => () => {
+  axiosWithAuth()
+    .put(`/mentee/${id}`, data)
+    .then(() => {
+      window.location.replace('/mentee');
+    })
+    .catch(err => console.dir(err));
 };
 
 export const fetchSchools = () => dispatch => {
