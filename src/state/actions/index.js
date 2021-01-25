@@ -115,7 +115,6 @@ export const fetchMentees = () => dispatch => {
     );
 };
 
-// ? refactor all the window.location.replace's so this doesn't force a refresh. see how login does it for example.
 // adding in an action for sending an edited mentee
 export const editMentee = (id, data) => dispatch => {
   console.log('editMentee fired:', id, data);
@@ -161,7 +160,11 @@ export const editSchool = (id, data) => dispatch => {
   axiosWithAuth()
     .put(`/school/${id}`, data)
     .then(res => {
-      window.location.replace('/school-village/');
+      console.log(res.data);
+      dispatch({
+        type: actionTypes.EDIT_VILLAGE,
+        payload: res.data,
+      });
     })
     .catch(err => console.dir(err));
 };
