@@ -50,6 +50,7 @@ export const logout = () => dispatch => {
 // -----------------------
 
 export const editHeadmasterProfile = (id, data) => dispatch => {
+  console.log(id, data);
   axiosWithAuth()
     .put(`/headmaster/${id}`, data)
     .then(res => {
@@ -116,11 +117,16 @@ export const fetchMentees = () => dispatch => {
 
 // ? refactor all the window.location.replace's so this doesn't force a refresh. see how login does it for example.
 // adding in an action for sending an edited mentee
-export const editMentee = (id, data) => () => {
+export const editMentee = (id, data) => dispatch => {
+  console.log('editMentee fired:', id, data);
   axiosWithAuth()
     .put(`/mentee/${id}`, data)
-    .then(() => {
-      window.location.replace('/mentee');
+    .then(res => {
+      console.log(res.data);
+      dispatch({
+        type: actionTypes.EDIT_MENTEE,
+        payload: res.data,
+      });
     })
     .catch(err => console.dir(err));
 };

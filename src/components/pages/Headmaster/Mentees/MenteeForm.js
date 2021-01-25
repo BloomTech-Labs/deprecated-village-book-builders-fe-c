@@ -6,7 +6,7 @@ import axios from 'axios';
 import { Form, Input, DatePicker, Space, Radio } from 'antd';
 import moment from 'moment';
 
-import { editHeadmasterProfile } from '../../../../state/actions';
+import { editHeadmasterProfile, editMentee } from '../../../../state/actions';
 import {
   layout,
   FormContainer,
@@ -38,12 +38,13 @@ const timeFormat = 'HH:mm';
 const genders = ['Male', 'Female', 'Other'];
 
 const MenteeForm = props => {
-  const { editing, currentMentee } = props;
+  const { editing, currentMentee, setShowModal } = props;
   const [formData, setFormData] = useState(
     editing ? currentMentee : initialState
   );
   const pathname = useHistory().location.pathname;
-  const params = useParams().id;
+  const history = useHistory();
+  const params = useParams();
   const [form] = Form.useForm();
 
   // this converts gender from string to value to populate form when editing
@@ -70,7 +71,10 @@ const MenteeForm = props => {
 
   const handleSubmit = async () => {
     debugLog(formData);
-    props.editHeadmasterProfile(params, formData);
+    console.log('mentee form', formData.id, formData);
+    props.editMentee(formData.id, formData);
+    setShowModal(false);
+    history.push('/mentor-pairings');
   };
 
   const handleChange = e => {
@@ -367,4 +371,4 @@ const MenteeForm = props => {
   );
 };
 
-export default connect(null, { editHeadmasterProfile })(MenteeForm);
+export default connect(null, { editHeadmasterProfile, editMentee })(MenteeForm);
