@@ -34,6 +34,7 @@ const initialState = {
 const VillageForm = props => {
   const [formData, setFormData] = useState(initialState);
   const pathname = useHistory().location.pathname;
+  const history = useHistory();
   const params = useParams().villageId;
   const [form] = Form.useForm();
 
@@ -54,6 +55,7 @@ const VillageForm = props => {
   const handleSubmit = async () => {
     // console.log(formData);
     props.editVillage(params, formData);
+    history.push('/school-village');
   };
 
   const handleChange = e => {

@@ -53,14 +53,8 @@ export const editHeadmasterProfile = (id, data) => dispatch => {
   axiosWithAuth()
     .put(`/headmaster/${id}`, data)
     .then(res => {
-      // ? refactor all the window.location.replace's so this doesn't force a refresh. see how login does it for example.
-      console.log('headmaster edit res.data', res.data);
       dispatch({
         type: actionTypes.EDIT_HEADMASTER_PROFILE,
-        payload: res.data,
-      });
-      dispatch({
-        type: actionTypes.FETCH_HEADMASTER_PROFILE,
         payload: res.data,
       });
     })
@@ -95,11 +89,15 @@ export const fetchVillage = id => dispatch => {
     .catch(err => console.dir(err));
 };
 
-export const editVillage = (id, data) => () => {
+export const editVillage = (id, data) => dispatch => {
   axiosWithAuth()
     .put(`/village/${id}`, data)
-    .then(() => {
-      window.location.replace('/school-village/');
+    .then(res => {
+      console.log(res.data);
+      dispatch({
+        type: actionTypes.EDIT_VILLAGE,
+        payload: res.data,
+      });
     })
     .catch(err => console.dir(err));
 };
@@ -116,6 +114,7 @@ export const fetchMentees = () => dispatch => {
     );
 };
 
+// ? refactor all the window.location.replace's so this doesn't force a refresh. see how login does it for example.
 // adding in an action for sending an edited mentee
 export const editMentee = (id, data) => () => {
   axiosWithAuth()
@@ -151,6 +150,7 @@ export const fetchSchool = id => dispatch => {
     .catch(err => console.dir(err));
 };
 
+// ? refactor all the window.location.replace's so this doesn't force a refresh. see how login does it for example.
 export const editSchool = (id, data) => dispatch => {
   axiosWithAuth()
     .put(`/school/${id}`, data)
@@ -164,6 +164,7 @@ export const editSchool = (id, data) => dispatch => {
 // ADMIN
 // ----------------
 
+// ? refactor all the window.location.replace's so this doesn't force a refresh. see how login does it for example.
 export const editLibrary = (id, data) => dispatch => {
   axiosWithAuth()
     .put(`/library/${id}`, data)
@@ -173,6 +174,7 @@ export const editLibrary = (id, data) => dispatch => {
     .catch(err => console.dir(err));
 };
 
+// ? refactor all the window.location.replace's so this doesn't force a refresh. see how login does it for example.
 export const addLibrary = (id, data) => dispatch => {
   axiosWithAuth()
     .post(`/library`, data)
