@@ -5,29 +5,26 @@
 // Declare action TYPES at the top of the file
 import axios from 'axios';
 import { axiosWithAuth } from '../../utils/axiosWithAuth';
-
 import * as actionTypes from './actionTypes';
-const baseURL = process.env.REACT_APP_BASE_URL;
-
+const baseURL = process.env.REACT_APP_BASE_URL || 'http://localhost:8080'; // new port for back-end;
 export const checkToken = data => dispatch => {
   dispatch({
     type: actionTypes.AUTH_SUCCESS,
     payload: window.localStorage.getItem('token'),
   });
 };
-
 // -------------------------
 // AUTHORIZATION
 // -------------------------
 export const login = data => dispatch => {
   axios
-    .post(`${baseURL}/auth/login`, data)
+    .post(`${baseURL}/users/login`, data)
     .then(res => {
       // console.log('LOGIN ACTION SUCCESS --> token', res.data);
-      window.localStorage.setItem('token', res.data.access_token);
+      window.localStorage.setItem('token', res.data.token); // replacing access_token
       dispatch({
         type: actionTypes.AUTH_SUCCESS,
-        payload: res.data.access_token,
+        payload: res.data.token,
       });
     })
     .catch(err => {
@@ -39,16 +36,13 @@ export const login = data => dispatch => {
       console.dir(err);
     });
 };
-
 export const logout = () => dispatch => {
   dispatch({ type: actionTypes.AUTH_LOGOUT });
   window.localStorage.removeItem('token');
 };
-
 // -----------------------
 // HEAD MASTER
 // -----------------------
-
 export const editHeadmasterProfile = (id, data) => dispatch => {
   axiosWithAuth()
     .put(`/headmaster/${id}`, data)
@@ -70,11 +64,9 @@ export const fetchHeadmasterProfile = id => dispatch => {
     })
     .catch(err => console.dir(err));
 };
-
 export const fetchHeadmasterSchool = () => dispatch => {
   dispatch({ type: actionTypes.FETCH_HEADMASTER_SCHOOL });
 };
-
 export const fetchVillage = id => dispatch => {
   // console.log("ACTIONSindexFetchVillage --> test", process.env.REACT_APP_BASEURL)
   axiosWithAuth()
@@ -86,7 +78,6 @@ export const fetchVillage = id => dispatch => {
     })
     .catch(err => console.dir(err));
 };
-
 export const editVillage = (id, data) => () => {
   axiosWithAuth()
     .put(`/village/${id}`, data)
@@ -95,7 +86,6 @@ export const editVillage = (id, data) => () => {
     })
     .catch(err => console.dir(err));
 };
-
 export const fetchMentees = () => dispatch => {
   dispatch({ type: actionTypes.FETCH_MENTEE_START });
   axiosWithAuth()
@@ -107,7 +97,6 @@ export const fetchMentees = () => dispatch => {
       dispatch({ type: actionTypes.FETCH_MENTEE_FAILURE, payload: err })
     );
 };
-
 export const fetchSchools = () => dispatch => {
   axiosWithAuth()
     .get(`/school`)
@@ -123,7 +112,6 @@ export const fetchSchools = () => dispatch => {
       console.dir(err);
     });
 };
-
 export const fetchSchool = id => dispatch => {
   axiosWithAuth()
     .get(`/school/${id}`)
@@ -132,7 +120,6 @@ export const fetchSchool = id => dispatch => {
     })
     .catch(err => console.dir(err));
 };
-
 export const editSchool = (id, data) => dispatch => {
   axiosWithAuth()
     .put(`/school/${id}`, data)
@@ -141,11 +128,9 @@ export const editSchool = (id, data) => dispatch => {
     })
     .catch(err => console.dir(err));
 };
-
 // ----------------
 // ADMIN
 // ----------------
-
 export const editLibrary = (id, data) => dispatch => {
   axiosWithAuth()
     .put(`/library/${id}`, data)
@@ -154,7 +139,6 @@ export const editLibrary = (id, data) => dispatch => {
     })
     .catch(err => console.dir(err));
 };
-
 export const addLibrary = (id, data) => dispatch => {
   axiosWithAuth()
     .post(`/library`, data)
