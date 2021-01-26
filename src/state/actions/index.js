@@ -155,14 +155,13 @@ export const fetchSchool = id => dispatch => {
     .catch(err => console.dir(err));
 };
 
-// ? refactor all the window.location.replace's so this doesn't force a refresh. see how login does it for example.
 export const editSchool = (id, data) => dispatch => {
   axiosWithAuth()
     .put(`/school/${id}`, data)
     .then(res => {
       console.log(res.data);
       dispatch({
-        type: actionTypes.EDIT_VILLAGE,
+        type: actionTypes.EDIT_HEADMASTER_SCHOOL,
         payload: res.data,
       });
     })
@@ -173,22 +172,28 @@ export const editSchool = (id, data) => dispatch => {
 // ADMIN
 // ----------------
 
-// ? refactor all the window.location.replace's so this doesn't force a refresh. see how login does it for example.
 export const editLibrary = (id, data) => dispatch => {
   axiosWithAuth()
     .put(`/library/${id}`, data)
-    .then(() => {
-      window.location.replace('/admin/libraries');
+    .then(res => {
+      console.log(res.data);
+      dispatch({
+        type: actionTypes.EDIT_LIBRARY,
+        payload: res.data,
+      });
     })
     .catch(err => console.dir(err));
 };
 
-// ? refactor all the window.location.replace's so this doesn't force a refresh. see how login does it for example.
 export const addLibrary = (id, data) => dispatch => {
   axiosWithAuth()
     .post(`/library`, data)
-    .then(() => {
-      window.location.replace('/admin/libraries');
+    .then(res => {
+      console.log(res.data);
+      dispatch({
+        type: actionTypes.ADD_LIBRARY,
+        payload: res.data,
+      });
     })
     .catch(err => console.dir(err));
 };
