@@ -13,7 +13,8 @@ import AdminDashboard from './pages/Admin/AdminDashboard';
 // import TeacherProfile from './pages/Teacher/TeacherProfile';
 // import TeacherEditProfile from './pages/Teacher/TeacherEditProfile';
 import StudentDashboard from './pages/Student/StudentDashboard';
-import TeacherDashboard from './pages/Teacher/TeacherDashboard';
+import MenteeDashboard from './pages/Headmaster/Mentees/MenteeDashboard';
+
 const App = ({ role, checkToken }) => {
   return (
     <div className="App">
@@ -46,8 +47,8 @@ const App = ({ role, checkToken }) => {
               {role === 'admin' && <AdminDashboard />}
 
               {/* checks token to see if role is mentee. credentials to check with -> mentees@mentees.com : password */}
-              {role === 'mentee' && <StudentDashboard />}
-              {role === 'teacher' && <TeacherDashboard />}
+              {role === 'student' && <StudentDashboard />}
+              {role === 'mentee' && <MenteeDashboard />}
             </>
           ) : (
             <Redirect to="/login" />
