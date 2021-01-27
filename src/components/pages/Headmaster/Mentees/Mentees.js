@@ -104,7 +104,7 @@ const Mentees = props => {
           style={{ width: '80%', marginBottom: '10pt', alignSelf: 'center' }}
           align="center"
         >
-          Create New Library
+          Create New Mentee
         </Button>
         <Input.Search
           data-testid="search-bar"

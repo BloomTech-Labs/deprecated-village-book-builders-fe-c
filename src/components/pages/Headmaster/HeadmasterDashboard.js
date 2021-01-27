@@ -28,6 +28,7 @@ import {
 import Logout from '../../Logout.js';
 // import MentorPairings from './Mentees/Mentees.js';
 import Mentees from './Mentees/Mentees.js';
+import Mentors from './Mentors/Mentors.js';
 
 function HeadmasterDashboard() {
   const [visible, setVisible] = useState(true);
@@ -61,7 +62,8 @@ function HeadmasterDashboard() {
     <div>
       <Dashboard>
         <Switch>
-          <Route path="/mentor-pairings" component={Mentees} />
+          <Route path="/mentees" component={Mentees} />
+          <Route path="/mentor-pairings" component={Mentors} />
           <Route exact path="/profile" component={HeadmasterProfile} />
           <Route path="/profile/edit/:id" component={ProfileForm} />
           <Route path="/mentor-advisor" />
@@ -112,7 +114,10 @@ function HeadmasterDashboard() {
             <button className="btn l2-btn menuLinks">Profile</button>
           </NavLink>
           <NavLink to={'/mentor-pairings'} onClick={() => setVisible(true)}>
-            <button className="btn l2-btn menuLinks">Mentor Pairings</button>
+            <button className="btn l2-btn menuLinks">Mentor Pairing</button>
+          </NavLink>
+          <NavLink to={'/mentees'} onClick={() => setVisible(true)}>
+            <button className="btn l2-btn menuLinks">Mentees</button>
           </NavLink>
           <NavLink to="/mentor-advisor" onClick={() => setVisible(true)}>
             <button className="btn l2-btn menuLinks">Mentor Advisor</button>
