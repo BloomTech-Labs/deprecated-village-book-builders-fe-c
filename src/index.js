@@ -3,10 +3,11 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
+
 import thunk from 'redux-thunk';
 import App from './components/App';
 import 'antd/dist/antd.less';
-import reducer from './state/reducers/index';
+import reducer from './state/reducers';
 import dotenv from 'dotenv';
 dotenv.config();
 
