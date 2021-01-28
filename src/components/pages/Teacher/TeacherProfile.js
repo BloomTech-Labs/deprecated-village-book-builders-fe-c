@@ -19,16 +19,12 @@ const TeacherProfile = props => {
     getTeacherProfile(params.id);
   }, [getTeacherProfile, params.id]);
 
-  console.log(teacherProfile, 'darkness');
-
   return (
     <div key={teacherProfile.id}>
       <StyledProfile>
-        <ComponentTitles titleText={'Teacher'} />
-        <Label>Name </Label>
-        <p>
-          {teacherProfile.firstName} {teacherProfile.lastName}
-        </p>
+        <ComponentTitles
+          titleText={`${teacherProfile.firstName} ${teacherProfile.lastName}`}
+        />
         <Label>Home</Label>
         <p>
           {teacherProfile.homeCity}, {teacherProfile.homeCountry}
@@ -54,22 +50,6 @@ const TeacherProfile = props => {
         {!teacherProfile.subjects
           ? null
           : teacherProfile.subjects.map(subject => <p>{subject}</p>)}
-
-        {/*
-        <Label>Primary Language: </Label>
-        <p>{teacherProfile.first_language}</p>
-        <Label>Other Languages: </Label>
-        {teacherProfile.other_languages.map(otherLanguage => <p>{otherLanguage}</p>)}
-        <Label>Gender: </Label>
-        <p>{`${teacherProfile.gender}`}</p>
-        <Label>Home City: </Label>
-        <p>{teacherProfile.home_city}</p>
-        <Label>Home Country: </Label>
-        <p>{teacherProfile.home_country}</p>
-        <Label>Subjects: </Label>
-        {teacherProfile.subjects.map(subject => <p>{subject}</p>)}
-        <Label>Highest Degree: </Label>
-        <p>{teacherProfile.highest_degree}}</p>*/}
       </StyledProfile>
       <Button
         classType={'edit-headmaster-profile'}
