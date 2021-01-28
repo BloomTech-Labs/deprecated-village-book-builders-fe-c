@@ -3,6 +3,7 @@ import { debugLog } from '../../utils/debugMode.js';
 
 export const EDIT_TEACHER_PROFILE = 'EDIT_TEACHER_PROFILE';
 export const editTeacherProfile = (id, formData) => async dispatch => {
+  console.log(id, formData);
   try {
     const confirmation = await axiosWithAuth().put(`/teacher/${id}`, formData);
     dispatch({ type: EDIT_TEACHER_PROFILE, payload: confirmation });
@@ -16,19 +17,6 @@ export const getTeacherProfile = id => async dispatch => {
   try {
     const { data } = await axiosWithAuth().get(`/teacher/${id}`);
     dispatch({ type: GET_TEACHER_PROFILE, payload: data });
-  } catch {
-    throw new Error();
-  }
-};
-
-export const CREATE_TEACHER_PROFILE = 'CREATE_TEACHER_PROFILE';
-export const createTeacherProfile = formData => async dispatch => {
-  try {
-    const newTeacherProfile = await axiosWithAuth().post('/teacher/', formData);
-    dispatch({
-      type: CREATE_TEACHER_PROFILE,
-      payload: newTeacherProfile.data.teacher,
-    });
   } catch {
     throw new Error();
   }

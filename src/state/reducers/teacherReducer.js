@@ -1,7 +1,6 @@
 import {
   GET_TEACHER_PROFILE,
   EDIT_TEACHER_PROFILE,
-  CREATE_TEACHER_PROFILE,
 } from '../actions/teacherActions';
 import { debugLog } from '../../utils/debugMode.js';
 
@@ -39,11 +38,6 @@ const teacherReducer = (state = initialState, action) => {
       return {
         ...state,
         teacherProfile: teacherProfile,
-      };
-    case CREATE_TEACHER_PROFILE:
-      debugLog(action.type, action.payload);
-      return {
-        newTeacherCreate: action.payload,
       };
     default:
       return state;
