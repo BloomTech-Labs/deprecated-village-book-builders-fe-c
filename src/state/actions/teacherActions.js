@@ -2,20 +2,34 @@ import { axiosWithAuth } from '../../utils/axiosWithAuth';
 import { debugLog } from '../../utils/debugMode.js';
 
 export const EDIT_TEACHER_PROFILE = 'EDIT_TEACHER_PROFILE';
-export const editTeacherProfile = (id, formData) => dispatch => {
-  axiosWithAuth()
-    .put(`/teacher/${id}`, formData)
-    .then(response => {
-      console.log('Edit teacher response', response);
-      dispatch({ type: EDIT_TEACHER_PROFILE, payload: response });
-    })
-    .catch(error => {
-      console.log(error);
-    });
+export const editTeacherProfile = (id, formData) => async dispatch => {
+  try {
+    const confirmation = await axiosWithAuth().put(`/teacher/${id}`, formData);
+    dispatch({ type: EDIT_TEACHER_PROFILE, payload: confirmation });
+  } catch {
+    throw new Error();
+  }
 };
 
 export const GET_TEACHER_PROFILE = 'GET_TEACHER_PROFILE';
 export const getTeacherProfile = id => async dispatch => {
-  const teacherProfile = await axiosWithAuth().get(`/teacher/${id}`);
-  dispatch({ type: GET_TEACHER_PROFILE, payload: teacherProfile });
+  try {
+    const teacherProfile = await axiosWithAuth().get(`/teacher/${id}`);
+    dispatch({ type: GET_TEACHER_PROFILE, payload: teacherProfile });
+  } catch {
+    throw new Error();
+  }
+};
+
+export const CREATE_TEACHER_PROFILE = 'CREATE_TEACHER_PROFILE';
+export const createTeacherProfile = formData => async dispatch => {
+  try {
+    const newTeacherProfile = await axiosWithAuth().post('/teacher/', formData);
+    dispatch({
+      type: CREATE_TEACHER_PROFILE,
+      payload: newTeacherProfile.data.teacher,
+    });
+  } catch {
+    throw new Error();
+  }
 };

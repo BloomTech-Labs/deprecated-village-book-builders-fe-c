@@ -29,25 +29,27 @@ const TeacherProfile = props => {
     funFact: 'I read Ancient Greek',
   };
 
+  console.log(teacherProfile);
+
   return (
     <div>
       <StyledProfile>
         <ComponentTitles titleText={'Teacher'} />
-        <img src={`${temporaryTeacherProfile.imgURL}`} alt="teacher" />
+        <img src={`${teacherProfile.imgURL}`} alt="teacher" />
         <Label>Name:</Label>
-        <p>{`${temporaryTeacherProfile.name}`}</p>
+        <p>{`${teacherProfile.name}`}</p>
         <Label>Contact:</Label>
-        <p>{`${temporaryTeacherProfile.contact}`}</p>
+        <p>{`${teacherProfile.contact}`}</p>
         <Label>Bio:</Label>
-        <p>{`${temporaryTeacherProfile.bio}`}</p>
+        <p>{`${teacherProfile.bio}`}</p>
         <Label>Education:</Label>
-        <p>{`${temporaryTeacherProfile.education}`}</p>
+        <p>{`${teacherProfile.education}`}</p>
         <Label>Location:</Label>
-        <p>{`${temporaryTeacherProfile.location}`}</p>
+        <p>{`${teacherProfile.location}`}</p>
         <Label>Subjects:</Label>
-        <p>{`${temporaryTeacherProfile.subjects}`}</p>
+        <p>{`${teacherProfile.subjects}`}</p>
         <Label>Fun Fact:</Label>
-        <p>{`${temporaryTeacherProfile.funFact}`}</p>
+        <p>{`${teacherProfile.funFact}`}</p>
       </StyledProfile>
       <Button
         classType={'edit-headmaster-profile'}
@@ -60,7 +62,7 @@ const TeacherProfile = props => {
 
 const mapStateToProps = state => {
   return {
-    teacherProfile: state.teacherProfile,
+    teacherProfile: state.teacherReducer.teacherProfile,
   };
 };
 
