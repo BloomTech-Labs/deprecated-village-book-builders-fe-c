@@ -126,19 +126,6 @@ const TeacherEditProfile = props => {
             />
           </Form.Item>
           <Form.Item
-            label="Location"
-            name="location"
-            rules={[{ required: true, message: 'Where do you teach' }]}
-          >
-            <Input
-              type="text"
-              name="location"
-              defaultValue="Lincoln, Nebraska"
-              value={initialFormValues.location}
-              onChange={event => handleChange(event)}
-            />
-          </Form.Item>
-          <Form.Item
             label="Subjects"
             name="subjects"
             rules={[{ required: true, message: 'What do you teach' }]}
