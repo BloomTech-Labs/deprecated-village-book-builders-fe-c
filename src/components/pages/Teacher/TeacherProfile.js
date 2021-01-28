@@ -11,25 +11,7 @@ const TeacherProfile = props => {
   const history = useHistory();
   const params = useParams();
 
-  const editProfileHandler = event =>
-    history.push(`/teacher/edit/${params.id}`);
-
-  // TemporaryTeacherProfile until backend has teacher profile data
-  const temporaryTeacherProfile = {
-    imgURL:
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c4/Nebraska_Cornhuskers_logo%2C_1992%E2%80%932003.svg/1200px-Nebraska_Cornhuskers_logo%2C_1992%E2%80%932003.svg.png',
-    name: 'AJ Gebara',
-    contact: 'ajgebara@gmail.com',
-    bio:
-      'Pokem ipsum dolor sit amet Exeggutor Kecleon Wing Attack Doduo Red Unown. Sunt in culpa Drilbur Calcium Hoenn Shieldon Wynaut Charizard. Growl Venonat Scolipede Espeon Charizard Barboach Hidden Machine',
-    education:
-      'University of Nebraska-Lincoln, Masters of Arts in Science Education',
-    location: 'Lincoln, Nebraska',
-    subjects: 'Biology and Chemistry',
-    funFact: 'I read Ancient Greek',
-  };
-
-  console.log(teacherProfile);
+  const editProfileHandler = event => history.push(`/teacher/edit/${params.id}`);
 
   return (
     <div>
