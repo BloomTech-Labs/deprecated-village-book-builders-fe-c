@@ -7,16 +7,7 @@ import { debugLog } from '../../utils/debugMode.js';
 
 const initialState = {
   editSuccess: '',
-  teacherProfile: {
-    imgURL: '',
-    name: '',
-    contact: '',
-    bio: '',
-    education: '',
-    location: '',
-    subjects: '',
-    funFact: '',
-  },
+  teacherProfile: {},
 };
 
 const teacherReducer = (state = initialState, action) => {
@@ -30,18 +21,24 @@ const teacherReducer = (state = initialState, action) => {
     case GET_TEACHER_PROFILE:
       debugLog(action.type, action.payload);
       const teacherProfile = {
-        imgURL: action.payload.imgURL,
-        name: action.payload.name,
-        contact: action.payload.contact,
-        bio: action.payload.bio,
-        education: action.payload.education,
-        location: action.payload.location,
+        teacherId: action.payload.id,
+        firstName: action.payload.first_name,
+        lastName: action.payload.last_name,
+        phone: action.payload.phone,
+        email: action.payload.email,
+        gender: action.payload.gender,
         subjects: action.payload.subjects,
-        funFact: action.payload.funFact,
+        education: action.payload.highest_degree,
+        homeCity: action.payload.home_city,
+        homeCountry: action.payload.home_country,
+        currentClassroom: action.payload.current_classroom,
+        timeZone: action.payload.home_timezone,
+        firstLanguage: action.payload.first_language,
+        otherLanguages: action.payload.other_languages,
       };
       return {
         ...state,
-        teacherProfile,
+        teacherProfile: teacherProfile,
       };
     case CREATE_TEACHER_PROFILE:
       debugLog(action.type, action.payload);

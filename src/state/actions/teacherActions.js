@@ -14,8 +14,8 @@ export const editTeacherProfile = (id, formData) => async dispatch => {
 export const GET_TEACHER_PROFILE = 'GET_TEACHER_PROFILE';
 export const getTeacherProfile = id => async dispatch => {
   try {
-    const teacherProfile = await axiosWithAuth().get(`/teacher/${id}`);
-    dispatch({ type: GET_TEACHER_PROFILE, payload: teacherProfile });
+    const { data } = await axiosWithAuth().get(`/teacher/${id}`);
+    dispatch({ type: GET_TEACHER_PROFILE, payload: data });
   } catch {
     throw new Error();
   }
