@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { axiosWithAuth } from '../../../../utils/axiosWithAuth';
 import { Button, Divider, Input, Modal, List, Avatar, Select } from 'antd';
+import { PlusOutlined } from '@ant-design/icons';
 import { connect } from 'react-redux';
 import { checkToken, fetchMentees } from '../../../../state/actions/index';
 import MenteeForm from './MenteeForm';
 import MenteeProfile from './MenteeProfile';
+import AddNewMentee from './AddNewMentee';
 const Mentees = props => {
   let menteesSelection = [...props.mentees];
   const [search, setSearch] = useState('');
@@ -104,8 +106,9 @@ const Mentees = props => {
           style={{ width: '80%', marginBottom: '10pt', alignSelf: 'center' }}
           align="center"
         >
-          Create New Library
+          <PlusOutlined /> Create New Library
         </Button>
+        <AddNewMentee />
         <Input.Search
           data-testid="search-bar"
           addonBefore={selectBefore}
