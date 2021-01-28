@@ -20,9 +20,12 @@ const TeacherEditProfile = props => {
   const params = useParams();
 
   const handleSubmit = async event => {
-    if (formData.other_languages)
+    if (formData.other_languages) {
       formData.other_languages = formData.other_languages.split(',');
-    if (formData.subjects) formData.subjects = formData.subjects.split(',');
+    }
+    if (formData.subjects) {
+      formData.subjects = formData.subjects.split(',');
+    }
     await editTeacherProfile(params.id, formData);
     history.push(`/teacher/${params.id}`);
   };
