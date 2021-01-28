@@ -1,12 +1,13 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
 import { ComponentTitles, Button } from '../../common/';
 import { Label } from '../../common/ProfileStyle';
 import { Profile as StyledProfile } from '../../common/ProfileStyle';
+import { getTeacherProfile } from '../../../state/actions/teacherActions';
 
 const TeacherProfile = props => {
-  const { teacherProfile } = props;
+  const { teacherProfile, getTeacherProfile } = props;
   /*Labels should be replaced with data from the backend*/
   const history = useHistory();
   const params = useParams();
@@ -14,40 +15,41 @@ const TeacherProfile = props => {
   const editProfileHandler = event =>
     history.push(`/teacher/edit/${params.id}`);
 
-  // TemporaryTeacherProfile until backend has teacher profile data
-  const temporaryTeacherProfile = {
-    imgURL:
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c4/Nebraska_Cornhuskers_logo%2C_1992%E2%80%932003.svg/1200px-Nebraska_Cornhuskers_logo%2C_1992%E2%80%932003.svg.png',
-    name: 'AJ Gebara',
-    contact: 'ajgebara@gmail.com',
-    bio:
-      'Pokem ipsum dolor sit amet Exeggutor Kecleon Wing Attack Doduo Red Unown. Sunt in culpa Drilbur Calcium Hoenn Shieldon Wynaut Charizard. Growl Venonat Scolipede Espeon Charizard Barboach Hidden Machine',
-    education:
-      'University of Nebraska-Lincoln, Masters of Arts in Science Education',
-    location: 'Lincoln, Nebraska',
-    subjects: 'Biology and Chemistry',
-    funFact: 'I read Ancient Greek',
-  };
+  useEffect(() => {
+    getTeacherProfile(params.id);
+  }, [getTeacherProfile, params.id]);
 
   return (
-    <div>
+    <div key={teacherProfile.id}>
       <StyledProfile>
-        <ComponentTitles titleText={'Teacher'} />
-        <img src={`${temporaryTeacherProfile.imgURL}`} alt="teacher" />
-        <Label>Name:</Label>
-        <p>{`${temporaryTeacherProfile.name}`}</p>
-        <Label>Contact:</Label>
-        <p>{`${temporaryTeacherProfile.contact}`}</p>
-        <Label>Bio:</Label>
-        <p>{`${temporaryTeacherProfile.bio}`}</p>
-        <Label>Education:</Label>
-        <p>{`${temporaryTeacherProfile.education}`}</p>
-        <Label>Location:</Label>
-        <p>{`${temporaryTeacherProfile.location}`}</p>
-        <Label>Subjects:</Label>
-        <p>{`${temporaryTeacherProfile.subjects}`}</p>
-        <Label>Fun Fact:</Label>
-        <p>{`${temporaryTeacherProfile.funFact}`}</p>
+        <ComponentTitles
+          titleText={`${teacherProfile.firstName} ${teacherProfile.lastName}`}
+        />
+        <Label>Home</Label>
+        <p>
+          {teacherProfile.homeCity}, {teacherProfile.homeCountry}
+        </p>
+        <Label>Time Zone</Label>
+        <p>{teacherProfile.timeZone}</p>
+        <Label>Gender</Label>
+        <p>{teacherProfile.gender}</p>
+        <Label>Contact</Label>
+        <p>{teacherProfile.email}</p>
+        <p>{teacherProfile.phone}</p>
+        <Label>Languages</Label>
+        <p>Primary- {teacherProfile.firstLanguage}</p>
+        <p>
+          Other-{' '}
+          {!teacherProfile.otherLanguages
+            ? null
+            : teacherProfile.otherLanguages.map(language => <p>{language}</p>)}
+        </p>
+        <Label>Education</Label>
+        <p>{teacherProfile.education}</p>
+        <Label>Subjects</Label>
+        {!teacherProfile.subjects
+          ? null
+          : teacherProfile.subjects.map(subject => <p>{subject}</p>)}
       </StyledProfile>
       <Button
         classType={'edit-headmaster-profile'}
@@ -60,8 +62,8 @@ const TeacherProfile = props => {
 
 const mapStateToProps = state => {
   return {
-    teacherProfile: state.teacherProfile,
+    teacherProfile: state.teacherReducer.teacherProfile,
   };
 };
 
-export default connect(mapStateToProps, {})(TeacherProfile);
+export default connect(mapStateToProps, { getTeacherProfile })(TeacherProfile);
