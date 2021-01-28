@@ -20,13 +20,11 @@ const TeacherEditProfile = props => {
   const params = useParams();
 
   const handleSubmit = async event => {
-    try {
-      if (formData.other_languages) formData.other_languages.split(',');
-      if (formData.subjects) formData.subjects.split(',');
-    } finally {
-      editTeacherProfile(params.id, formData);
-      history.push(`/teacher/${params.id}`);
-    }
+    if (formData.other_languages)
+      formData.other_languages = formData.other_languages.split(',');
+    if (formData.subjects) formData.subjects = formData.subjects.split(',');
+    await editTeacherProfile(params.id, formData);
+    history.push(`/teacher/${params.id}`);
   };
 
   const handleChange = event => {
@@ -125,7 +123,7 @@ const TeacherEditProfile = props => {
           <Form.Item label="Other Languages" name="other_languages">
             <Input
               type="text"
-              name="otherLanguages"
+              name="other_languages"
               value={formData.other_languages}
               onChange={event => handleChange(event)}
             />
