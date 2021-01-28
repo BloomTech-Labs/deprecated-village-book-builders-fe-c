@@ -1,10 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { Link, NavLink, Route, Switch } from 'react-router-dom';
 import StudentProfile from './StudentProfile/Profile';
+import {
+  HomeOutlined,
+  ProfileOutlined,
+  LogoutOutlined,
+} from '@ant-design/icons';
 import ProfileForm from './StudentProfile/ProfileForm';
 import { Drawer, Button } from 'antd';
 import { MenuOutlined } from '@ant-design/icons';
-import './StudentDashboard.css';
+import '../Headmaster/HeadmasterDashboard.css';
 import {
   menuButton,
   menuIcon,
@@ -77,13 +82,19 @@ function StudentDashboard() {
           <h2>Hello, Student!</h2>
 
           <NavLink to="/dashboard" onClick={() => setVisible(true)}>
-            <button className="btn l2-btn menuLinks">Home</button>
+            <button className="btn l2-btn menuLinks">
+              Home <HomeOutlined />
+            </button>
           </NavLink>
           <NavLink to="/profile" onClick={() => setVisible(true)}>
-            <button className="btn l2-btn menuLinks">Profile</button>
+            <button className="btn l2-btn menuLinks">
+              Profile <ProfileOutlined />
+            </button>
           </NavLink>
           <Link to="/logout" onClick={() => setVisible(true)}>
-            <button className="btn l2-btn menuLinks">Logout</button>
+            <button className="btn l2-btn menuLinks">
+              Logout <LogoutOutlined />
+            </button>
           </Link>
         </Drawer>
       </div>
