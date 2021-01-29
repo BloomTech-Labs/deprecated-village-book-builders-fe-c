@@ -3,7 +3,8 @@ import { connect } from 'react-redux';
 import { useParams, useHistory } from 'react-router-dom';
 // import axios from 'axios';
 import { axiosWithAuth } from '../../../utils/axiosWithAuth';
-import { Form, Input, Button, Divider } from 'antd';
+import { Form, Input, Divider } from 'antd';
+import Button from '../../common/Button';
 import { addLibrary } from '../../../state/actions';
 
 //? would it be faster on base-model cellphones to store library data on redux when the edit button is pushed, and then pull from the store to here, or to have the simple secondary axios request pull that specific library data.
@@ -60,72 +61,165 @@ function AddLibraryForm({ addLibrary }) {
   };
 
   return (
-    <Form onFinish={handleSubmit} form={form}>
-      <Form.Item label="Library Name" name="name">
-        <Input
-          type="text"
+    <div style={{ marginLeft: '30%', marginTop: '15%', width: '100%' }}>
+      <h2 className="vbb-header" style={{ marginLeft: '9%' }}>
+        Add a New Library
+      </h2>
+      <Form onFinish={handleSubmit} form={form}>
+        <label
           name="name"
-          value={formData.name.value}
-          onChange={e => handleChange(e)}
-        />
-      </Form.Item>
+          style={{
+            display: 'flex',
+            alignItems: 'baseline',
+            padding: '0',
+            width: '100%',
+          }}
+        >
+          <p
+            className="vbb-header"
+            style={{ width: '10%', fontSize: '1.7em', padding: '0' }}
+          >
+            Library Name:{' '}
+          </p>
+          <Input
+            type="text"
+            name="name"
+            style={{ width: '20%' }}
+            value={formData.name.value}
+            onChange={e => handleChange(e)}
+          />
+        </label>
 
-      <Form.Item label="Description" name="description">
-        <Input
-          type="text"
+        <label
+          style={{
+            display: 'flex',
+            alignItems: 'baseline',
+            padding: '0',
+            width: '100%',
+          }}
           name="description"
-          value={formData.description.value}
-          onChange={e => handleChange(e)}
-        />
-      </Form.Item>
+        >
+          <p
+            className="vbb-header"
+            style={{ width: '10%', fontSize: '1.7em', padding: '0' }}
+          >
+            Description :
+          </p>
+          <Input
+            style={{ width: '20%' }}
+            type="text"
+            name="description"
+            value={formData.description.value}
+            onChange={e => handleChange(e)}
+          />
+        </label>
 
-      <Form.Item label="Usage" name="library_usage">
-        <Input
-          type="text"
+        <label
+          style={{
+            display: 'flex',
+            alignItems: 'baseline',
+            padding: '0',
+            width: '100%',
+          }}
           name="library_usage"
-          value={formData.library_usage}
-          onChange={e => handleChange(e)}
-        />
-      </Form.Item>
+        >
+          <p
+            className="vbb-header"
+            style={{ width: '10%', fontSize: '1.7em', padding: '0' }}
+          >
+            Usage :
+          </p>
+          <Input
+            style={{ width: '20%' }}
+            type="text"
+            name="library_usage"
+            value={formData.library_usage}
+            onChange={e => handleChange(e)}
+          />
+        </label>
 
-      <Form.Item label="Notes" name="notes">
-        <Input
-          type="text"
+        <label
+          style={{
+            display: 'flex',
+            alignItems: 'baseline',
+            padding: '0',
+            width: '100%',
+          }}
           name="notes"
-          value={formData.notes}
-          onChange={e => handleChange(e)}
-        />
-      </Form.Item>
+        >
+          <p
+            className="vbb-header"
+            style={{ width: '10%', fontSize: '1.7em', padding: '0' }}
+          >
+            Notes :
+          </p>
+          <Input
+            style={{ width: '20%' }}
+            type="text"
+            name="notes"
+            value={formData.notes}
+            onChange={e => handleChange(e)}
+          />
+        </label>
 
-      <Form.Item label="Image Url" name="image">
-        <Input
-          type="text"
+        <label
+          style={{
+            display: 'flex',
+            alignItems: 'baseline',
+            padding: '0',
+            width: '100%',
+          }}
           name="image"
-          value={formData.image}
-          onChange={e => handleChange(e)}
-        />
-      </Form.Item>
+        >
+          <p
+            className="vbb-header"
+            style={{ width: '10%', fontSize: '1.7em', padding: '0' }}
+          >
+            Image Url :
+          </p>
+          <Input
+            style={{ width: '20%' }}
+            type="text"
+            name="image"
+            value={formData.image}
+            onChange={e => handleChange(e)}
+          />
+        </label>
 
-      {/* TODO: When this image renders, it removes the buttons off the page. Not covers them, but completely removes them. Not useful. */}
-      {/* {formData.image ? (
+        {/* TODO: When this image renders, it removes the buttons off the page. Not covers them, but completely removes them. Not useful. */}
+        {/* {formData.image ? (
         <img src={formData.image} alt="Library" />
       ) : (
         <p>Previous Image URL broken or not provided</p>
       )} */}
 
-      <Form.Item>
-        {/* <input type="submit" value="Submit Edit" /> */}
-        <Button htmlType="button" onClick={handleSubmit}>
-          Add Library
-        </Button>
-        {/* <Button htmlType="button" onClick={() => getData()}>
+        <label>
+          {/* <input
+          style={{width:'20%'}} type="submit" value="Submit Edit" /> */}
+          <span
+            style={{
+              display: 'flex',
+              justifyContent: 'space-between',
+              width: '35%',
+            }}
+          >
+            <Button
+              htmlType="button"
+              buttonText="Add Library"
+              onClick={handleSubmit}
+            ></Button>
+            {/* <Button htmlType="button" onClick={() => getData()}>
           Reset changes
         </Button> */}
-        <Button htmlType="link" onClick={handleCancel}>
-          Cancel
-        </Button>
-      </Form.Item>
-    </Form>
+            <Button
+              htmlType="link"
+              buttonText="Cancel"
+              onClick={handleCancel}
+            ></Button>
+          </span>
+        </label>
+      </Form>
+    </div>
   );
 }
 
