@@ -28,6 +28,7 @@ import {
 import Logout from '../../Logout.js';
 // import MentorPairings from './Mentees/Mentees.js';
 import Mentees from './Mentees/Mentees.js';
+import Mentors from '../Mentor/Mentors.js';
 
 function HeadmasterDashboard() {
   const [visible, setVisible] = useState(true);
@@ -64,7 +65,7 @@ function HeadmasterDashboard() {
           <Route path="/mentor-pairings" component={Mentees} />
           <Route exact path="/profile" component={HeadmasterProfile} />
           <Route path="/profile/edit/:id" component={ProfileForm} />
-          <Route path="/mentor-advisor" />
+          <Route path="/mentor-advisor" component={Mentors} />
           <Route path="/school-village">
             <Village />
             <Schools />
