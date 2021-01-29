@@ -6,7 +6,7 @@
 import axios from 'axios';
 import { axiosWithAuth } from '../../utils/axiosWithAuth';
 import * as actionTypes from './actionTypes';
-URL = process.env.REACT_APP_BASE_URL || 'http://localhost:8080'; // new port for back-end;
+let baseURL = process.env.REACT_APP_BASE_URL || 'http://localhost:8080'; // new port for back-end;
 export const checkToken = data => dispatch => {
   dispatch({
     type: actionTypes.AUTH_SUCCESS,
@@ -83,7 +83,6 @@ export const fetchVillage = id => dispatch => {
 };
 
 export const editVillage = (id, data) => dispatch => {
-
   axiosWithAuth()
     .put(`/village/${id}`, data)
     .then(res => {
@@ -120,6 +119,18 @@ export const editMentee = (id, data) => dispatch => {
       });
     })
     .catch(err => console.dir(err));
+};
+
+export const fetchMentors = () => dispatch => {
+  dispatch({ type: actionTypes.FETCH_MENTOR_START });
+  axiosWithAuth()
+    .get('/mentee')
+    .then(res => {
+      dispatch({ type: actionTypes.FETCH_MENTOR_SUCCESS, payload: res.data });
+    })
+    .catch(err =>
+      dispatch({ type: actionTypes.FETCH_MENTOR_FAILURE, payload: err })
+    );
 };
 
 export const fetchSchools = () => dispatch => {
