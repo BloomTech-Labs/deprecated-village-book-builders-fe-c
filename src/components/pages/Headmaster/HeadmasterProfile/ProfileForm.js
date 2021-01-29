@@ -49,6 +49,7 @@ const dateFormatList = ['DD/MM/YYYY', 'DD/MM/YY'];
 const ProfileForm = props => {
   const [formData, setFormData] = useState(initialState);
   const [value, setValue] = useState(1);
+  const history = useHistory();
   const pathname = useHistory().location.pathname;
   const params = useParams().id;
   const [form] = Form.useForm();
@@ -71,6 +72,7 @@ const ProfileForm = props => {
   const handleSubmit = async () => {
     console.log(formData);
     props.editHeadmasterProfile(params, formData);
+    history.push('/profile');
   };
 
   const handleChange = e => {

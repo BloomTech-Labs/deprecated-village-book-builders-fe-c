@@ -2,9 +2,14 @@ import React, { useEffect, useState } from 'react';
 import { axiosWithAuth } from '../../../../utils/axiosWithAuth';
 import { Button, Divider, Input, Modal, List, Avatar, Select } from 'antd';
 import { connect } from 'react-redux';
-import { checkToken, fetchMentees } from '../../../../state/actions/index';
+import {
+  checkToken,
+  fetchMentees,
+  editMentee,
+} from '../../../../state/actions/index';
 import MenteeForm from './MenteeForm';
 import MenteeProfile from './MenteeProfile';
+
 const Mentees = props => {
   let menteesSelection = [...props.mentees];
   const [search, setSearch] = useState('');
@@ -25,6 +30,7 @@ const Mentees = props => {
       setShowModal(false);
       setCurrentMentee({});
       setEditing(false);
+      console.log('this got fired!!!', menteeData);
     } else {
       // Opening Modal
       setShowModal(true);
@@ -94,7 +100,8 @@ const Mentees = props => {
 
   useEffect(() => {
     props.fetchMentees();
-  }, []);
+    console.log('showmodal', showModal);
+  }, [showModal]);
 
   return (
     <div className="menteeContainer">
@@ -182,7 +189,7 @@ const Mentees = props => {
             Delete
           </Button>,
           editing ? (
-            <Button key="submit" type="primary" onClick={moreInfoHandler}>
+            <Button key="submit" type="primary" onClick={editMentee()}>
               Submit
             </Button>
           ) : (
@@ -193,7 +200,11 @@ const Mentees = props => {
         ]}
       >
         {editing ? (
-          <MenteeForm editing={editing} currentMentee={currentMentee} />
+          <MenteeForm
+            editing={editing}
+            currentMentee={currentMentee}
+            setShowModal={setShowModal}
+          />
         ) : (
           <MenteeProfile currentMentee={currentMentee} />
         )}
@@ -210,4 +221,8 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps, { checkToken, fetchMentees })(Mentees);
+export default connect(mapStateToProps, {
+  checkToken,
+  fetchMentees,
+  editMentee,
+})(Mentees);

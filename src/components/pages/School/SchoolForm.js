@@ -32,6 +32,7 @@ const initialState = {
 const SchoolForm = props => {
   const [formData, setFormData] = useState(initialState);
   const pathname = useHistory().location.pathname;
+  const history = useHistory();
   const params = useParams().schoolId;
   const [form] = Form.useForm();
 
@@ -52,6 +53,7 @@ const SchoolForm = props => {
 
   const handleSubmit = async () => {
     props.editSchool(params, formData);
+    history.push('/school-village');
   };
 
   const handleChange = e => {
