@@ -37,7 +37,7 @@ import {
 import Logout from '../../Logout.js';
 // import MentorPairings from './Mentees/Mentees.js';
 import Mentees from './Mentees/Mentees.js';
-import MentorPairing from '../Mentor/MentorPairing.js';
+import MentorPairing from '../Mentor/MentorPairing';
 
 function HeadmasterDashboard() {
   const [visible, setVisible] = useState(true);
@@ -128,7 +128,7 @@ function HeadmasterDashboard() {
               Profile <ProfileOutlined />
             </button>
           </NavLink>
-          <NavLink to={'/mentor-pairings'} onClick={() => setVisible(true)}>
+          <NavLink to={'/mentor-pairing'} onClick={() => setVisible(true)}>
             <button className="btn l2-btn menuLinks">
               Mentor Pairings <UserSwitchOutlined />
             </button>
