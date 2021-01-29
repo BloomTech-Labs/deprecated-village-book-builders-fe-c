@@ -69,6 +69,8 @@ const langOptions = [
   { label: 'Lao', value: 'Lao' },
 ];
 
+const subjects = ['Math', 'English', 'History', 'Science', 'Geography'];
+
 export default function AddNewMentee(props) {
   const [visible, setVisible] = useState(false);
   const [langs, setLangs] = useState(langOptions);
@@ -113,9 +115,25 @@ export default function AddNewMentee(props) {
             </Col>
           </Row>
           <Row gutter={16}>
-            <Col span={24}>
+            <Col span={12}>
               <Form.Item name="email" label="Email">
                 <Input placeholder="Email" />
+              </Form.Item>
+            </Col>
+            <Col span={12}>
+              <Form.Item name="phone" label="Phone">
+                <Input placeholder="Phone#" />
+              </Form.Item>
+            </Col>
+          </Row>
+          <Row gutter={16}>
+            <Col span={24}>
+              <Form.Item name="subjects" label="Subjects">
+                <Select mode="multiple" placeholder="Subjects">
+                  {subjects.map(sub => {
+                    return <Select.Option value={sub}>{sub}</Select.Option>;
+                  })}
+                </Select>
               </Form.Item>
             </Col>
           </Row>
@@ -127,14 +145,22 @@ export default function AddNewMentee(props) {
             </Col>
             <Col span={12}>
               <Form.Item name="secondaryLang" label="Secondary Language">
-                <Select placeholder="Secondary Language" options={langs} />
+                <Select mode="multiple" placeholder="Secondary Language">
+                  {langs.map(lang => {
+                    return (
+                      <Select.Option value={lang.value}>
+                        {lang.label}
+                      </Select.Option>
+                    );
+                  })}
+                </Select>
               </Form.Item>
             </Col>
           </Row>
           <Row gutter={16}>
             <Col span={12}>
               <Form.Item name="grade" label="School Grade">
-                <Select options={gradeLevels} />
+                <Select placeholder="School Grade" options={gradeLevels} />
               </Form.Item>
             </Col>
             <Col span={4}>
