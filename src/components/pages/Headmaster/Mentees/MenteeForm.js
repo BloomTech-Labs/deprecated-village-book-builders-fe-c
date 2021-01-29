@@ -89,6 +89,11 @@ const MenteeForm = props => {
     <FormContainer>
       <Form.Item {...tailLayout}></Form.Item>
       <Form onFinish={handleSubmit} form={form} {...layout}>
+        <span style={{ display: 'flex', justifyContent: 'center' }}>
+          <Required id="requiredMsg">
+            Fields with <span id="required">&#42;</span> are required.
+          </Required>
+        </span>
         <Form.Item
           label="First Name"
           name="first_name"
@@ -128,13 +133,13 @@ const MenteeForm = props => {
           />
         </Form.Item>
         <Form.Item
-          label="email"
-          name="email"
+          label="Email"
+          name="Email"
           rules={[{ required: true, message: 'email is required.' }]}
         >
           <Input
             type="text"
-            name="email"
+            name="Email"
             value={formData.email}
             defaultValue={formData.email}
             onChange={e => handleChange(e)}
@@ -353,14 +358,11 @@ const MenteeForm = props => {
         </Form.Item>
 
         <Form.Item {...tailLayout}>
-          <Button
+          {/* <Button
             className="l2-btn btn"
             htmlType="submit"
             buttonText="Submit Village Edit"
-          />
-          <Required id="requiredMsg">
-            Fields with <span id="required">&#42;</span> are required.
-          </Required>
+          /> */}
         </Form.Item>
       </Form>
     </FormContainer>

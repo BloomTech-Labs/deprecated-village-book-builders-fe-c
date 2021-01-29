@@ -250,23 +250,38 @@ const Mentees = props => {
         maskClosable
         destroyOnClose
         footer={[
-          <Button
+          <button
+            className="l2-btn btn"
             key="back"
             onClick={editing ? editingHandler : moreInfoHandler}
           >
             Return
-          </Button>,
-          <Button key="delete" onClick={() => console.log('delete')}>
+          </button>,
+          <button
+            className="l2-btn btn"
+            key="delete"
+            onClick={() => console.log('delete')}
+          >
             Delete
-          </Button>,
+          </button>,
           editing ? (
-            <Button key="submit" type="primary" onClick={moreInfoHandler}>
+            <button
+              className="l2-btn btn"
+              key="submit"
+              type="primary"
+              onClick={moreInfoHandler}
+            >
               Submit
-            </Button>
+            </button>
           ) : (
-            <Button key="edit" type="primary" onClick={editingHandler}>
+            <button
+              className="l2-btn btn"
+              key="edit"
+              type="primary"
+              onClick={editingHandler}
+            >
               Edit
-            </Button>
+            </button>
           ),
         ]}
       >
