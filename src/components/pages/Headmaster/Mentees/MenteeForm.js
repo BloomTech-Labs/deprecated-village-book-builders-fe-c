@@ -47,19 +47,6 @@ const MenteeForm = props => {
   const params = useParams();
   const [form] = Form.useForm();
 
-  // this converts gender from string to value to populate form when editing
-  if (currentMentee.gender === 'Male') {
-    currentMentee.gender = 0;
-  } else if (currentMentee.gender === 'Female') {
-    currentMentee.gender = 1;
-  } else {
-    currentMentee.gender = 2;
-  }
-
-  // this converts dob to populate form when editing
-  let dobData = currentMentee.dob.split('T');
-  currentMentee.dob = dobData[0];
-
   // this sets the form data to the current mentee card headmaster is editing
   useEffect(() => {
     if (editing) {
@@ -68,6 +55,21 @@ const MenteeForm = props => {
       setFormData(initialState);
     }
   }, [editing]);
+
+  // this converts gender from string to value to populate form when editing
+  if (editing && currentMentee.gender === 'Male') {
+    currentMentee.gender = 0;
+  } else if (editing && currentMentee.gender === 'Female') {
+    currentMentee.gender = 1;
+  } else if (editing) {
+    currentMentee.gender = 2;
+  }
+
+  // this converts dob to populate form when editing
+  if (editing) {
+    let dobData = currentMentee.dob.split('T');
+    currentMentee.dob = dobData[0];
+  }
 
   const handleSubmit = async () => {
     debugLog(formData);
@@ -360,7 +362,7 @@ const MenteeForm = props => {
           <Button
             className="l2-btn btn"
             htmlType="submit"
-            buttonText="Submit Village Edit"
+            buttonText="Submit Mentee"
           />
           <Required id="requiredMsg">
             Fields with <span id="required">&#42;</span> are required.
