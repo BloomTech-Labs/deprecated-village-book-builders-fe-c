@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { fetchMentors } from '../../../state/actions/index';
 import { Button, Divider, Input, Modal, List, Avatar, Select } from 'antd';
+import MentorProfile from '../../pages/Mentor/MentorProfile';
 
 const Mentors = props => {
   let mentorsSelection = [...props.mentors];
@@ -118,7 +119,7 @@ const Mentors = props => {
         {editing ? (
           <p>A Mentor form will need to go here</p>
         ) : (
-          <p>A mentor profile will need to go here</p>
+          <MentorProfile currentMentor={currentMentor} />
         )}
       </Modal>
     </>
