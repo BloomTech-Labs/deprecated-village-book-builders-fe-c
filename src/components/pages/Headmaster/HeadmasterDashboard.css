@@ -87,7 +87,8 @@
   margin-right: 10px;
 }
 
-.menteeModal {
+.menteeModal,
+.mentorModal {
   background-color: rgb(236, 166, 73);
 }
 
