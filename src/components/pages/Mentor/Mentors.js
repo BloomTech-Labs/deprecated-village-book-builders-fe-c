@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { fetchMentors } from '../../../state/actions/index';
 import { Button, Divider, Input, Modal, List, Avatar, Select } from 'antd';
 import MentorProfile from '../../pages/Mentor/MentorProfile';
+import MentorForm from '../Mentor/MentorForm';
 
 const Mentors = props => {
   let mentorsSelection = [...props.mentors];
@@ -13,8 +14,6 @@ const Mentors = props => {
   // used to dictate when we open modals
   const editingHandler = e => {
     setEditing(!editing);
-    console.log(e);
-    console.log(showModal);
   };
 
   // let's us populate the selected user's data into the modal
@@ -24,7 +23,6 @@ const Mentors = props => {
       setShowModal(false);
       setCurrentMentor({});
       setEditing(false);
-      console.log('this got fired!!!', mentorData);
     } else {
       // Opening Modal
       setShowModal(true);
@@ -47,7 +45,7 @@ const Mentors = props => {
           itemLayout="horizontal"
           dataSource={mentorsSelection}
           renderItem={item => (
-            <List.Item>
+            <List.Item key={item.id}>
               <div className="listItemWrapper">
                 <div className="listItemMeta">
                   <List.Item.Meta
@@ -78,7 +76,7 @@ const Mentors = props => {
                       moreInfoHandler(e, item);
                       editingHandler();
                     }}
-                    classname="listItemButton"
+                    className="listItemButton"
                     danger
                     size="middle"
                     type="default"
@@ -117,7 +115,11 @@ const Mentors = props => {
         ]}
       >
         {editing ? (
-          <p>A Mentor form will need to go here</p>
+          <MentorForm
+            editing={editing}
+            currentMentor={currentMentor}
+            setShowModal={setShowModal}
+          />
         ) : (
           <MentorProfile currentMentor={currentMentor} />
         )}

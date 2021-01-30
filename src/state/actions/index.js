@@ -124,13 +124,27 @@ export const editMentee = (id, data) => dispatch => {
 export const fetchMentors = () => dispatch => {
   dispatch({ type: actionTypes.FETCH_MENTOR_START });
   axiosWithAuth()
-    .get('/mentee')
+    .get('/mentor')
     .then(res => {
       dispatch({ type: actionTypes.FETCH_MENTOR_SUCCESS, payload: res.data });
     })
     .catch(err =>
       dispatch({ type: actionTypes.FETCH_MENTOR_FAILURE, payload: err })
     );
+};
+
+export const editMentor = (id, data) => dispatch => {
+  console.log('editMentor fired:', id, data);
+  axiosWithAuth()
+    .put(`/mentor/${id}`, data)
+    .then(res => {
+      console.log(res.data);
+      dispatch({
+        type: actionTypes.EDIT_MENTOR,
+        payload: res.data,
+      });
+    })
+    .catch(err => console.dir(err));
 };
 
 export const fetchSchools = () => dispatch => {

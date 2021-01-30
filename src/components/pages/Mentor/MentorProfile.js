@@ -4,7 +4,7 @@ import React from 'react';
 import { debugLog } from '../../../utils/debugMode';
 const MentorProfile = ({ currentMentor }) => {
   debugLog(
-    'Prop drilled from Mentees.js',
+    'Prop drilled from Mentors.js',
     currentMentor,
     moment.utc(currentMentor.dob).format('dddd, MMMM Do of YYYY')
   );
@@ -48,7 +48,7 @@ const MentorProfile = ({ currentMentor }) => {
       ) : (
         <>
           <Avatar
-            src={currentMentor.mentee_picture}
+            src={currentMentor.mentor_picture}
             size={250}
             style={{ alignSelf: 'center' }}
           />
@@ -64,10 +64,6 @@ const MentorProfile = ({ currentMentor }) => {
           <p>{currentMentor.gender}</p>
           <Divider plain>Date of Birth</Divider>
           <p>{moment.utc(currentMentor.dob).format('dddd, MMMM Do of YYYY')}</p>
-          <Divider plain>Mentor</Divider>
-          <p>
-            {currentMentor.mentorId ? currentMentor.mentorId : 'Unassigned'}
-          </p>
           <Divider plain>Grades</Divider>
           <p>{`English :${currentMentor.english_lvl}`}</p>
           <p>{`Math :${currentMentor.math_lvl}`}</p>

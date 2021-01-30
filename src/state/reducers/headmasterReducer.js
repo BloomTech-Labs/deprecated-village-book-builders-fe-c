@@ -10,6 +10,7 @@ import {
   FETCH_MENTOR_SUCCESS,
   FETCH_MENTOR_FAILURE,
   FETCH_MENTOR_START,
+  EDIT_MENTOR,
 } from '../actions/actionTypes';
 
 import { debugLog } from '../../utils/debugMode.js';
@@ -55,6 +56,18 @@ const reducer = (state = initialState, action) => {
         ...state,
         mentors: action.payload,
       };
+    case EDIT_MENTOR:
+      debugLog(action.type, action.payload);
+      return state.mentors.map((item, index) => {
+        if (index !== item.id) {
+          return item;
+        }
+
+        return {
+          ...item,
+          ...action.item,
+        };
+      });
     default:
       return state;
   }
