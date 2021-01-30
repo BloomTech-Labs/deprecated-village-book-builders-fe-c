@@ -17,55 +17,153 @@ const HeadmasterProfile = props => {
   }, [fetchHeadmasterProfile]);
   return (
     <Profile>
-      <ComponentTitles titleText="Village" />
-      <img src={`${headmasterProfile.headmasters_picture}`} alt="headmaster" />
-      <Label>Name:</Label>
-      <p>{`${headmasterProfile.first_name} ${headmasterProfile.last_name}`}</p>
-
-      <Label>Gender:</Label>
-      <p>{headmasterProfile.gender}</p>
-
-      <Label>Address:</Label>
-      <p>{headmasterProfile.address}</p>
-
-      <Label>Bio:</Label>
-      <p>{headmasterProfile.bio}</p>
-
-      <Label>Communication App:</Label>
-      <p>{headmasterProfile.communication_app}</p>
-
-      <Label>DOB:</Label>
-      <p>{headmasterProfile.dob}</p>
-
-      <Label>General Availability:</Label>
-      <p>{headmasterProfile.general_availability}</p>
-
-      <Label>Mentor Advisor Point of Contact:</Label>
-      <p>{headmasterProfile.mentor_advisor_point_of_contact}</p>
-
-      <Label>Mentor Program Goals:</Label>
-      <p>{headmasterProfile.goals_mentor_program}</p>
-
-      <Label>Personal Goals:</Label>
-      <p>{headmasterProfile.goals_personal}</p>
-
-      <Label>School Community Goals:</Label>
-      <p>{headmasterProfile.goals_school_community}</p>
-
-      <Label>Goals Mentor Program:</Label>
-      <p>{headmasterProfile.goals_mentor_program}</p>
-
+      <span style={{ display: 'flex', justifyContent: 'space-between' }}>
+        <ComponentTitles titleText="Profile" />
+        <div className="villageButtons">
+          <Link to={`/profile/edit/${headmasterProfile.id}`}>
+            <ThemeProvider theme={{ color: '#6ac66b' }}>
+              <Button buttonText="Edit Your Profile" />
+            </ThemeProvider>
+          </Link>
+        </div>
+      </span>
+      <span style={{ display: 'flex', justifyContent: 'center' }}>
+        <img
+          src={`${headmasterProfile.headmasters_picture}`}
+          alt="headmaster"
+        />
+      </span>
+      <span
+        style={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          marginLeft: '20px',
+        }}
+      >
+        <Label>Name:</Label>
+        <p>{`${headmasterProfile.first_name} ${headmasterProfile.last_name}`}</p>
+      </span>
+      <span
+        style={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          marginLeft: '20px',
+        }}
+      >
+        <Label>Gender:</Label>
+        <p>{headmasterProfile.gender}</p>
+      </span>
+      <span
+        style={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          marginLeft: '20px',
+        }}
+      >
+        <Label>Address:</Label>
+        <p>{headmasterProfile.address}</p>
+      </span>
+      <span
+        style={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          marginLeft: '20px',
+        }}
+      >
+        <Label>Bio:</Label>
+        <p>{headmasterProfile.bio}</p>
+      </span>
+      <span
+        style={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          marginLeft: '20px',
+        }}
+      >
+        <Label>Communication App:</Label>
+        <p>{headmasterProfile.communication_app}</p>
+      </span>
+      <span
+        style={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          marginLeft: '20px',
+        }}
+      >
+        <Label>DOB:</Label>
+        <p>{headmasterProfile.dob}</p>
+      </span>
+      <span
+        style={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          marginLeft: '20px',
+        }}
+      >
+        <Label>General Availability:</Label>
+        <p>{headmasterProfile.general_availability}</p>
+      </span>
+      <span
+        style={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          marginLeft: '20px',
+        }}
+      >
+        <Label>Mentor Advisor Point of Contact:</Label>
+        <p>{headmasterProfile.mentor_advisor_point_of_contact}</p>
+      </span>
+      <span
+        style={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          marginLeft: '20px',
+        }}
+      >
+        <Label>Mentor Program Goals:</Label>
+        <p>{headmasterProfile.goals_mentor_program}</p>
+      </span>
+      <span
+        style={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          marginLeft: '20px',
+        }}
+      >
+        <Label>Personal Goals:</Label>
+        <p>{headmasterProfile.goals_personal}</p>
+      </span>
+      <span
+        style={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          marginLeft: '20px',
+        }}
+      >
+        <Label>School Community Goals:</Label>
+        <p>{headmasterProfile.goals_school_community}</p>
+      </span>
+      <span
+        style={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          marginLeft: '20px',
+        }}
+      >
+        <Label>Goals Mentor Program:</Label>
+        <p>{headmasterProfile.goals_mentor_program}</p>
+      </span>
       <p></p>
-
-      <Label>Time Zone:</Label>
-      <p>{headmasterProfile.time_zone}</p>
-      <div className="villageButtons">
-        <Link to={`/profile/edit/${headmasterProfile.id}`}>
-          <ThemeProvider theme={{ color: '#6ac66b' }}>
-            <Button buttonText="Edit Your Profile" />
-          </ThemeProvider>
-        </Link>
-      </div>
+      <span
+        style={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          marginLeft: '20px',
+        }}
+      >
+        <Label>Time Zone:</Label>
+        <p>{headmasterProfile.time_zone}</p>
+      </span>
     </Profile>
   );
 };

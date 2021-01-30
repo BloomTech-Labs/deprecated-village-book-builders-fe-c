@@ -109,7 +109,7 @@ h5 {
 p {
   font-family: 'Nunito', sans-serif;
   font-size: 18px;
-  padding-left: 50px;
+  /* padding-left: 50px; */
 }
 
 a {
@@ -202,6 +202,13 @@ a {
 .l5-btn,
 .unbook-btn {
   background-color: #ff914d;
+}
+.menuLinks {
+  background-color: #4c4c49;
+}
+.menuLinks:hover {
+  background-color: #ff914d;
+  color: #fffff6;
 }
 
 .l4-btn,
