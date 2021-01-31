@@ -48,6 +48,7 @@ function EditLibraryForm({ editLibrary }) {
   const handleSubmit = async () => {
     // console.log('formData', formData);
     editLibrary(params, formData);
+    history.push('/admin/libraries');
   };
 
   const handleCancel = () => {
