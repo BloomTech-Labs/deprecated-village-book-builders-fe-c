@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button, Modal, Row, Col, Form, Input, Select } from 'antd';
 import { PlusOutlined } from '@ant-design/icons';
+import { axiosWithAuth } from '../../../../utils/axiosWithAuth';
 
 const gradeLevels = [
   { label: 'Kindergarten', value: 'k' },
@@ -110,147 +111,239 @@ const timeZones = [
   { label: 'UTC+14', value: 'UTC+14' },
 ];
 
+const userForm = {
+  first_name: '',
+  last_name: '',
+  email: '',
+  phone: '', // Need to update Mentee DB columns
+  subjects: [], // Need to update Mentee DB columns
+  home_country: '', // Need to update Mentee DB columns
+  time_zone: '', // Need to update Mentee DB columns
+  primary_language: '',
+  secondary_language: [], // Need to update Mentee DB columns
+  school_lvl: '',
+  dob: '',
+};
+
 export default function AddNewMentee(props) {
   const [visible, setVisible] = useState(false);
-  const [langs, setLangs] = useState(langOptions);
+  const [libraryUsers, setLibraryUsers] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const [editUserForm, setEditUserForm] = useState(null);
 
   const openModal = () => setVisible(true);
   const closeModal = () => setVisible(false);
+
+  const [modalContent, setModalContent] = useState({
+    title: 'Loading',
+    footer: [
+      <Button key="close" onClick={closeModal}>
+        Close
+      </Button>,
+    ],
+    content: 'Loading users...',
+  });
+
+  useEffect(() => {
+    setIsLoading(true);
+    axiosWithAuth()
+      .get(`/users/library`)
+      .then(res => {
+        setLibraryUsers(res.data);
+        setIsLoading(false);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }, [setLibraryUsers]);
+
+  const loadLibraryUsers = () => {
+    setIsLoading(true);
+    openModal();
+    displayContent();
+
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 2000);
+  };
+
+  const onLibraryUserClick = (user, content) => {
+    const { email } = user;
+    setEditUserForm({ email, ...user });
+    setModalContent(content);
+  };
+
+  const displayContent = () => {
+    if (!libraryUsers || !libraryUsers.length) {
+      setModalContent({
+        footer: [<Button key="close">Close</Button>],
+        content: 'No users found.',
+      });
+    } else {
+      const content = [
+        {
+          footer: [
+            <Button key="close" onClick={closeModal}>
+              Close
+            </Button>,
+          ],
+          content: libraryUsers.map(user => {
+            return (
+              <Button onClick={() => onLibraryUserClick(user, content[1])}>
+                {user.email}
+              </Button>
+            );
+          }),
+        },
+        {
+          footer: [
+            <Button key="cancel" onClick={closeModal}>
+              Cancel
+            </Button>,
+            <Button key="submit" type="primary">
+              Submit
+            </Button>,
+          ],
+          content: (
+            <Form layout="vertical" size="large">
+              <Row gutter={16}>
+                <Col span={12}>
+                  <Form.Item name="name" label="Name">
+                    <Input placeholder="First Name" />
+                  </Form.Item>
+                </Col>
+                <Col span={12}>
+                  <Form.Item name="name" label=" ">
+                    <Input placeholder="Last Name" />
+                  </Form.Item>
+                </Col>
+              </Row>
+              <Row gutter={16}>
+                <Col span={12}>
+                  <Form.Item name="email" label="Email">
+                    <Input placeholder="Email" />
+                  </Form.Item>
+                </Col>
+                <Col span={12}>
+                  <Form.Item name="phone" label="Phone">
+                    <Input placeholder="Phone#" />
+                  </Form.Item>
+                </Col>
+              </Row>
+              <Row gutter={16}>
+                <Col span={24}>
+                  <Form.Item name="subjects" label="Subjects">
+                    <Select mode="multiple" placeholder="Subjects">
+                      {subjects.map(sub => {
+                        return <Select.Option value={sub}>{sub}</Select.Option>;
+                      })}
+                    </Select>
+                  </Form.Item>
+                </Col>
+              </Row>
+              <Row gutter={16}>
+                <Col span={12}>
+                  <Form.Item name="homeCountry" label="Home Country">
+                    <Input placeholder="Country" />
+                  </Form.Item>
+                </Col>
+                <Col span={12}>
+                  <Form.Item name="homeTimeZone" label="Time Zone">
+                    <Select placeholder="TimeZone">
+                      {timeZones.map(zone => {
+                        return (
+                          <Select.Option value={zone.value}>
+                            {zone.label}
+                          </Select.Option>
+                        );
+                      })}
+                    </Select>
+                  </Form.Item>
+                </Col>
+              </Row>
+              <Row gutter={16}>
+                <Col span={12}>
+                  <Form.Item name="primaryLang" label="Primary Language">
+                    <Select
+                      placeholder="Primary Language"
+                      options={langOptions}
+                    />
+                  </Form.Item>
+                </Col>
+                <Col span={12}>
+                  <Form.Item name="secondaryLang" label="Secondary Language">
+                    <Select mode="multiple" placeholder="Secondary Language">
+                      {langOptions.map(lang => {
+                        return (
+                          <Select.Option value={lang.value}>
+                            {lang.label}
+                          </Select.Option>
+                        );
+                      })}
+                    </Select>
+                  </Form.Item>
+                </Col>
+              </Row>
+              <Row gutter={16}>
+                <Col span={12}>
+                  <Form.Item name="grade" label="School Grade">
+                    <Select placeholder="School Grade" options={gradeLevels} />
+                  </Form.Item>
+                </Col>
+                <Col span={4}>
+                  <Form.Item name="dateOfBirth" label="Date of Birth">
+                    <Input placeholder="Year" />
+                  </Form.Item>
+                </Col>
+                <Col span={4}>
+                  <Form.Item name="dateOfBirth" label=" ">
+                    <Input placeholder="Month" />
+                  </Form.Item>
+                </Col>
+                <Col span={4}>
+                  <Form.Item name="dateOfBirth" label=" ">
+                    <Input placeholder="Day" />
+                  </Form.Item>
+                </Col>
+              </Row>
+              <Row gutter={16}>
+                <Col span={12}>
+                  <Form.Item name="password" label="Password">
+                    <Input type="password" placeholder="Password" />
+                  </Form.Item>
+                </Col>
+                <Col span={12}>
+                  <Form.Item name="confirmPass" label="ConfirmPassword">
+                    <Input type="password" placeholder="Confirm Password" />
+                  </Form.Item>
+                </Col>
+              </Row>
+            </Form>
+          ),
+        },
+      ];
+
+      setModalContent(content[0]);
+    }
+  };
 
   return (
     <>
       <Button
         style={{ width: '80%', marginBottom: '10pt', alignSelf: 'center' }}
         align="center"
-        onClick={openModal}
+        onClick={loadLibraryUsers}
       >
         <PlusOutlined /> Add New Student
       </Button>
       <Modal
-        title="Add new Student"
+        title="Add New Student"
         visible={visible}
         onCancel={closeModal}
-        footer={[
-          <Button key="cancel" onClick={closeModal}>
-            Cancel
-          </Button>,
-          <Button key="submit" type="primary">
-            Submit
-          </Button>,
-        ]}
+        footer={modalContent.footer}
         width={900}
       >
-        <Form layout="vertical" size="large">
-          <Row gutter={16}>
-            <Col span={12}>
-              <Form.Item name="name" label="Name">
-                <Input placeholder="First Name" />
-              </Form.Item>
-            </Col>
-            <Col span={12}>
-              <Form.Item name="name" label=" ">
-                <Input placeholder="Last Name" />
-              </Form.Item>
-            </Col>
-          </Row>
-          <Row gutter={16}>
-            <Col span={12}>
-              <Form.Item name="email" label="Email">
-                <Input placeholder="Email" />
-              </Form.Item>
-            </Col>
-            <Col span={12}>
-              <Form.Item name="phone" label="Phone">
-                <Input placeholder="Phone#" />
-              </Form.Item>
-            </Col>
-          </Row>
-          <Row gutter={16}>
-            <Col span={24}>
-              <Form.Item name="subjects" label="Subjects">
-                <Select mode="multiple" placeholder="Subjects">
-                  {subjects.map(sub => {
-                    return <Select.Option value={sub}>{sub}</Select.Option>;
-                  })}
-                </Select>
-              </Form.Item>
-            </Col>
-          </Row>
-          <Row gutter={16}>
-            <Col span={12}>
-              <Form.Item name="homeCountry" label="Home Country">
-                <Input placeholder="Country" />
-              </Form.Item>
-            </Col>
-            <Col span={12}>
-              <Form.Item name="homeTimeZone" label="Time Zone">
-                <Select placeholder="TimeZone">
-                  {timeZones.map(zone => {
-                    return (
-                      <Select.Option value={zone.value}>
-                        {zone.label}
-                      </Select.Option>
-                    );
-                  })}
-                </Select>
-              </Form.Item>
-            </Col>
-          </Row>
-          <Row gutter={16}>
-            <Col span={12}>
-              <Form.Item name="primaryLang" label="Primary Language">
-                <Select placeholder="Primary Language" options={langs} />
-              </Form.Item>
-            </Col>
-            <Col span={12}>
-              <Form.Item name="secondaryLang" label="Secondary Language">
-                <Select mode="multiple" placeholder="Secondary Language">
-                  {langs.map(lang => {
-                    return (
-                      <Select.Option value={lang.value}>
-                        {lang.label}
-                      </Select.Option>
-                    );
-                  })}
-                </Select>
-              </Form.Item>
-            </Col>
-          </Row>
-          <Row gutter={16}>
-            <Col span={12}>
-              <Form.Item name="grade" label="School Grade">
-                <Select placeholder="School Grade" options={gradeLevels} />
-              </Form.Item>
-            </Col>
-            <Col span={4}>
-              <Form.Item name="dateOfBirth" label="Date of Birth">
-                <Input placeholder="Year" />
-              </Form.Item>
-            </Col>
-            <Col span={4}>
-              <Form.Item name="dateOfBirth" label=" ">
-                <Input placeholder="Month" />
-              </Form.Item>
-            </Col>
-            <Col span={4}>
-              <Form.Item name="dateOfBirth" label=" ">
-                <Input placeholder="Day" />
-              </Form.Item>
-            </Col>
-          </Row>
-          <Row gutter={16}>
-            <Col span={12}>
-              <Form.Item name="password" label="Password">
-                <Input type="password" placeholder="Password" />
-              </Form.Item>
-            </Col>
-            <Col span={12}>
-              <Form.Item name="confirmPass" label="ConfirmPassword">
-                <Input type="password" placeholder="Confirm Password" />
-              </Form.Item>
-            </Col>
-          </Row>
-        </Form>
+        {isLoading ? 'LOADING...' : modalContent.content}
       </Modal>
     </>
   );
