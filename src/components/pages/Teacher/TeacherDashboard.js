@@ -18,6 +18,7 @@ import StudentOnboarding from './StudentOnboarding';
 // import ProfileForm from './HeadmasterProfile/ProfileForm.js';
 // import HeadmasterNav from './Drawer';
 // import TestComponent from './TestComponent';
+
 import { Drawer, Button } from 'antd';
 import { MenuOutlined } from '@ant-design/icons';
 import './TeacherDashboard.css';
@@ -64,21 +65,14 @@ function TeacherDashboard() {
       <Dashboard>
         <Switch>
           {/* <Route path="/mentor-pairings" component={Mentees} /> */}
-          <Route exact path="/profile" component={TeacherProfile} />
-          <Route path="/profile/edit/:id" component={TeacherEditProfile} />
-          {/* <Route path="/mentor-advisor" />
-          <Route path="/school-village">
-            <Village />
-            <Schools />
+          <Route path="/profile/edit/:id">
+            <TeacherEditProfile />
           </Route>
-          <Route
-            exact
-            path="/village/edit/:villageId"
-            component={VillageForm}
-          />
-          <Route exact path="/school/edit/:schoolId" component={SchoolForm} />
-          <Route path="/library" /> */}
+          <Route path="/profile/:id">
+            <TeacherProfile />
+          </Route>
           <Route path="/studentOnboarding" component={StudentOnboarding} />
+          <Route exact path="/profile" component={TeacherProfile} />
           <Route path="/logout" component={Logout} />
         </Switch>
       </Dashboard>

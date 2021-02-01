@@ -11,13 +11,12 @@ const TeacherProfile = props => {
   /*Labels should be replaced with data from the backend*/
   const history = useHistory();
   const params = useParams();
-
-  const editProfileHandler = event =>
-    history.push(`/teacher/edit/${params.id}`);
+  let id = 1;
+  const editProfileHandler = event => history.push(`/teacher/edit/${id}`);
 
   useEffect(() => {
-    getTeacherProfile(params.id);
-  }, [getTeacherProfile, params.id]);
+    getTeacherProfile(id);
+  }, [getTeacherProfile, id]);
 
   return (
     <div key={teacherProfile.id}>

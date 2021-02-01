@@ -20,7 +20,7 @@ export const login = data => dispatch => {
   axios
     .post(`${baseURL}/users/login`, data)
     .then(res => {
-      // console.log('LOGIN ACTION SUCCESS --> token', res.data);
+      console.log('LOGIN ACTION SUCCESS --> token', res.data);
       window.localStorage.setItem('token', res.data.token); // replacing access_token
       dispatch({
         type: actionTypes.AUTH_SUCCESS,

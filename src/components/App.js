@@ -14,6 +14,7 @@ import AdminDashboard from './pages/Admin/AdminDashboard';
 // import TeacherEditProfile from './pages/Teacher/TeacherEditProfile';
 import StudentDashboard from './pages/Student/StudentDashboard';
 import MenteeDashboard from './pages/Headmaster/Mentees/MenteeDashboard';
+import TeacherDashboard from '../components/pages/Teacher/TeacherDashboard';
 
 const App = ({ role, checkToken }) => {
   return (
@@ -28,14 +29,6 @@ const App = ({ role, checkToken }) => {
         <Route path="/headmaster">
           <Profile />
         </Route>
-        {/*Teacher Routes*/}
-        {/* <Route path="/teacher/edit/:id">
-          <TeacherEditProfile />
-        </Route>
-        <Route path="/teacher/:id">
-          <TeacherProfile />
-        </Route> */}
-
         <Route path="/">
           {/*//! this needs to be changed to if there is an unexpired token*/}
           {/* Look for token in case a user refreshes the page & clears redux store, then it repopulates the redux store with userId, role & loggedIn status with checkToken().  */}
@@ -45,7 +38,7 @@ const App = ({ role, checkToken }) => {
               {/* //once we make a reusable dashboard/sidebar, this is where we would put it, passing in the role as props to fill it out accordingly. */}
               {role === 'headmaster' && <HeadmasterDashboard />}
               {role === 'admin' && <AdminDashboard />}
-
+              {role === 'teacher' && <TeacherDashboard />}
               {/* checks token to see if role is mentee. credentials to check with -> mentees@mentees.com : password */}
               {role === 'student' && <StudentDashboard />}
               {role === 'mentee' && <MenteeDashboard />}
