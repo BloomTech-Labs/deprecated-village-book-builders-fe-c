@@ -263,7 +263,7 @@ const ProfileForm = props => {
           <Button
             className="l2-btn btn"
             htmlType="submit"
-            buttonText="Submit Village Edit"
+            buttonText="Submit Your Profile Edit"
           />
           <Required id="requiredMsg">
             Fields with <span id="required">&#42;</span> are required.
