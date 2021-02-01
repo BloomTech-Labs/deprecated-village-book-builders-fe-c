@@ -1,6 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { axiosWithAuth } from '../../../../utils/axiosWithAuth';
-import { Button, Divider, Input, Modal, List, Avatar, Select } from 'antd';
+import {
+  InfoCircleOutlined,
+  EditOutlined,
+  PlusCircleOutlined,
+} from '@ant-design/icons';
+import { Divider, Input, Modal, List, Avatar, Select } from 'antd';
+import Button from '../../../common/Button';
 import { connect } from 'react-redux';
 import {
   checkToken,
@@ -16,7 +22,76 @@ const Mentees = props => {
   const [showModal, setShowModal] = useState(false);
   const [editing, setEditing] = useState(false);
   const [currentMentee, setCurrentMentee] = useState({});
-  const [searchBy, setSearchBy] = useState('name');
+  const [searchBy, setSearchBy] = useState('Name');
+  const menteeStyles = {
+    newMentee: {
+      border: 'none',
+      backgroundColor: '#ff914d',
+      fontFamily: 'Caveat Brush,cursive',
+      fontStyle: 'italic',
+      webkitLetterSpacing: '2px',
+      mozLetterSpacing: '2px',
+      msLetterSpacing: '2px',
+      height: 'none',
+      letterSpacing: '2px',
+      fontWeight: '400',
+      fontSize: '22px',
+      color: 'white',
+      borderRadius: '18px',
+      padding: '8px',
+      paddingLeft: '15px',
+      paddingRight: '15px',
+      webkitAppearance: 'none',
+      margin: '1rem 0',
+      textAlign: 'right',
+      margin: '1rem 0',
+      width: 'auto',
+    },
+    moreInfo: {
+      border: 'none',
+      backgroundColor: '#ff914d',
+      fontFamily: 'Caveat Brush,cursive',
+      fontStyle: 'italic',
+      webkitLetterSpacing: '2px',
+      mozLetterSpacing: '2px',
+      msLetterSpacing: '2px',
+      letterSpacing: '2px',
+      fontWeight: '400',
+      fontSize: '22px',
+      color: 'white',
+      borderRadius: '18px',
+      padding: '8px',
+      paddingLeft: '15px',
+      paddingRight: '15px',
+      webkitAppearance: 'none',
+      margin: '1rem 0',
+      textAlign: 'right',
+      margin: '1rem 20px',
+      width: 'auto',
+    },
+    editMentee: {
+      border: 'none',
+      backgroundColor: '#ff914d',
+      fontFamily: 'Caveat Brush,cursive',
+      fontStyle: 'italic',
+      webkitLetterSpacing: '2px',
+      mozLetterSpacing: '2px',
+      msLetterSpacing: '2px',
+      letterSpacing: '2px',
+      fontWeight: '400',
+      fontSize: '22px',
+      color: 'white',
+      borderRadius: '18px',
+      padding: '8px',
+      paddingLeft: '15px',
+      paddingRight: '15px',
+      webkitAppearance: 'none',
+      margin: '1rem 0',
+      textAlign: 'right',
+      margin: '1rem 0',
+      width: 'auto',
+    },
+  };
 
   const editingHandler = e => {
     setEditing(!editing);
@@ -65,7 +140,7 @@ const Mentees = props => {
   );
 
   // Search filters go here 'searchBy' is the field we're filtering through
-  if (Array.isArray(menteesSelection) && searchBy == 'name') {
+  if (Array.isArray(menteesSelection) && searchBy == 'Name') {
     menteesSelection = menteesSelection.filter(
       item =>
         item.first_name.toLowerCase().includes(search.toLowerCase()) ||
@@ -107,20 +182,24 @@ const Mentees = props => {
     <div className="menteeContainer">
       <h1 id="menteeTittle">Mentee Management</h1>
       <div className="exploreWrapper">
-        <Button
-          style={{ width: '80%', marginBottom: '10pt', alignSelf: 'center' }}
-          align="center"
-        >
-          Create New Library
-        </Button>
-        <Input.Search
-          data-testid="search-bar"
-          addonBefore={selectBefore}
-          value={search}
-          placeholder={searchBy}
-          style={{ width: '80%', alignSelf: 'center' }}
-          onChange={searchHandler}
-        />
+        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+          <Input.Search
+            data-testid="search-bar"
+            addonBefore={selectBefore}
+            value={search}
+            placeholder={searchBy}
+            style={{ width: '80%', alignSelf: 'center' }}
+            onChange={searchHandler}
+          />
+          <button
+            className="l2-btn btn"
+            style={menteeStyles.newMentee}
+            onClick={e => console.log(e)}
+          >
+            {/* Create New Mentee  */}
+            Create New Mentee <PlusCircleOutlined />
+          </button>
+        </div>
         <Divider />
         <List
           itemLayout="horizontal"
@@ -144,26 +223,25 @@ const Mentees = props => {
                   />
                 </div>
                 <div className="listItemButtonWrapper">
-                  <Button
-                    onClick={e => moreInfoHandler(e, item)}
-                    className="listItemButton"
-                    size="middle"
-                    type="default"
+                  <button
+                    onClick={e => {
+                      moreInfoHandler(e, item);
+                    }}
+                    style={menteeStyles.moreInfo}
+                    className="l2-btn btn "
                   >
-                    More Info
-                  </Button>
-                  <Button
+                    <InfoCircleOutlined />
+                  </button>
+                  <button
                     onClick={e => {
                       moreInfoHandler(e, item);
                       editingHandler();
                     }}
-                    className="listItemButton"
-                    danger
-                    size="middle"
-                    type="default"
+                    style={menteeStyles.editMentee}
+                    className="l2-btn btn "
                   >
-                    Edit
-                  </Button>
+                    <EditOutlined />
+                  </button>
                 </div>
               </div>
             </List.Item>

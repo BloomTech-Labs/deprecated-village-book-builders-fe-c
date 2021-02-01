@@ -17,53 +17,147 @@ const StudentProfile = props => {
   //   }, [getStudentProfile]);
   return (
     <Profile>
-      <ComponentTitles titleText="Edit Your Profile" />
+      <span style={{ display: 'flex', justifyContent: 'space-between' }}>
+        <ComponentTitles titleText="Edit Your Profile" />
+        <div className="villageButtons">
+          <Link to={`/profile/edit/${studentProfile.id}`}>
+            <ThemeProvider theme={{ color: '#6ac66b' }}>
+              <Button buttonText="Edit Your Profile" />
+            </ThemeProvider>
+          </Link>
+        </div>
+      </span>
       <img src={`${studentProfile.mentee_picture}`} alt="mentee" />
-      <Label> Name:</Label>
-      <p>{`${studentProfile.first_name} ${studentProfile.last_name}`}</p>
-
-      <Label>Gender:</Label>
-      <p>{studentProfile.gender}</p>
-
-      <Label>Email:</Label>
-      <p>{studentProfile.email}</p>
-
-      <Label>Language:</Label>
-      <p>{studentProfile.language}</p>
-
-      <Label>School Level:</Label>
-      <p>{studentProfile.school_lvl}</p>
-
-      <Label>DOB:</Label>
-      <p>{studentProfile.dob}</p>
-
-      <Label>General Availability:</Label>
-      <p>{studentProfile.general_availability}</p>
-
-      <Label>English Level:</Label>
-      <p>{studentProfile.english_lvl}</p>
-
-      <Label>School Level:</Label>
-      <p>{studentProfile.school_lvl}</p>
-
-      <Label>Math Level:</Label>
-      <p>{studentProfile.math_lvl}</p>
-
-      <Label>Reading Level:</Label>
-      <p>{studentProfile.reading_lvl}</p>
-
-      <Label>Academic Description:</Label>
-      <p>{studentProfile.academic_description}</p>
-
-      <Label>Support Needed:</Label>
-      <p>{studentProfile.support_neededl}</p>
-      <div className="villageButtons">
-        <Link to={`/profile/edit/${studentProfile.id}`}>
-          <ThemeProvider theme={{ color: '#6ac66b' }}>
-            <Button buttonText="Edit Your Profile" />
-          </ThemeProvider>
-        </Link>
-      </div>
+      <span
+        style={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          marginLeft: '20px',
+        }}
+      >
+        <Label> Name:</Label>
+        <p>{`${studentProfile.first_name} ${studentProfile.last_name}`}</p>
+      </span>
+      <span
+        style={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          marginLeft: '20px',
+        }}
+      >
+        <Label>Gender:</Label>
+        <p>{studentProfile.gender}</p>
+      </span>
+      <span
+        style={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          marginLeft: '20px',
+        }}
+      >
+        <Label>Email:</Label>
+        <p>{studentProfile.email}</p>
+      </span>
+      <span
+        style={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          marginLeft: '20px',
+        }}
+      >
+        <Label>Language:</Label>
+        <p>{studentProfile.language}</p>
+      </span>
+      <span
+        style={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          marginLeft: '20px',
+        }}
+      >
+        <Label>School Level:</Label>
+        <p>{studentProfile.school_lvl}</p>
+      </span>
+      <span
+        style={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          marginLeft: '20px',
+        }}
+      >
+        <Label>DOB:</Label>
+        <p>{studentProfile.dob}</p>
+      </span>
+      <span
+        style={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          marginLeft: '20px',
+        }}
+      >
+        <Label>General Availability:</Label>
+        <p>{studentProfile.general_availability}</p>
+      </span>
+      <span
+        style={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          marginLeft: '20px',
+        }}
+      >
+        <Label>English Level:</Label>
+        <p>{studentProfile.english_lvl}</p>
+      </span>
+      <span
+        style={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          marginLeft: '20px',
+        }}
+      >
+        <Label>School Level:</Label>
+        <p>{studentProfile.school_lvl}</p>
+      </span>
+      <span
+        style={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          marginLeft: '20px',
+        }}
+      >
+        <Label>Math Level:</Label>
+        <p>{studentProfile.math_lvl}</p>
+      </span>
+      <span
+        style={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          marginLeft: '20px',
+        }}
+      >
+        <Label>Reading Level:</Label>
+        <p>{studentProfile.reading_lvl}</p>
+      </span>
+      <span
+        style={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          marginLeft: '20px',
+        }}
+      >
+        <Label>Academic Description:</Label>
+        <p>{studentProfile.academic_description}</p>
+      </span>
+      <span
+        style={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          marginLeft: '20px',
+        }}
+      >
+        <Label>Support Needed:</Label>
+        <p>{studentProfile.support_neededl}</p>
+      </span>
     </Profile>
   );
 };
