@@ -50,7 +50,7 @@ function AddLibraryForm({ addLibrary }) {
   };
 
   const handleCancel = () => {
-    push('admin/libraries');
+    push('/admin/libraries');
     // window.location.replace('/admin/libraries');
   };
 
