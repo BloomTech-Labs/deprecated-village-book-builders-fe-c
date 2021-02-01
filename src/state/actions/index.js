@@ -138,7 +138,7 @@ export const editMentor = (id, data) => dispatch => {
   axiosWithAuth()
     .put(`/mentor/${id}`, data)
     .then(res => {
-      console.log(res.data);
+      // console.log(res.data);
       dispatch({
         type: actionTypes.EDIT_MENTOR,
         payload: res.data,

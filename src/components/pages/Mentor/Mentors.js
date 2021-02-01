@@ -108,7 +108,7 @@ const Mentors = props => {
               Submit
             </Button>
           ) : (
-            <Button key="edit" type="primary">
+            <Button key="edit" type="primary" onClick={editingHandler}>
               Edit
             </Button>
           ),
