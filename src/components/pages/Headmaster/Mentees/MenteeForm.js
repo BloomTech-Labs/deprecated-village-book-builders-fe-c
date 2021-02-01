@@ -6,7 +6,11 @@ import axios from 'axios';
 import { Form, Input, DatePicker, Space, Radio } from 'antd';
 import moment from 'moment';
 
-import { editHeadmasterProfile, editMentee } from '../../../../state/actions';
+import {
+  editHeadmasterProfile,
+  editMentee,
+  addMentee,
+} from '../../../../state/actions';
 import {
   layout,
   FormContainer,
@@ -48,7 +52,7 @@ const MenteeForm = props => {
   const params = useParams();
   const [form] = Form.useForm();
 
-  console.log('sanity test 1', currentMentee);
+  console.log('sanity test 1', props);
   // this sets the form data to the current mentee card headmaster is editing
   useEffect(() => {
     if (editing) {
@@ -83,9 +87,13 @@ const MenteeForm = props => {
   const handleSubmit = async () => {
     debugLog(formData);
     console.log('mentee form', formData.id, formData);
-    props.editMentee(formData.id, formData);
-    setShowModal(false);
-    history.push('/mentor-pairings');
+    if (editing) {
+      props.editMentee(formData.id, formData);
+      setShowModal(false);
+    } else {
+      addMentee(formData);
+    }
+    history.push('/mentees');
   };
 
   const handleChange = e => {
