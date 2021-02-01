@@ -1,5 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
+import {
+  HomeOutlined,
+  ProfileOutlined,
+  CalendarOutlined,
+  LogoutOutlined,
+  ContactsOutlined,
+} from '@ant-design/icons';
 import { NavLink } from 'react-router-dom';
 import { Drawer } from 'antd';
 
@@ -40,19 +47,29 @@ export default function MenteeMenu(props) {
       zIndex={1}
     >
       <NavLink to="/">
-        <Button>Home</Button>
+        <button className="btn l2-btn menuLinks">
+          Home <HomeOutlined />
+        </button>
       </NavLink>
       <NavLink to="/Calendar">
-        <Button>Calendar</Button>
+        <button className="btn l2-btn menuLinks">
+          Calendar <CalendarOutlined />
+        </button>
       </NavLink>
       <NavLink to="/Profile">
-        <Button>Profile</Button>
+        <button className="btn l2-btn menuLinks">
+          Profile <ProfileOutlined />
+        </button>
       </NavLink>
       <NavLink to="/Mentor">
-        <Button>Mentor</Button>
+        <button className="btn l2-btn menuLinks">
+          Mentor <ContactsOutlined />
+        </button>
       </NavLink>
       <NavLink to="/Logout">
-        <Button>Logout</Button>
+        <button className="btn l2-btn menuLinks">
+          Logout <LogoutOutlined />
+        </button>
       </NavLink>
     </Drawer>
   );
