@@ -15,6 +15,7 @@ import {
 } from '../../../common/FormStyle';
 import Button from '../../../common/Button';
 import { debugLog } from '../../../../utils/debugMode';
+import { axiosWithAuth } from '../../../../utils/axiosWithAuth';
 
 const baseURL = 'https://cors-anywhere.herokuapp.com/http://54.158.134.245/api';
 
@@ -55,9 +56,10 @@ const ProfileForm = props => {
   const [form] = Form.useForm();
 
   useEffect(() => {
-    axios // ! This should later become available through axiosWithAuth() only once we figure out the Auth with Stakeholder's backend
-      .get(`${baseURL}/headmaster/1`)
+    axiosWithAuth() // ! This should later become available through axiosWithAuth() only once we figure out the Auth with Stakeholder's backend
+      .get(`headmaster/${params}`)
       .then(res => {
+        console.log('axios res', res.data);
         form.setFieldsValue(res.data);
         setFormData(res.data);
       })
