@@ -142,9 +142,9 @@ const MenteeForm = props => {
           />
         </Form.Item> */}
         <Form.Item
-          label="email"
+          label="Email"
           name="email"
-          rules={[{ required: true, message: 'email is required.' }]}
+          rules={[{ required: true, message: 'Email is required.' }]}
         >
           <Input
             type="text"
@@ -157,7 +157,7 @@ const MenteeForm = props => {
         <Form.Item
           label="Primary Language"
           name="primary_language"
-          rules={[{ required: true, message: 'Phone Number is required.' }]}
+          rules={[{ required: true, message: 'Primary language is required.' }]}
         >
           <Input
             type="text"
@@ -182,7 +182,7 @@ const MenteeForm = props => {
         <Form.Item
           label="Picture URL"
           name="mentee_picture"
-          rules={[{ required: true, message: 'Bio is required.' }]}
+          rules={[{ required: true, message: 'Picture URL is required.' }]}
         >
           <Input
             type="text"
@@ -195,7 +195,7 @@ const MenteeForm = props => {
         <Form.Item
           label="English Level"
           name="english_lvl"
-          rules={[{ required: true, message: 'english level is required.' }]}
+          rules={[{ required: true, message: 'English level is required.' }]}
         >
           <Input
             type="text"
@@ -221,7 +221,7 @@ const MenteeForm = props => {
         <Form.Item
           label="Reading Level"
           name="reading_lvl"
-          rules={[{ required: true, message: 'reading level is required.' }]}
+          rules={[{ required: true, message: 'Reading level is required.' }]}
         >
           <Input
             type="text"
@@ -232,9 +232,9 @@ const MenteeForm = props => {
         </Form.Item>
 
         <Form.Item
-          label="school Level"
+          label="School Level"
           name="school_lvl"
-          rules={[{ required: true, message: 'school level is required.' }]}
+          rules={[{ required: true, message: 'School level is required.' }]}
         >
           <Input
             type="text"
@@ -250,7 +250,7 @@ const MenteeForm = props => {
           rules={[
             {
               required: true,
-              message: 'academic description level is required.',
+              message: 'Academic description level is required.',
             },
           ]}
         >
