@@ -6,7 +6,7 @@
 import axios from 'axios';
 import { axiosWithAuth } from '../../utils/axiosWithAuth';
 import * as actionTypes from './actionTypes';
-URL = process.env.REACT_APP_BASE_URL || 'http://localhost:8080'; // new port for back-end;
+let baseURL = process.env.REACT_APP_BASE_URL || 'http://localhost:8080'; // new port for back-end;
 export const checkToken = data => dispatch => {
   dispatch({
     type: actionTypes.AUTH_SUCCESS,
@@ -83,7 +83,6 @@ export const fetchVillage = id => dispatch => {
 };
 
 export const editVillage = (id, data) => dispatch => {
-
   axiosWithAuth()
     .put(`/village/${id}`, data)
     .then(res => {
@@ -107,11 +106,25 @@ export const fetchMentees = () => dispatch => {
     );
 };
 
+// action for adding new mentee
+export const addMentee = data => dispatch => {
+  axiosWithAuth()
+    .post(`/mentee`, data)
+    .then(res => {
+      console.log(res.data);
+      dispatch({
+        type: actionTypes.ADD_MENTEE,
+        payload: res.data,
+      });
+    })
+    .catch(err => console.dir(err));
+};
+
 // adding in an action for sending an edited mentee
 export const editMentee = (id, data) => dispatch => {
   console.log('editMentee fired:', id, data);
   axiosWithAuth()
-    .put(`/mentee/${id}`, data)
+    .put(`/mentee/${id}`, JSON.stringify(data))
     .then(res => {
       console.log(res.data);
       dispatch({
