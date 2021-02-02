@@ -128,7 +128,7 @@ const StudentOnboarding = props => {
 
   return (
     <div className="menteeContainer">
-      <h1 id="menteeTittle">Mentee Management</h1>
+      <h1 id="menteeTitle">New Student Onboarding</h1>
       <div className="exploreWrapper">
         <div style={{ display: 'flex', justifyContent: 'space-between' }}>
           <Input.Search
