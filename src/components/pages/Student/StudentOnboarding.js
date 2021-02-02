@@ -170,7 +170,7 @@ const StudentOnboarding = props => {
 
 const mapStateToProps = state => {
   return {
-    mentees: state.headmasterReducer.mentees,
+    mentees: state.headmasterReducer.mentees.filter(mentee => !mentee.active),
     userId: state.authReducer.userId,
     role: state.authReducer.role,
   };
