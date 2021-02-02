@@ -10,6 +10,7 @@ import {
   editHeadmasterProfile,
   editMentee,
   addMentee,
+  deleteMentee,
 } from '../../../../state/actions';
 import {
   layout,
@@ -108,6 +109,10 @@ const MenteeForm = props => {
     }
   };
 
+  const deleteHandler = e => {
+    deleteMentee(formData.id);
+    console.log('deleting menteee');
+  };
   return (
     <FormContainer>
       <Form.Item {...tailLayout}></Form.Item>
@@ -365,6 +370,10 @@ const MenteeForm = props => {
             htmlType="submit"
             buttonText="Submit Mentee"
           />
+          <button onClick={deleteMentee(formData.id)} className="l2-btn btn ">
+            delete mentee
+          </button>
+          <br></br>
           <Required id="requiredMsg">
             Fields with <span id="required">&#42;</span> are required.
           </Required>
