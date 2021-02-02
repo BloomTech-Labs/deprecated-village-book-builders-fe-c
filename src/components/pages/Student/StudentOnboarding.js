@@ -16,7 +16,7 @@ import {
 import MenteeForm from '../Headmaster/Mentees/MenteeForm';
 import MenteeProfile from '../Headmaster/Mentees/MenteeProfile';
 
-const Mentees = props => {
+const StudentOnboarding = props => {
   let menteesSelection = [...props.mentees];
   const [search, setSearch] = useState('');
   const [showModal, setShowModal] = useState(false);
@@ -303,4 +303,4 @@ export default connect(mapStateToProps, {
   checkToken,
   fetchMentees,
   editMentee,
-})(Mentees);
+})(StudentOnboarding);
