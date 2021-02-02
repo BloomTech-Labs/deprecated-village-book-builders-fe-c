@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { axiosWithAuth } from '../../../../utils/axiosWithAuth';
+import { axiosWithAuth } from '../../../utils/axiosWithAuth';
 import {
   InfoCircleOutlined,
   EditOutlined,
