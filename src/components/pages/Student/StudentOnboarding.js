@@ -118,7 +118,7 @@ const StudentOnboarding = props => {
                 <div className="listItemMeta">
                   <List.Item.Meta
                     avatar={<Avatar src={item.mentee_picture} />}
-                    title={`${item.first_name} ${item.last_name}`}
+                    title={item.first_name + ' ' + item.last_name}
                     description={item.dob}
                   />
                 </div>
@@ -126,6 +126,7 @@ const StudentOnboarding = props => {
                   <button
                     onClick={e => {
                       console.log('Confirming student...');
+                      moreInfoHandler(e, item);
                     }}
                     style={menteeStyles.confirmOnboarding}
                     className="l2-btn btn "
