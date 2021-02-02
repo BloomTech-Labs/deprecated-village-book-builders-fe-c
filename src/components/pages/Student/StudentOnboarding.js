@@ -105,14 +105,6 @@ const StudentOnboarding = props => {
     >
       <Option value="Name">Name</Option>
       <Option value="YYYY-MM-DD">Birthday</Option>
-      <Option value="Email">Email</Option>
-      <Option value="Timezone">Timezone</Option>
-      <OptGroup label="Grades:">
-        <Option value="Min English grade">English</Option>
-        <Option value="Min Math grade">Math</Option>
-        <Option value="Min Reading grade">Reading</Option>
-        <Option value="Min School grade">School</Option>
-      </OptGroup>
     </Select>
   );
 
@@ -126,27 +118,6 @@ const StudentOnboarding = props => {
   } else if (Array.isArray(menteesSelection) && searchBy == 'YYYY-MM-DD') {
     menteesSelection = menteesSelection.filter(item =>
       item.dob.includes(search)
-    );
-  } else if (Array.isArray(menteesSelection) && searchBy == 'Email') {
-    menteesSelection = menteesSelection.filter(item =>
-      item.email.toLowerCase().includes(search.toLowerCase())
-    );
-  } else if (Array.isArray(menteesSelection) && searchBy == 'Timezone') {
-    menteesSelection = menteesSelection.filter(item =>
-      item.availability.time_zone.toLowerCase().includes(search.toLowerCase())
-    );
-    // this dynamically filters grades by the selected class. The 'searchBy' strings must match the corresonding value on the selectBy options as we're just slicing the string as it's passed in.
-  } else if (
-    Array.isArray(menteesSelection) &&
-    (searchBy == 'Min English grade' ||
-      'Min Math grade' ||
-      'Min Reading grade' ||
-      'Min School grade')
-  ) {
-    let sliced = searchBy.toLowerCase().split(' ');
-    let searchTerm = sliced[1] + '_lvl';
-    menteesSelection = menteesSelection.filter(
-      item => item[searchTerm] >= search
     );
   }
 
