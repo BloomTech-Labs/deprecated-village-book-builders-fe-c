@@ -15,6 +15,8 @@ import TeacherEditProfile from './pages/Teacher/TeacherEditProfile';
 import StudentDashboard from './pages/Student/StudentDashboard';
 import MenteeDashboard from './pages/Headmaster/Mentees/MenteeDashboard';
 import MenteeForm from './pages/Headmaster/Mentees/MenteeForm';
+import MatchingPage from '../components/pages/Headmaster/Matching/MatchingPage';
+import Mentees from './pages/Headmaster/Mentees/Mentees';
 
 const App = ({ role, checkToken }) => {
   return (
@@ -31,6 +33,9 @@ const App = ({ role, checkToken }) => {
         </Route>
         <Route path="/new-mentee">
           <MenteeForm />
+        </Route>
+        <Route path="/mentor-pairings">
+          <MatchingPage />
         </Route>
         {/*Teacher Routes*/}
         <Route path="/teacher/edit/:id">
