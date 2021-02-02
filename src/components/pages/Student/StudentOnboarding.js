@@ -12,6 +12,6 @@ import {
   checkToken,
   fetchMentees,
   editMentee,
-} from '../../../../state/actions/index';
+} from '../../../state/actions/index';
 import MenteeForm from '../Headmaster/Mentees/MenteeForm';
 import MenteeProfile from '../Headmaster/Mentees/MenteeProfile';
