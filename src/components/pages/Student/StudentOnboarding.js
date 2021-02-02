@@ -126,7 +126,7 @@ const StudentOnboarding = props => {
                         {item.first_name + ' ' + item.last_name}
                       </a>
                     }
-                    description={item.academic_description}
+                    description={item.dob}
                   />
                 </div>
                 <div className="listItemButtonWrapper">
