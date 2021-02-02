@@ -4,6 +4,7 @@ import {
   InfoCircleOutlined,
   EditOutlined,
   PlusCircleOutlined,
+  CheckOutlined,
 } from '@ant-design/icons';
 import { Divider, Input, Modal, List, Avatar, Select } from 'antd';
 import Button from '../../common/Button';
@@ -19,7 +20,7 @@ const StudentOnboarding = props => {
   const [currentMentee, setCurrentMentee] = useState({});
   const [searchBy, setSearchBy] = useState('Name');
   const menteeStyles = {
-    moreInfo: {
+    confirmOnboarding: {
       border: 'none',
       backgroundColor: '#ff914d',
       fontFamily: 'Caveat Brush,cursive',
@@ -117,27 +118,19 @@ const StudentOnboarding = props => {
                 <div className="listItemMeta">
                   <List.Item.Meta
                     avatar={<Avatar src={item.mentee_picture} />}
-                    title={
-                      <a
-                        onClick={e => {
-                          moreInfoHandler(e, item);
-                        }}
-                      >
-                        {item.first_name + ' ' + item.last_name}
-                      </a>
-                    }
+                    title={`${item.first_name} ${item.last_name}`}
                     description={item.dob}
                   />
                 </div>
                 <div className="listItemButtonWrapper">
                   <button
                     onClick={e => {
-                      moreInfoHandler(e, item);
+                      console.log('Confirming student...');
                     }}
-                    style={menteeStyles.moreInfo}
+                    style={menteeStyles.confirmOnboarding}
                     className="l2-btn btn "
                   >
-                    <InfoCircleOutlined />
+                    <CheckOutlined />
                   </button>
                 </div>
               </div>
