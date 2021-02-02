@@ -6,7 +6,7 @@
 import axios from 'axios';
 import { axiosWithAuth } from '../../utils/axiosWithAuth';
 import * as actionTypes from './actionTypes';
-URL = process.env.REACT_APP_BASE_URL || 'http://localhost:8080'; // new port for back-end;
+let baseURL = process.env.REACT_APP_BASE_URL || 'http://localhost:8080'; // new port for back-end;
 export const checkToken = data => dispatch => {
   dispatch({
     type: actionTypes.AUTH_SUCCESS,
