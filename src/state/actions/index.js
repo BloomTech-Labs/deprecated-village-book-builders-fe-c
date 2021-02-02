@@ -212,3 +212,17 @@ export const addLibrary = (id, data) => dispatch => {
     })
     .catch(err => console.dir(err));
 };
+
+export const deleteLibrary = id => dispatch => {
+  console.log('delete the library');
+  axiosWithAuth()
+    .delete(`/library/${id}`)
+    .then(res => {
+      console.log('deleted', res.data);
+      dispatch({
+        type: actionTypes.DELETE_LIBRARY,
+        id: id,
+      });
+    })
+    .catch(err => console.dir(err));
+};
