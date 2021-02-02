@@ -5,6 +5,7 @@ import {
   EditOutlined,
   PlusCircleOutlined,
   CheckOutlined,
+  CloseOutlined,
 } from '@ant-design/icons';
 import { Divider, Input, Modal, List, Avatar, Select } from 'antd';
 import Button from '../../common/Button';
@@ -77,6 +78,7 @@ const StudentOnboarding = props => {
   );
 
   // Search filters go here 'searchBy' is the field we're filtering through
+  // Simplifying filter options for new students down to just name and DOB
   if (Array.isArray(menteesSelection) && searchBy == 'Name') {
     menteesSelection = menteesSelection.filter(
       item =>
@@ -96,7 +98,7 @@ const StudentOnboarding = props => {
 
   return (
     <div className="menteeContainer">
-      <h1 id="menteeTitle">New Student Onboarding</h1>
+      <h1 id="menteeTittle">New Student Onboarding</h1>
       <div className="exploreWrapper">
         <div style={{ display: 'flex', justifyContent: 'space-between' }}>
           <Input.Search
@@ -148,12 +150,24 @@ const StudentOnboarding = props => {
         maskClosable
         destroyOnClose
         footer={[
-          <Button key="back" onClick={moreInfoHandler}>
-            Return
-          </Button>,
-          <Button key="delete" onClick={() => console.log('delete')}>
-            Delete
-          </Button>,
+          <button
+            onClick={e => {
+              moreInfoHandler(e, {});
+            }}
+            style={menteeStyles.confirmOnboarding}
+            className="l2-btn btn "
+          >
+            <CloseOutlined />
+          </button>,
+          <button
+            onClick={e => {
+              console.log('Confirming student...');
+            }}
+            style={menteeStyles.confirmOnboarding}
+            className="l2-btn btn "
+          >
+            <CheckOutlined />
+          </button>,
         ]}
       >
         <MenteeProfile currentMentee={currentMentee} />
