@@ -14,6 +14,7 @@ import TeacherProfile from './pages/Teacher/TeacherProfile';
 import TeacherEditProfile from './pages/Teacher/TeacherEditProfile';
 import StudentDashboard from './pages/Student/StudentDashboard';
 import MenteeDashboard from './pages/Headmaster/Mentees/MenteeDashboard';
+import StudentOnboarding from './pages/Student/StudentOnboarding';
 
 const App = ({ role, checkToken }) => {
   return (
@@ -34,6 +35,9 @@ const App = ({ role, checkToken }) => {
         </Route>
         <Route path="/teacher/:id">
           <TeacherProfile />
+        </Route>
+        <Route path="/student-onboarding">
+          <StudentOnboarding />
         </Route>
 
         <Route path="/">
