@@ -99,6 +99,7 @@ export const fetchMentees = () => dispatch => {
   axiosWithAuth()
     .get('/mentee')
     .then(res => {
+      console.log(res);
       dispatch({ type: actionTypes.FETCH_MENTEE_SUCCESS, payload: res.data });
     })
     .catch(err =>

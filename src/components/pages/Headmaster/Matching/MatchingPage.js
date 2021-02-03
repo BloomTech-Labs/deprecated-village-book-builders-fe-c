@@ -1,20 +1,21 @@
 import React, { useEffect, useState } from 'react';
 
 import { Divider, Input, Modal, List, Avatar, Select } from 'antd';
+import { axiosWithAuth } from '../../../../utils/axiosWithAuth';
 import { connect } from 'react-redux';
 import {
   checkToken,
   fetchMentees,
-  editMentee
+  editMentee,
 } from '../../../../state/actions/index';
-import MenteeTable from "./MenteeTable";
-import MentorTable from "./MentorTable";
+import MenteeTable from './MenteeTable';
+import MentorTable from './MentorTable';
 import { useHistory } from 'react-router-dom';
 
-const MatchingPage = (props) => {
-    let mentees = [...props.mentees];
-    let mentors = [...props.mentees];
-  console.log("second", props.mentees)
+const MatchingPage = props => {
+  let mentees = [...props.mentees];
+  let mentors = [...props.mentees];
+  console.log('second', props.mentees);
 
   const [search, setSearch] = useState('');
   const [showModal, setShowModal] = useState(false);
@@ -24,10 +25,7 @@ const MatchingPage = (props) => {
   const history = useHistory();
   const [toggle, setToggle] = useState(true);
 
-
-
   const searchHandler = e => setSearch(e.target.value);
-  
 
   // These are the dropdown options for the searchbar
   const { Option, OptGroup } = Select;
@@ -63,9 +61,7 @@ const MatchingPage = (props) => {
         item.last_name.toLowerCase().includes(search.toLowerCase())
     );
   } else if (Array.isArray(mentees) && searchBy == 'YYYY-MM-DD') {
-    mentees = mentees.filter(item =>
-      item.dob.includes(search)
-    );
+    mentees = mentees.filter(item => item.dob.includes(search));
   } else if (Array.isArray(mentees) && searchBy == 'Email') {
     mentees = mentees.filter(item =>
       item.email.toLowerCase().includes(search.toLowerCase())
@@ -84,9 +80,7 @@ const MatchingPage = (props) => {
   ) {
     let sliced = searchBy.toLowerCase().split(' ');
     let searchTerm = sliced[1] + '_lvl';
-    mentees = mentees.filter(
-      item => item[searchTerm] >= search
-    );
+    mentees = mentees.filter(item => item[searchTerm] >= search);
   }
 
   useEffect(() => {
@@ -94,43 +88,48 @@ const MatchingPage = (props) => {
     console.log('showmodal', showModal);
   }, [showModal]);
 
-  const toggleView = (event) => {
+  const toggleView = event => {
     setToggle(!toggle);
   };
+  console.log(mentees, mentors);
 
   return (
-    <div className="menteeContainer">
-      <h1 id="menteeTittle">Mentee Management</h1>
-      <div className="exploreWrapper">
-        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-          <Input.Search
-            data-testid="search-bar"
-            addonBefore={selectBefore}
-            value={search}
-            placeholder={searchBy}
-            style={{ width: '80%', alignSelf: 'center' }}
-            onChange={searchHandler}
-          />
-          
-        </div>
-        <Divider />
-      </div>
-    
-        <div className="matchApp">
-            <button onClick={toggleView}>toggle mentor/mentee view</button>
-            <br></br>
-            <br></br>
-            <button>Sort it!</button>
-            {toggle ? (
-                <div>mentee table</div>
-                // <MenteeTable mentees={menteeData} mentors={mentorData} />
-            ) : (
-                <div>mentor table</div>
-                // <MentorTable mentors={mentorData} mentees={menteeData} />
-            )}
+    mentees.length && (
+      <div className="menteeContainer">
+        <h1 id="menteeTittle">Mentee Management</h1>
+        <div className="exploreWrapper">
+          <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+            <Input.Search
+              data-testid="search-bar"
+              addonBefore={selectBefore}
+              value={search}
+              placeholder={searchBy}
+              style={{ width: '80%', alignSelf: 'center' }}
+              onChange={searchHandler}
+            />
+          </div>
+          <Divider />
         </div>
 
-    </div>
+        <div className="matchApp">
+          <button onClick={toggleView}>toggle mentor/mentee view</button>
+          <br></br>
+          <br></br>
+          <button>Sort it!</button>
+          {toggle ? (
+            // <div>mentee table</div>
+            <>
+              <MenteeTable mentees={[...mentees]} mentors={[...mentors]} />
+            </>
+          ) : (
+            // <div>mentor table</div>
+            <>
+              <MentorTable mentors={[...mentors]} mentees={[...mentees]} />
+            </>
+          )}
+        </div>
+      </div>
+    )
   );
 };
 
@@ -147,7 +146,6 @@ export default connect(mapStateToProps, {
   fetchMentees,
   editMentee,
 })(MatchingPage);
-
 
 // import React, { useEffect, useState } from "react";
 // import { connect } from 'react-redux';
@@ -196,7 +194,7 @@ export default connect(mapStateToProps, {
 //       role: state.authReducer.role,
 //     };
 //   };
-  
+
 //   export default connect(mapStateToProps, {
 //     fetchMentees,
 //     // fetchMentors
