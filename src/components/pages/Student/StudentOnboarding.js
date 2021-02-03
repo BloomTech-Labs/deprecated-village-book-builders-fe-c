@@ -11,12 +11,19 @@ import {
 import { Divider, Input, Modal, List, Avatar, Select, DatePicker } from 'antd';
 import Button from '../../common/Button';
 import { connect } from 'react-redux';
-import { checkToken, fetchMentees } from '../../../state/actions/index';
+import {
+  checkToken,
+  fetchMentees,
+  editMentee,
+} from '../../../state/actions/index';
 import MenteeForm from '../Headmaster/Mentees/MenteeForm';
 import MenteeProfile from '../Headmaster/Mentees/MenteeProfile';
+import { useHistory } from 'react-router-dom';
 
 const StudentOnboarding = props => {
   let menteesSelection = [...props.mentees];
+  const history = useHistory();
+  const { editMentee } = props;
   const [search, setSearch] = useState('');
   const [showModal, setShowModal] = useState(false);
   const [currentMentee, setCurrentMentee] = useState({});
@@ -53,7 +60,6 @@ const StudentOnboarding = props => {
       // Closing Modal
       setShowModal(false);
       setCurrentMentee({});
-      console.log('this got fired!!!', menteeData);
     } else {
       // Opening Modal
       setShowModal(true);
@@ -61,8 +67,15 @@ const StudentOnboarding = props => {
     }
   };
 
-  // These are the dropdown options for the searchbar
-  const { Option, OptGroup } = Select;
+  const confirmStudent = async () => {
+    console.log('confirming student', currentMentee);
+    const menteeToConfirm = JSON.parse(JSON.stringify(currentMentee));
+    // menteeToConfirm.active = true
+    // console.log(menteeToConfirm)
+    const newStudent = await editMentee(menteeToConfirm.id, { active: true });
+    history.push(`/login`);
+    // console.log(newStudent)
+  };
 
   // Simplifying filter options for new students down to just DOB
   // Example dob string from BE: 1987-10-06T02:42:54.255Z
@@ -82,6 +95,7 @@ const StudentOnboarding = props => {
   useEffect(() => {
     props.fetchMentees();
     console.log('showmodal', showModal);
+    console.log(currentMentee);
   }, [showModal]);
 
   return (
@@ -103,7 +117,6 @@ const StudentOnboarding = props => {
           itemLayout="horizontal"
           dataSource={menteesSelection}
           renderItem={item => {
-            console.log(item.dob);
             return (
               <List.Item>
                 <div className="listItemWrapper">
@@ -155,9 +168,7 @@ const StudentOnboarding = props => {
             <CloseOutlined />
           </button>,
           <button
-            onClick={e => {
-              console.log('Confirming student...');
-            }}
+            onClick={confirmStudent}
             style={menteeStyles.confirmOnboarding}
             className="l2-btn btn "
           >
@@ -182,4 +193,5 @@ const mapStateToProps = state => {
 export default connect(mapStateToProps, {
   checkToken,
   fetchMentees,
+  editMentee,
 })(StudentOnboarding);
