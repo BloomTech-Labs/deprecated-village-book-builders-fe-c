@@ -124,7 +124,7 @@ const StudentOnboarding = props => {
                     <List.Item.Meta
                       avatar={<Avatar src={item.mentee_picture} />}
                       title={item.first_name + ' ' + item.last_name}
-                      description={item.dob}
+                      description={item.primary_language}
                     />
                   </div>
                   <div className="listItemButtonWrapper">
