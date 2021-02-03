@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { axiosWithAuth } from '../../../utils/axiosWithAuth';
+import moment from 'moment';
 import {
   InfoCircleOutlined,
   EditOutlined,
@@ -7,7 +8,7 @@ import {
   CheckOutlined,
   CloseOutlined,
 } from '@ant-design/icons';
-import { Divider, Input, Modal, List, Avatar, Select } from 'antd';
+import { Divider, Input, Modal, List, Avatar, Select, DatePicker } from 'antd';
 import Button from '../../common/Button';
 import { connect } from 'react-redux';
 import { checkToken, fetchMentees } from '../../../state/actions/index';
@@ -19,7 +20,6 @@ const StudentOnboarding = props => {
   const [search, setSearch] = useState('');
   const [showModal, setShowModal] = useState(false);
   const [currentMentee, setCurrentMentee] = useState({});
-  const [searchBy, setSearchBy] = useState('Name');
   const menteeStyles = {
     confirmOnboarding: {
       border: 'none',
@@ -45,7 +45,9 @@ const StudentOnboarding = props => {
     },
   };
 
-  const searchHandler = e => setSearch(e.target.value);
+  const searchHandler = e => {
+    setSearch(e);
+  };
   const moreInfoHandler = (e, menteeData) => {
     if (showModal) {
       // Closing Modal
@@ -62,34 +64,20 @@ const StudentOnboarding = props => {
   // These are the dropdown options for the searchbar
   const { Option, OptGroup } = Select;
 
-  function searchOptions(value) {
-    setSearchBy(value);
-  }
-  const selectBefore = (
-    <Select
-      defaultValue="Name"
-      className="select-before"
-      onChange={searchOptions}
-      style={{ width: 100 }}
-    >
-      <Option value="Name">Name</Option>
-      <Option value="YYYY-MM-DD">Birthday</Option>
-    </Select>
-  );
-
-  // Search filters go here 'searchBy' is the field we're filtering through
-  // Simplifying filter options for new students down to just name and DOB
-  if (Array.isArray(menteesSelection) && searchBy == 'Name') {
-    menteesSelection = menteesSelection.filter(
-      item =>
-        item.first_name.toLowerCase().includes(search.toLowerCase()) ||
-        item.last_name.toLowerCase().includes(search.toLowerCase())
-    );
-  } else if (Array.isArray(menteesSelection) && searchBy == 'YYYY-MM-DD') {
-    menteesSelection = menteesSelection.filter(item =>
-      item.dob.includes(search)
-    );
-  }
+  // Simplifying filter options for new students down to just DOB
+  // Example dob string from BE: 1987-10-06T02:42:54.255Z
+  menteesSelection = menteesSelection.filter(item => {
+    // Normalizes BE date to be matched with moment object data
+    if (!search) {
+      return menteesSelection;
+    }
+    const formattedDob = `${item.dob.slice(8, 10)}/${item.dob.slice(
+      5,
+      7
+    )}/${item.dob.slice(0, 4)}`;
+    console.log(formattedDob, search._i);
+    return formattedDob === search._i;
+  });
 
   useEffect(() => {
     props.fetchMentees();
@@ -101,47 +89,54 @@ const StudentOnboarding = props => {
       <h1 id="menteeTittle">New Student Onboarding</h1>
       <div className="exploreWrapper">
         <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-          <Input.Search
+          <DatePicker
             data-testid="search-bar"
-            addonBefore={selectBefore}
             value={search}
-            placeholder={searchBy}
-            style={{ width: '80%', alignSelf: 'center' }}
+            placeholder="Select your Date of Birth"
+            style={{ width: '20%', alignSelf: 'center' }}
             onChange={searchHandler}
+            format={'DD/MM/YYYY'}
           />
         </div>
         <Divider />
         <List
           itemLayout="horizontal"
           dataSource={menteesSelection}
-          renderItem={item => (
-            <List.Item>
-              <div className="listItemWrapper">
-                <div className="listItemMeta">
-                  <List.Item.Meta
-                    avatar={<Avatar src={item.mentee_picture} />}
-                    title={item.first_name + ' ' + item.last_name}
-                    description={item.dob}
-                  />
+          renderItem={item => {
+            console.log(item.dob);
+            return (
+              <List.Item>
+                <div className="listItemWrapper">
+                  <div className="listItemMeta">
+                    <List.Item.Meta
+                      avatar={<Avatar src={item.mentee_picture} />}
+                      title={item.first_name + ' ' + item.last_name}
+                      description={item.dob}
+                    />
+                  </div>
+                  <div className="listItemButtonWrapper">
+                    <button
+                      onClick={e => {
+                        console.log('Confirming student...');
+                        moreInfoHandler(e, item);
+                      }}
+                      style={menteeStyles.confirmOnboarding}
+                      className="l2-btn btn "
+                    >
+                      <CheckOutlined />
+                    </button>
+                  </div>
                 </div>
-                <div className="listItemButtonWrapper">
-                  <button
-                    onClick={e => {
-                      console.log('Confirming student...');
-                      moreInfoHandler(e, item);
-                    }}
-                    style={menteeStyles.confirmOnboarding}
-                    className="l2-btn btn "
-                  >
-                    <CheckOutlined />
-                  </button>
-                </div>
-              </div>
-            </List.Item>
-          )}
+              </List.Item>
+            );
+          }}
         />
         ,
       </div>
+      <p>
+        Can't find the Student you're looking for? Contact your teacher or
+        headmaster.
+      </p>
       <Modal
         className="menteeModal"
         visible={showModal}
