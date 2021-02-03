@@ -10,6 +10,7 @@ const userForm = {
   first_name: '',
   last_name: '',
   email: '',
+  phone_code: '',
   phone: '', // Need to update Mentee DB columns
   subjects: [], // Need to update Mentee DB columns
   home_country: '', // Need to update Mentee DB columns
@@ -67,21 +68,21 @@ export default function AddNewMentee(props) {
     setMenteeForm({ ...menteeForm, [name]: value });
   };
 
-  const onSubjectsChange = val => {
-    setMenteeForm({ ...menteeForm, subjects: val });
-  };
-
-  const onPrimLangChange = val => {
-    setMenteeForm({ ...menteeForm, primary_language: val });
-  };
-
-  const onSecLangChange = val => {
-    setMenteeForm({ ...menteeForm, secondary_language: val });
-  };
-
   const onSelectChange = (val, name) => {
     setMenteeForm({ ...menteeForm, [name]: val });
   };
+
+  const footerButtons = [
+    [<Button key="close">Close</Button>],
+    [
+      <Button key="cancel" onClick={closeModal}>
+        Cancel
+      </Button>,
+      <Button form="newMentee" htmlType="submit" key="submit" type="primary">
+        Submit
+      </Button>,
+    ],
+  ];
 
   return (
     <>
@@ -96,7 +97,9 @@ export default function AddNewMentee(props) {
         title="Add New Student"
         visible={visible}
         onCancel={onCloseBtnClick}
-        // footer={modalContent.footer}
+        footer={
+          modalContentType === 'library' ? footerButtons[0] : footerButtons[1]
+        }
         width={900}
       >
         {modalContentType === 'library' && (
