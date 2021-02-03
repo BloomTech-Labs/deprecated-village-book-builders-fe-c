@@ -22,7 +22,7 @@ const initialState = {
 function EditLibraryForm({ editLibrary }) {
   const [formData, setFormData] = useState(initialState);
 
-  const { push } = useHistory();
+  const history = useHistory();
 
   const params = useParams().id;
   // ? Why is this console logging 4 times? It's running too much.
@@ -51,8 +51,7 @@ function EditLibraryForm({ editLibrary }) {
   };
 
   const handleCancel = () => {
-    // push('admin/libraries');
-    window.location.replace('/admin/libraries');
+    history.push('/admin/libraries');
   };
 
   const handleChange = e => {

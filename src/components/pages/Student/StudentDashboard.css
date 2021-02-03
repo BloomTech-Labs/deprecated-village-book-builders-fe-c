@@ -1,104 +1,104 @@
 #components-layout-demo-top-side .logo {
-	float: left;
-	width: 120px;
-	height: 31px;
-	margin: 16px 24px 16px 0;
-	background: rgba(255, 255, 255, 0.3);
+  float: left;
+  width: 120px;
+  height: 31px;
+  margin: 16px 24px 16px 0;
+  background: rgba(255, 255, 255, 0.3);
 }
 
 .ant-row-rtl #components-layout-demo-top-side .logo {
-	float: right;
-	margin: 16px 0 16px 24px;
+  float: right;
+  margin: 16px 0 16px 24px;
 }
 
 .site-layout-background {
-	background: #fff;
+  background: #fff;
 }
 
 .menuLinks {
-	color: white;
-	margin-bottom: 2rem;
-	width: 100%;
-	border: none;
+  color: white;
+  background-color: #4c4c49;
+  margin-bottom: 2rem;
+  width: 100%;
+  border: none;
 }
 
 .menuLinks a {
-	color: white;
+  color: white;
 }
 
 .menuLinks:hover {
-	transition: all 200ms linear;
+  transition: all 200ms linear;
 }
 
 .menuLinks a:hover {
-	color: white;
+  color: white;
+  background-color: #ff914d;
 }
 
 .headmasterDashboard {
-	margin-left: 340px;
+  margin-left: 340px;
 }
 
 .menuIcon {
-	position: fixed;
-	bottom: 0px;
-	width: 100%;
-	transition: 'bottom 200ms linear';
+  position: fixed;
+  bottom: 0px;
+  width: 100%;
+  transition: 'bottom 200ms linear';
 }
 
 .menuMove {
-	position: fixed;
-	bottom: 500px;
-	width: 100%;
-	transition: 'bottom 200ms linear';
+  position: fixed;
+  bottom: 500px;
+  width: 100%;
+  transition: 'bottom 200ms linear';
 }
 
 .menuButton {
-	width: 100%;
-	background: #549bea;
-	border: 1px solid #549bea;
-	height: 3rem;
+  width: 100%;
+  background: #549bea;
+  border: 1px solid #549bea;
+  height: 3rem;
 }
 
 #menteeTittle {
-	text-align: center;
+  text-align: center;
 }
 
 .exploreWrapper {
-	margin: 0 6pt;
-	display: flex;
-	flex-direction: column;
-	justify-content: space-around;
-  }
+  margin: 0 6pt;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
 
 .listItemWrapper {
-	display: flex;
-	flex-direction: column;
-	width: 100%;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
 
-  }
-
-.listItemButtonWrapper{
-	display: flex;
-	justify-content: flex-end;
-	margin: 6pt 0;
-
+.listItemButtonWrapper {
+  display: flex;
+  justify-content: flex-end;
+  margin: 6pt 0;
 }
 .listItemButton {
-	width: 90px;
-	margin-right: 10px;
+  width: 90px;
+  margin-right: 10px;
 }
 
-.menteeModal{
-	background-color: rgb(236, 166, 73);
+.menteeModal {
+  background-color: rgb(236, 166, 73);
 }
 
 .menteeProfileWrapper {
-	display: flex;
-	flex-direction: column;
-	align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }
 @media screen and (max-width: 800px) {
-	.headmasterDashboard {
-		margin-left: 0;
-	}
+  .headmasterDashboard {
+    margin-left: 0;
+  }
 }

@@ -6,7 +6,7 @@
 import axios from 'axios';
 import { axiosWithAuth } from '../../utils/axiosWithAuth';
 import * as actionTypes from './actionTypes';
-const baseURL = process.env.REACT_APP_BASE_URL || 'http://localhost:8080'; // new port for back-end;
+URL = process.env.REACT_APP_BASE_URL || 'http://localhost:8080'; // new port for back-end;
 export const checkToken = data => dispatch => {
   dispatch({
     type: actionTypes.AUTH_SUCCESS,
@@ -44,11 +44,14 @@ export const logout = () => dispatch => {
 // HEAD MASTER
 // -----------------------
 export const editHeadmasterProfile = (id, data) => dispatch => {
+  console.log(id, data);
   axiosWithAuth()
     .put(`/headmaster/${id}`, data)
     .then(res => {
-      // ? refactor all the window.location.replace's so this doesn't force a refresh. see how login does it for example.
-      window.location.replace('/profile/');
+      dispatch({
+        type: actionTypes.EDIT_HEADMASTER_PROFILE,
+        payload: res.data,
+      });
     })
     .catch(err => console.dir(err));
 };
@@ -78,11 +81,17 @@ export const fetchVillage = id => dispatch => {
     })
     .catch(err => console.dir(err));
 };
-export const editVillage = (id, data) => () => {
+
+export const editVillage = (id, data) => dispatch => {
+
   axiosWithAuth()
     .put(`/village/${id}`, data)
-    .then(() => {
-      window.location.replace('/school-village/');
+    .then(res => {
+      console.log(res.data);
+      dispatch({
+        type: actionTypes.EDIT_VILLAGE,
+        payload: res.data,
+      });
     })
     .catch(err => console.dir(err));
 };
@@ -97,6 +106,22 @@ export const fetchMentees = () => dispatch => {
       dispatch({ type: actionTypes.FETCH_MENTEE_FAILURE, payload: err })
     );
 };
+
+// adding in an action for sending an edited mentee
+export const editMentee = (id, data) => dispatch => {
+  console.log('editMentee fired:', id, data);
+  axiosWithAuth()
+    .put(`/mentee/${id}`, data)
+    .then(res => {
+      console.log(res.data);
+      dispatch({
+        type: actionTypes.EDIT_MENTEE,
+        payload: res.data,
+      });
+    })
+    .catch(err => console.dir(err));
+};
+
 export const fetchSchools = () => dispatch => {
   axiosWithAuth()
     .get(`/school`)
@@ -124,7 +149,11 @@ export const editSchool = (id, data) => dispatch => {
   axiosWithAuth()
     .put(`/school/${id}`, data)
     .then(res => {
-      window.location.replace('/school-village/');
+      console.log(res.data);
+      dispatch({
+        type: actionTypes.EDIT_HEADMASTER_SCHOOL,
+        payload: res.data,
+      });
     })
     .catch(err => console.dir(err));
 };
@@ -134,16 +163,24 @@ export const editSchool = (id, data) => dispatch => {
 export const editLibrary = (id, data) => dispatch => {
   axiosWithAuth()
     .put(`/library/${id}`, data)
-    .then(() => {
-      window.location.replace('/admin/libraries');
+    .then(res => {
+      console.log(res.data);
+      dispatch({
+        type: actionTypes.EDIT_LIBRARY,
+        payload: res.data,
+      });
     })
     .catch(err => console.dir(err));
 };
 export const addLibrary = (id, data) => dispatch => {
   axiosWithAuth()
     .post(`/library`, data)
-    .then(() => {
-      window.location.replace('/admin/libraries');
+    .then(res => {
+      console.log(res.data);
+      dispatch({
+        type: actionTypes.ADD_LIBRARY,
+        payload: res.data,
+      });
     })
     .catch(err => console.dir(err));
 };

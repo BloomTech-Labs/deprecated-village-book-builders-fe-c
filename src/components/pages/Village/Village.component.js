@@ -18,7 +18,16 @@ const Village = ({ villageData, userId, fetchVillage }) => {
   // console.log("village component, villageData", villageData);
   return (
     <Profile>
-      <ComponentTitles titleText="Village" />
+      <span style={{ display: 'flex', justifyContent: 'space-between' }}>
+        <ComponentTitles titleText="Village" />
+        <div className="villageButtons">
+          <Link to={`/village/edit/${villageData.id}`}>
+            <ThemeProvider theme={{ color: '#6ac66b' }}>
+              <Button buttonText="Edit Village Profile" />
+            </ThemeProvider>
+          </Link>
+        </div>
+      </span>
       <Label>Headmaster:</Label>
       <p>Mr Headmaster</p>
       <Label>Village Contact:</Label>
@@ -33,13 +42,6 @@ const Village = ({ villageData, userId, fetchVillage }) => {
       <p>{villageData.educationContactPhone}</p>
       <Label>Notes: </Label>
       <p>{villageData.notes}</p>
-      <div className="villageButtons">
-        <Link to={`/village/edit/${villageData.id}`}>
-          <ThemeProvider theme={{ color: '#6ac66b' }}>
-            <Button buttonText="Edit Village Profile" />
-          </ThemeProvider>
-        </Link>
-      </div>
     </Profile>
   );
 };

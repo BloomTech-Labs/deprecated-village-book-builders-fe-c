@@ -1,4 +1,13 @@
 import React, { useState, useEffect } from 'react';
+import {
+  HomeOutlined,
+  ProfileOutlined,
+  UserSwitchOutlined,
+  DatabaseOutlined,
+  LogoutOutlined,
+  UnorderedListOutlined,
+  FolderOpenOutlined,
+} from '@ant-design/icons';
 // import { connect } from 'react-redux';
 import {
   Link,
@@ -28,6 +37,7 @@ import {
 import Logout from '../../Logout.js';
 // import MentorPairings from './Mentees/Mentees.js';
 import Mentees from './Mentees/Mentees.js';
+import MentorPairing from '../Mentor/MentorPairing.js';
 
 function HeadmasterDashboard() {
   const [visible, setVisible] = useState(true);
@@ -61,7 +71,8 @@ function HeadmasterDashboard() {
     <div>
       <Dashboard>
         <Switch>
-          <Route path="/mentor-pairings" component={Mentees} />
+          <Route path="/mentees" component={Mentees} />
+          <Route path="/mentor-pairing" component={MentorPairing} />
           <Route exact path="/profile" component={HeadmasterProfile} />
           <Route path="/profile/edit/:id" component={ProfileForm} />
           <Route path="/mentor-advisor" />
@@ -103,31 +114,49 @@ function HeadmasterDashboard() {
           width={desktop ? 300 : 500}
           height={500}
         >
-          <h2>Hello, Headmaster!</h2>
+          <h2 className="vbb-header" style={{ textAlign: 'center' }}>
+            Hello, Headmaster!
+          </h2>
 
           <NavLink to="/dashboard" onClick={() => setVisible(true)}>
-            <button className="btn l2-btn menuLinks">Home</button>
+            <button className="btn l2-btn menuLinks">
+              Home <HomeOutlined />
+            </button>
           </NavLink>
           <NavLink to="/profile" onClick={() => setVisible(true)}>
-            <button className="btn l2-btn menuLinks">Profile</button>
+            <button className="btn l2-btn menuLinks">
+              Profile <ProfileOutlined />
+            </button>
           </NavLink>
           <NavLink to={'/mentor-pairings'} onClick={() => setVisible(true)}>
-            <button className="btn l2-btn menuLinks">Mentor Pairings</button>
+            <button className="btn l2-btn menuLinks">
+              Mentor Pairings <UserSwitchOutlined />
+            </button>
+          </NavLink>
+          <NavLink to={'/mentees'} onClick={() => setVisible(true)}>
+            <button className="btn l2-btn menuLinks">
+              Mentees <UnorderedListOutlined />
+            </button>
           </NavLink>
           <NavLink to="/mentor-advisor" onClick={() => setVisible(true)}>
             <button className="btn l2-btn menuLinks">Mentor Advisor</button>
           </NavLink>
           <NavLink to="/school-village" onClick={() => setVisible(true)}>
-            <button className="btn l2-btn menuLinks">School/Village</button>
+            <button className="btn l2-btn menuLinks">
+              School/Village <FolderOpenOutlined />
+            </button>
           </NavLink>
           <NavLink to="/library" onClick={() => setVisible(true)}>
-            <button className="btn l2-btn menuLinks">Library</button>
+            <button className="btn l2-btn menuLinks">
+              Library <DatabaseOutlined />{' '}
+            </button>
           </NavLink>
           <Link to="/logout" onClick={() => setVisible(true)}>
-            <button className="btn l2-btn menuLinks">Logout</button>
+            <button className="btn l2-btn menuLinks">
+              Logout <LogoutOutlined />
+            </button>
           </Link>
         </Drawer>
-
         {/* <HeadmasterNav /> */}
       </div>
     </div>

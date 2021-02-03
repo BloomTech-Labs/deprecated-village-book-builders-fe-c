@@ -3,6 +3,12 @@ import React, { useState, useEffect } from 'react';
 // import axios from 'axios';
 import { axiosWithAuth } from '../../../utils/axiosWithAuth';
 import { Button, Divider, Input, Modal } from 'antd';
+import {
+  InfoCircleOutlined,
+  EditOutlined,
+  PlusCircleOutlined,
+} from '@ant-design/icons';
+
 import { useHistory } from 'react-router-dom';
 import './libraries.css';
 
@@ -13,6 +19,75 @@ export default function Libraries() {
   const [search, setSearch] = useState('');
 
   const { push } = useHistory();
+  const libraryStyles = {
+    newLibrary: {
+      border: 'none',
+      backgroundColor: '#ff914d',
+      fontFamily: 'Caveat Brush,cursive',
+      fontStyle: 'italic',
+      webkitLetterSpacing: '2px',
+      mozLetterSpacing: '2px',
+      msLetterSpacing: '2px',
+      height: 'none',
+      letterSpacing: '2px',
+      fontWeight: '400',
+      fontSize: '22px',
+      color: 'white',
+      borderRadius: '18px',
+      padding: '8px',
+      paddingLeft: '15px',
+      paddingRight: '15px',
+      webkitAppearance: 'none',
+      margin: '1rem 0',
+      textAlign: 'right',
+      margin: '1rem 0',
+      width: 'auto',
+    },
+    editLibrary: {
+      border: 'none',
+      backgroundColor: '#ff914d',
+      fontFamily: 'Caveat Brush,cursive',
+      fontStyle: 'italic',
+      webkitLetterSpacing: '2px',
+      mozLetterSpacing: '2px',
+      msLetterSpacing: '2px',
+      letterSpacing: '2px',
+      fontWeight: '400',
+      fontSize: '22px',
+      color: 'white',
+      borderRadius: '18px',
+      padding: '8px',
+      paddingLeft: '15px',
+      paddingRight: '15px',
+      webkitAppearance: 'none',
+      margin: '1rem 0',
+      textAlign: 'right',
+      margin: '1rem 20px',
+      width: 'auto',
+    },
+    moreInfo: {
+      border: 'none',
+      backgroundColor: '#ff914d',
+      fontFamily: 'Caveat Brush,cursive',
+      fontStyle: 'italic',
+      webkitLetterSpacing: '2px',
+      mozLetterSpacing: '2px',
+      msLetterSpacing: '2px',
+      letterSpacing: '2px',
+      fontWeight: '400',
+      fontSize: '22px',
+      color: 'white',
+      borderRadius: '18px',
+      padding: '8px',
+      paddingLeft: '15px',
+      paddingRight: '15px',
+      webkitAppearance: 'none',
+      margin: '1rem 0',
+      textAlign: 'right',
+      margin: '1rem 0',
+      width: 'auto',
+    },
+  };
 
   const getLibraries = () => {
     axiosWithAuth()
@@ -51,20 +126,28 @@ export default function Libraries() {
   return (
     <div className="libraries-container">
       <h1>Libraries, Admin View.</h1>
-
-      <Button
-        onClick={() => handleAddLibrary()}
-        style={{ width: '50%', marginBottom: '10pt' }}
-        align="center"
+      <div
+        style={{
+          width: '80%',
+          display: 'flex',
+          justifyContent: 'space-between',
+        }}
       >
-        Create New Library
-      </Button>
-      <Input.Search
-        onChange={searchHandler}
-        value={search}
-        placeholder="Search by Name"
-        style={{ width: '50%' }}
-      />
+        <Input.Search
+          onChange={searchHandler}
+          value={search}
+          style={{ width: '80%', alignSelf: 'center' }}
+          placeholder="Search by Name"
+        />
+        <button
+          onClick={() => handleAddLibrary()}
+          className="l2-btn btn"
+          style={libraryStyles.newLibrary}
+          align="center"
+        >
+          Create New Library
+        </button>
+      </div>
       <Divider />
       {libraries ? (
         libraries
@@ -76,13 +159,24 @@ export default function Libraries() {
               <div className="individual-library-container" key={library.id}>
                 <h2>{library.name}</h2>
                 <p>{library.description}</p>
-                {/* <div className="button-container"> */}
-                <Button onClick={() => handleModal(library)}>
-                  {' '}
-                  More Info{' '}
-                </Button>
-                <Button onClick={() => handleEdit(library.id)}> Edit </Button>
-                {/* </div> */}
+                <div className="listItemButtonWrapper">
+                  {/* <div className="button-container"> */}
+                  <button
+                    style={libraryStyles.moreInfo}
+                    className="l2-btn btn "
+                    onClick={() => handleModal(library)}
+                  >
+                    <InfoCircleOutlined />
+                  </button>
+                  <button
+                    style={libraryStyles.editLibrary}
+                    className="l2-btn btn "
+                    onClick={() => handleEdit(library.id)}
+                  >
+                    {' '}
+                    <EditOutlined />
+                  </button>
+                </div>
                 <Divider />
               </div>
             );
