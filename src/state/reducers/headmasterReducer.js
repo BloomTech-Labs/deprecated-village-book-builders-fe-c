@@ -56,16 +56,14 @@ const reducer = (state = initialState, action) => {
       };
     case EDIT_MENTOR:
       debugLog(action.type, action.payload);
-      return state.mentors.map((item, index) => {
-        if (index !== item.id) {
+      const updatedMenors = state.mentors.map((item, index) => {
+        if (item.id == action.payload.id) {
+          return action.payload;
+        } else {
           return item;
         }
-
-        return {
-          ...item,
-          ...action.item,
-        };
       });
+      return { ...state, mentors: updatedMenors };
     default:
       return state;
   }

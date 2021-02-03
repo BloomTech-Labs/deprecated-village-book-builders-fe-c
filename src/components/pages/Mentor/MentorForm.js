@@ -68,8 +68,10 @@ const MentorForm = props => {
 
   //   edit functionality is not currently working, the Db is returning a 500 error, I believe it has something to do with including the dynamic questions in the body of the put reqeust but this will need further investigation.
   const handleSubmit = async () => {
+    let jsonified = formData;
+    jsonified.dynamic_questions = JSON.stringify(formData.dynamic_questions);
     debugLog(formData);
-    props.editMentor(formData.id, formData);
+    props.editMentor(formData.id, jsonified);
     setShowModal(false);
     history.push('/mentor-advisor');
   };
