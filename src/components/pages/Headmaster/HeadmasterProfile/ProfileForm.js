@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { useParams, useHistory, Link } from 'react-router-dom';
-import axios from 'axios';
 
 import { Form, Input, DatePicker, Space, Radio } from 'antd';
 import moment from 'moment';
@@ -17,7 +16,7 @@ import Button from '../../../common/Button';
 import { debugLog } from '../../../../utils/debugMode';
 import { axiosWithAuth } from '../../../../utils/axiosWithAuth';
 
-const baseURL = 'https://cors-anywhere.herokuapp.com/http://54.158.134.245/api';
+// const baseURL = 'https://cors-anywhere.herokuapp.com/http://54.158.134.245/api';
 
 const initialState = {
   first_name: '',
@@ -72,7 +71,7 @@ const ProfileForm = props => {
   };
 
   const handleSubmit = async () => {
-    console.log(formData);
+    // console.log(parformData);
     props.editHeadmasterProfile(params, formData);
     history.push('/profile');
   };
@@ -91,7 +90,7 @@ const ProfileForm = props => {
         <Form.Item
           label="First Name"
           name="first_name"
-          rules={[{ required: true, message: 'First Name is required.' }]}
+          // rules={[{ required: true, message: 'First Name is required.' }]}
         >
           <Input
             type="text"
@@ -105,7 +104,7 @@ const ProfileForm = props => {
         <Form.Item
           label="Last Name"
           name="last_name"
-          rules={[{ required: true, message: 'Last Name is required.' }]}
+          // rules={[{ required: true, message: 'Last Name is required.' }]}
         >
           <Input
             type="text"
@@ -115,17 +114,18 @@ const ProfileForm = props => {
           />
         </Form.Item>
 
-        <Space direction="vertical" size={12} {...tailLayout}>
+        {/* So apparently there isnt a dob in the headmaster in the BE.. do you want with that info hahah
+         <Space direction="vertical" size={12} {...tailLayout}>
           <DatePicker
-            defaultValue={moment(`${formData.dob}`, dateFormatList[0])}
+               defaultValue={moment(formData.dob, 'YYYY-MM-DD')}
             format={dateFormat}
           />
-        </Space>
+        </Space> */}
 
         <Form.Item
           label="Address"
           name="address"
-          rules={[{ required: true, message: 'Address is required.' }]}
+          // rules={[{ required: true, message: 'Address is required.' }]}
         >
           <Input
             type="text"
@@ -138,7 +138,7 @@ const ProfileForm = props => {
         <Form.Item
           label="Phone Number"
           name="phone_number"
-          rules={[{ required: true, message: 'Phone Number is required.' }]}
+          // rules={[{ required: true, message: 'Phone Number is required.' }]}
         >
           <Input
             type="text"
@@ -159,7 +159,7 @@ const ProfileForm = props => {
         <Form.Item
           label="Bio"
           name="bio"
-          rules={[{ required: true, message: 'Bio is required.' }]}
+          // rules={[{ required: true, message: 'Bio is required.' }]}
         >
           <Input
             type="text"
@@ -172,9 +172,9 @@ const ProfileForm = props => {
         <Form.Item
           label="Communication App"
           name="communication_app"
-          rules={[
-            { required: true, message: 'Communication app is required.' },
-          ]}
+          // rules={[
+          //   { required: true, message: 'Communication app is required.' },
+          // ]}
         >
           <Input
             type="text"
@@ -187,9 +187,9 @@ const ProfileForm = props => {
         <Form.Item
           label="General Availability"
           name="general_availability"
-          rules={[
-            { required: true, message: 'General Availability is required' },
-          ]}
+          // rules={[
+          //   { required: true, message: 'General Availability is required' },
+          // ]}
         >
           <Input
             type="text"
@@ -202,9 +202,9 @@ const ProfileForm = props => {
         <Form.Item
           label="Mentor Program Goals"
           name="goals_mentor_program"
-          rules={[
-            { required: true, message: 'Goals of mentor program is required.' },
-          ]}
+          // rules={[
+          //   { required: true, message: 'Goals of mentor program is required.' },
+          // ]}
         >
           <Input
             type="text"
@@ -216,7 +216,7 @@ const ProfileForm = props => {
         <Form.Item
           label="Personal Goals"
           name="goals_personal"
-          rules={[{ required: true, message: 'Personal goals are required.' }]}
+          // rules={[{ required: true, message: 'Personal goals are required.' }]}
         >
           <Input
             type="text"
@@ -228,12 +228,12 @@ const ProfileForm = props => {
         <Form.Item
           label="School Community Goals"
           name="goals_school_community"
-          rules={[
-            {
-              required: true,
-              message: 'Goals for schools community are required.',
-            },
-          ]}
+          // rules={[
+          //   {
+          //     required: true,
+          //     message: 'Goals for schools community are required.',
+          //   },
+          // ]}
         >
           <Input
             type="text"
@@ -245,12 +245,12 @@ const ProfileForm = props => {
         <Form.Item
           label="Mentor Advisor Point of Contact"
           name="mentor_advisor_point_of_contact"
-          rules={[
-            {
-              required: true,
-              message: 'Mentor advisor point of contact is required.',
-            },
-          ]}
+          // rules={[
+          //   {
+          //     required: true,
+          //     message: 'Mentor advisor point of contact is required.',
+          //   },
+          // ]}
         >
           <Input
             type="text"
