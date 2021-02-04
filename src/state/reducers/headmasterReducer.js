@@ -7,6 +7,7 @@ import {
   FETCH_MENTEE_SUCCESS,
   FETCH_MENTEE_FAILURE,
   FETCH_MENTEE_START,
+  DELETE_MENTEE,
   FETCH_MENTOR_SUCCESS,
   EDIT_MENTOR,
 } from '../actions/actionTypes';
@@ -48,6 +49,9 @@ const reducer = (state = initialState, action) => {
     case FETCH_MENTEE_FAILURE:
       debugLog(action.type, action.payload);
       return { ...state };
+    case DELETE_MENTEE:
+      debugLog(action.type, action.payload);
+      return state.filter((data, i) => i !== action.id);
     case FETCH_MENTOR_SUCCESS:
       debugLog(action.type, action.payload);
       return {
