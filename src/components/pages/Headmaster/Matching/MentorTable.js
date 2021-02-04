@@ -5,6 +5,7 @@ import { Editors } from 'react-data-grid-addons';
 const { DropDownEditor } = Editors;
 
 const MentorTable = ({ mentors, mentees }) => {
+  console.log('mentor table', mentors);
   const [menteeFilter, setMenteeFilter] = useState(mentors);
   const [mentorId, setMentorId] = useState(9);
   const initialRows = mentors.map((mentor, index) => {
@@ -15,6 +16,9 @@ const MentorTable = ({ mentors, mentees }) => {
       as_early_as: mentor.availability.as_early_as,
       as_late_as: mentor.availability.as_late_as,
       mentee: '',
+      save: (
+        <button onClick={() => console.log('save this pair')}>save pair</button>
+      ),
     };
   });
   const [rows, setRows] = useState(initialRows);
@@ -73,6 +77,7 @@ const MentorTable = ({ mentors, mentees }) => {
         },
       },
     },
+    { key: 'save', name: 'Save' },
   ];
   console.log(rows);
 
