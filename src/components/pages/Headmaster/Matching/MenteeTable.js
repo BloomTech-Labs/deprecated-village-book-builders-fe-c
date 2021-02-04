@@ -1,6 +1,6 @@
-import React, { useState } from "react";
-import ReactDataGrid from "react-data-grid";
-import { Editors } from "react-data-grid-addons";
+import React, { useState } from 'react';
+import ReactDataGrid from 'react-data-grid';
+import { Editors } from 'react-data-grid-addons';
 
 const { DropDownEditor } = Editors;
 
@@ -14,19 +14,22 @@ const MenteeTable = ({ mentors, mentees }) => {
       last_name: mentee.last_name,
       as_early_as: mentee.availability.as_early_as,
       as_late_as: mentee.availability.as_late_as,
-      mentor: ""
+      mentor: '',
+      save: (
+        <button onClick={() => console.log('save this pair')}>save pair</button>
+      ),
     };
   });
   const [rows, setRows] = useState(initialRows);
 
-  let potential_match = "";
+  let potential_match = '';
   let list_of_matches = {};
-  mentees.filter((mentee) => {
-    mentors.filter((mentor) => {
-      let student_start_hour = mentee.availability.as_early_as.split(":")[0];
-      let student_end_hour = mentee.availability.as_late_as.split(":")[0];
-      let mentor_start_hour = mentor.availability.as_early_as.split(":")[0];
-      let mentor_end_hour = mentor.availability.as_late_as.split(":")[0];
+  mentees.filter(mentee => {
+    mentors.filter(mentor => {
+      let student_start_hour = mentee.availability.as_early_as.split(':')[0];
+      let student_end_hour = mentee.availability.as_late_as.split(':')[0];
+      let mentor_start_hour = mentor.availability.as_early_as.split(':')[0];
+      let mentor_end_hour = mentor.availability.as_late_as.split(':')[0];
 
       if (
         student_start_hour >= mentor_start_hour &&
@@ -40,7 +43,7 @@ const MenteeTable = ({ mentors, mentees }) => {
           list_of_matches[mentee.id] = [potential_match];
         }
       } else {
-        console.log("no match");
+        console.log('no match');
       }
       return list_of_matches;
     });
@@ -56,23 +59,24 @@ const MenteeTable = ({ mentors, mentees }) => {
 
   const columns = [
     {
-      key: "id",
-      name: "ID"
+      key: 'id',
+      name: 'ID',
     },
-    { key: "first_name", name: "First Name" },
-    { key: "last_name", name: "Last Name" },
-    { key: "as_early_as", name: "From" },
-    { key: "as_late_as", name: "To" },
+    { key: 'first_name', name: 'First Name' },
+    { key: 'last_name', name: 'Last Name' },
+    { key: 'as_early_as', name: 'From' },
+    { key: 'as_late_as', name: 'To' },
     {
-      key: "mentor",
-      name: "Mentor",
+      key: 'mentor',
+      name: 'Mentor',
       editor: PairChoicesEditor,
       events: {
-        onDoubleClick: function (ev, args) {
+        onDoubleClick: function(ev, args) {
           setMenteeId(args.rowId);
-        }
-      }
-    }
+        },
+      },
+    },
+    { key: 'save', name: 'Save' },
   ];
   console.log(rows);
 
@@ -86,11 +90,11 @@ const MenteeTable = ({ mentors, mentees }) => {
 
   return (
     <>
-      <h5 style={{ textAlign: "center" }}>Mentees:</h5>
+      <h5 style={{ textAlign: 'center' }}>Mentees:</h5>
       <ReactDataGrid
         columns={columns}
         toolbar="true"
-        rowGetter={(i) => rows[i]}
+        rowGetter={i => rows[i]}
         rowsCount={rows.length}
         onGridRowsUpdated={onGridRowsUpdated}
         enableCellSelect={true}
