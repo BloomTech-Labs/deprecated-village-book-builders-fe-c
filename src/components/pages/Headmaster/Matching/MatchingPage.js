@@ -86,12 +86,10 @@ const MatchingPage = props => {
 
   useEffect(() => {
     props.fetchMentees();
-    console.log('showmodal', showModal);
   }, [showModal]);
 
   useEffect(() => {
     props.fetchMentors();
-    console.log('showmodal', showModal);
   }, [showModal]);
 
   const toggleView = event => {

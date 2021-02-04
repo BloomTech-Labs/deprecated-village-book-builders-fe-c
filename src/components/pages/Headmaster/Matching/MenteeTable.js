@@ -1,12 +1,26 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import ReactDataGrid from 'react-data-grid';
 import { Editors } from 'react-data-grid-addons';
+import { axiosWithAuth } from '../../../../utils/axiosWithAuth';
 
 const { DropDownEditor } = Editors;
 
 const MenteeTable = ({ mentors, mentees }) => {
   const [menteeFilter, setMenteeFilter] = useState(mentees);
   const [menteeId, setMenteeId] = useState(9);
+  const [pairs, setPairs] = useState([]);
+
+  useEffect(() => {
+    axiosWithAuth()
+      .get(`pair/`)
+      .then(res => {
+        setPairs(res.data);
+      })
+      .catch(error => console.dir(error));
+  }, []);
+
+  console.log('active pairs', pairs);
+
   const initialRows = mentees.map((mentee, index) => {
     return {
       id: mentee.id,
