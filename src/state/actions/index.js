@@ -106,16 +106,45 @@ export const fetchMentees = () => dispatch => {
     );
 };
 
+// action for adding new mentee
+export const addMentee = data => dispatch => {
+  console.log('addMentee fired:', data);
+  axiosWithAuth()
+    .post(`/mentee`, data)
+    .then(res => {
+      console.log('add mentee', res.data);
+      dispatch({
+        type: actionTypes.ADD_MENTEE,
+        payload: res.data,
+      });
+    })
+    .catch(err => console.dir(err));
+};
+
 // adding in an action for sending an edited mentee
 export const editMentee = (id, data) => dispatch => {
   console.log('editMentee fired:', id, data);
   axiosWithAuth()
-    .put(`/mentee/${id}`, data)
+    .put(`/mentee/${id}`, JSON.stringify(data))
     .then(res => {
-      console.log(res.data);
+      console.log('editing mentee', res.data);
       dispatch({
         type: actionTypes.EDIT_MENTEE,
         payload: res.data,
+      });
+    })
+    .catch(err => console.dir(err));
+};
+
+export const deleteMentee = id => dispatch => {
+  console.log('delete the mentee');
+  axiosWithAuth()
+    .delete(`/mentee/${id}`)
+    .then(res => {
+      console.log('deleted', res.data);
+      dispatch({
+        type: actionTypes.DELETE_MENTEE,
+        id: id,
       });
     })
     .catch(err => console.dir(err));
@@ -205,6 +234,20 @@ export const addLibrary = (id, data) => dispatch => {
       dispatch({
         type: actionTypes.ADD_LIBRARY,
         payload: res.data,
+      });
+    })
+    .catch(err => console.dir(err));
+};
+
+export const deleteLibrary = id => dispatch => {
+  console.log('delete the library');
+  axiosWithAuth()
+    .delete(`/library/${id}`)
+    .then(res => {
+      console.log('deleted', res.data);
+      dispatch({
+        type: actionTypes.DELETE_LIBRARY,
+        id: id,
       });
     })
     .catch(err => console.dir(err));

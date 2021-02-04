@@ -15,6 +15,7 @@ import {
 } from '../../../../state/actions/index';
 import MenteeForm from './MenteeForm';
 import MenteeProfile from './MenteeProfile';
+import { useHistory } from 'react-router-dom';
 
 const Mentees = props => {
   let menteesSelection = [...props.mentees];
@@ -23,6 +24,8 @@ const Mentees = props => {
   const [editing, setEditing] = useState(false);
   const [currentMentee, setCurrentMentee] = useState({});
   const [searchBy, setSearchBy] = useState('Name');
+  const history = useHistory();
+
   const menteeStyles = {
     newMentee: {
       border: 'none',
@@ -178,6 +181,10 @@ const Mentees = props => {
     console.log('showmodal', showModal);
   }, [showModal]);
 
+  const newMentee = () => {
+    history.push('/new-mentee');
+  };
+
   return (
     <div className="menteeContainer">
       <h1 id="menteeTittle">Mentee Management</h1>
@@ -194,7 +201,7 @@ const Mentees = props => {
           <button
             className="l2-btn btn"
             style={menteeStyles.newMentee}
-            onClick={e => console.log(e)}
+            onClick={newMentee}
           >
             {/* Create New Mentee  */}
             Create New Mentee <PlusCircleOutlined />

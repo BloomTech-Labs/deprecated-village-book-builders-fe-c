@@ -19,7 +19,7 @@ const baseURL = 'https://cors-anywhere.herokuapp.com/http://54.158.134.245/api';
 
 const initialState = {
   name: '',
-  count_students_currently_enrolled: '',
+  count_mentees_currently_enrolled: '',
   count_teachers: '',
   id: '',
   notes: '',
@@ -52,7 +52,9 @@ const SchoolForm = props => {
   }, []);
 
   const handleSubmit = async () => {
-    props.editSchool(params, formData);
+    let jsonified = formData;
+    jsonified.dynamic_questions = JSON.stringify(formData.dynamic_questions);
+    props.editSchool(params, jsonified);
     history.push('/school-village');
   };
 
@@ -69,12 +71,12 @@ const SchoolForm = props => {
       <Form onFinish={handleSubmit} form={form} {...layout}>
         <Form.Item
           label="Headmaster"
-          name="headmaster"
+          name="name"
           rules={[{ required: true, message: 'Headmaster name is required.' }]}
         >
           <Input
             type="text"
-            name="headmaster"
+            name="name"
             defaultValue="Mr Headmaster"
             value={formData.headmaster}
             onChange={e => handleChange(e)}
@@ -116,13 +118,13 @@ const SchoolForm = props => {
 
         <Form.Item
           label="Students Currently Enrolled"
-          name="count_students_currently_enrolled"
+          name="count_mentees_currently_enrolled"
           rules={[{ required: true, message: 'Student count is required.' }]}
         >
           <Input
             type="text"
-            name="count_students_currently_enrolled"
-            value={formData.count_students_currently_enrolled}
+            name="count_mentees_currently_enrolled"
+            value={formData.count_mentees_currently_enrolled}
             onChange={e => handleChange(e)}
           />
         </Form.Item>

@@ -19,7 +19,7 @@ const baseURL = 'https://cors-anywhere.herokuapp.com/http://54.158.134.245/api';
 
 //! use real name when full server is developed
 const initialState = {
-  headmaster: 'Mr Headmaster',
+  name: 'Mr Headmaster',
   headmasters: [],
   schools: [],
   village_contact_name: '',
@@ -70,12 +70,12 @@ const VillageForm = props => {
       <Form onFinish={handleSubmit} form={form} {...layout}>
         <Form.Item
           label="Headmaster"
-          name="headmaster"
+          name="name"
           rules={[{ required: true, message: 'Headmaster name is required.' }]}
         >
           <Input
             type="text"
-            name="headmaster"
+            name="name"
             defaultValue="Mr Headmaster"
             value={formData.headmaster}
             onChange={e => handleChange(e)}
@@ -100,9 +100,9 @@ const VillageForm = props => {
         <Form.Item
           label="Village Contact Phone"
           name="village_contact_phone"
-          rules={[
-            { required: true, message: 'Village Contact Phone is required.' },
-          ]}
+          // rules={[
+          //   { required: true, message: 'Village Contact Phone is required.' },
+          // ]}
         >
           <Input
             type="text"
@@ -115,9 +115,9 @@ const VillageForm = props => {
         <Form.Item
           label="Education Contact Name"
           name="educationContactName"
-          rules={[
-            { required: true, message: 'Education Contact Name is required.' },
-          ]}
+          // rules={[
+          //   { required: true, message: 'Education Contact Name is required.' },
+          // ]}
         >
           <Input
             type="text"
@@ -130,9 +130,9 @@ const VillageForm = props => {
         <Form.Item
           label="Education Contact Phone"
           name="educationContactPhone"
-          rules={[
-            { required: true, message: 'Education Contact Phone is required.' },
-          ]}
+          // rules={[
+          //   { required: true, message: 'Education Contact Phone is required.' },
+          // ]}
         >
           <Input
             type="text"
@@ -145,14 +145,14 @@ const VillageForm = props => {
         <Form.Item
           label="Education Contact Email"
           name="educationContactEmail"
-          rules={[{ required: true, message: 'Education Email is required.' }]}
+          // rules={[{ required: true, message: 'Education Email is required.' }]}
         >
           <Input
             type="email"
             name="educationContactEmail"
             value={formData.educationContactEmail}
             onChange={e => handleChange(e)}
-            required
+            // required
           />
         </Form.Item>
         <Form.Item label="Notes" name="notes">
