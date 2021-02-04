@@ -7,6 +7,7 @@ import {
   checkToken,
   fetchMentees,
   editMentee,
+  fetchMentors,
 } from '../../../../state/actions/index';
 import MenteeTable from './MenteeTable';
 import MentorTable from './MentorTable';
@@ -14,8 +15,8 @@ import { useHistory } from 'react-router-dom';
 
 const MatchingPage = props => {
   let mentees = [...props.mentees];
-  let mentors = [...props.mentees];
-  console.log('second', props.mentees);
+  let mentors = [...props.mentors];
+  console.log('second', props);
 
   const [search, setSearch] = useState('');
   const [showModal, setShowModal] = useState(false);
@@ -88,6 +89,11 @@ const MatchingPage = props => {
     console.log('showmodal', showModal);
   }, [showModal]);
 
+  useEffect(() => {
+    props.fetchMentors();
+    console.log('showmodal', showModal);
+  }, [showModal]);
+
   const toggleView = event => {
     setToggle(!toggle);
   };
@@ -98,7 +104,7 @@ const MatchingPage = props => {
       <div className="menteeContainer">
         <h1 id="menteeTittle">Mentee Management</h1>
         <div className="exploreWrapper">
-          <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+          <div style={{ display: 'flex', justifyContent: 'center' }}>
             <Input.Search
               data-testid="search-bar"
               addonBefore={selectBefore}
@@ -112,10 +118,9 @@ const MatchingPage = props => {
         </div>
 
         <div className="matchApp">
-          <button onClick={toggleView}>toggle mentor/mentee view</button>
-          <br></br>
-          <br></br>
-          <button>Sort it!</button>
+          <div style={{ display: 'flex', justifyContent: 'center' }}>
+            <button onClick={toggleView}>toggle mentor/mentee view</button>
+          </div>
           {toggle ? (
             // <div>mentee table</div>
             <>
@@ -136,6 +141,7 @@ const MatchingPage = props => {
 const mapStateToProps = state => {
   return {
     mentees: state.headmasterReducer.mentees,
+    mentors: state.headmasterReducer.mentors,
     userId: state.authReducer.userId,
     role: state.authReducer.role,
   };
@@ -145,6 +151,7 @@ export default connect(mapStateToProps, {
   checkToken,
   fetchMentees,
   editMentee,
+  fetchMentors,
 })(MatchingPage);
 
 // import React, { useEffect, useState } from "react";
