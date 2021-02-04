@@ -34,9 +34,6 @@ const App = ({ role, checkToken }) => {
         <Route path="/new-mentee">
           <MenteeForm />
         </Route>
-        <Route path="/mentor-pairings">
-          <MatchingPage />
-        </Route>
         {/*Teacher Routes*/}
         <Route path="/teacher/edit/:id">
           <TeacherEditProfile />
