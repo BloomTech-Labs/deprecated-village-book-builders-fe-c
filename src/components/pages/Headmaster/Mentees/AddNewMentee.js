@@ -69,6 +69,7 @@ export default function AddNewMentee(props) {
   };
 
   const onFormSubmit = () => {
+    // ON SUBMIT HERE
     const {
       first_name,
       last_name,
@@ -81,6 +82,7 @@ export default function AddNewMentee(props) {
       time_zone,
       secondary_language,
     } = menteeForm;
+
     const dob = new Date(
       `${menteeForm['dob_year']}-${menteeForm['dob_month']}-${menteeForm['dob_day']}`
     );
