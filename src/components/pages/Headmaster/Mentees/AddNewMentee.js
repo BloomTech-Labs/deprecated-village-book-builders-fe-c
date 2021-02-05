@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Button, Modal, Row, Col, Form, Input, Select } from 'antd';
-import { PlusOutlined } from '@ant-design/icons';
+import { PlusCircleOutlined } from '@ant-design/icons';
 import { axiosWithAuth } from '../../../../utils/axiosWithAuth';
 
 import ModalLibraryUsers from './ModalLibraryUsers';
@@ -26,6 +26,7 @@ const userForm = {
 };
 
 export default function AddNewMentee(props) {
+  const { btnStyle } = props;
   const [libraryUsers, setLibraryUsers] = useState(null);
   const [visible, setVisible] = useState(false);
   const [modalContentType, setModalContentType] = useState('library');
@@ -33,6 +34,10 @@ export default function AddNewMentee(props) {
 
   const openModal = () => setVisible(true);
   const closeModal = () => setVisible(false);
+
+  // const onSubmitForm = (form) => {
+  //   const { first_name, last_name, email, }
+  // }
 
   const onBtnClick = () => {
     // When HeadMaster clicks "Add New Mentee"
@@ -47,9 +52,10 @@ export default function AddNewMentee(props) {
 
   useEffect(() => {
     axiosWithAuth()
-      .get('/users/library')
+      .get('/mentee')
       .then(res => {
-        setLibraryUsers(res.data);
+        const mentees = res.data;
+        setLibraryUsers(mentees.filter(mentee => !mentee.active));
       })
       .catch(err => {
         console.log(err);
@@ -62,10 +68,58 @@ export default function AddNewMentee(props) {
     setModalContentType('form');
   };
 
+  const onFormSubmit = () => {
+    const {
+      first_name,
+      last_name,
+      email,
+      primary_language,
+      school_lvl,
+      password,
+      subjects,
+      home_country,
+      time_zone,
+      secondary_language,
+    } = menteeForm;
+    const dob = new Date(
+      `${menteeForm['dob_year']}-${menteeForm['dob_month']}-${menteeForm['dob_day']}`
+    );
+    const phone = `${userForm['phone_code']}-${userForm['phone']}`;
+
+    const cleanedUser = {
+      // For User role in Database
+      email,
+      password,
+      role: 'mentee',
+    };
+
+    const cleanedMentee = {
+      // For Mentee role in Database
+      active: true,
+      first_name,
+      last_name,
+      email,
+      dob,
+      primary_language,
+      secondary_language, // We need to make a new column in Database, as requested by Stakeholder
+      school_lvl,
+      phone, // We need to make a new column in Database, as requested by Stakeholder
+      subjects, // We need to make a new column in Database, as requested by Stakeholder
+      home_country, // We need to make a new column in Database, as requested by Stakeholder
+      time_zone, // We need to make a new column in Database, as requested by Stakeholder
+    };
+
+    alert('ON SUBMIT GOES HERE');
+  };
+
   const onFormChange = evt => {
     // onChange when HeadMaster is editing a User with a Library Role
     const { name, value } = evt.target;
-    setMenteeForm({ ...menteeForm, [name]: value });
+    if (name === 'phone_code') {
+      setMenteeForm({ ...menteeForm, [name]: `+${value}` });
+    } else {
+      setMenteeForm({ ...menteeForm, [name]: value });
+    }
   };
 
   const onSelectChange = (val, name) => {
@@ -86,12 +140,8 @@ export default function AddNewMentee(props) {
 
   return (
     <>
-      <Button
-        style={{ width: '80%', marginBottom: '10pt', alignSelf: 'center' }}
-        align="center"
-        onClick={onBtnClick}
-      >
-        <PlusOutlined /> Add New Student
+      <Button style={btnStyle} align="center" onClick={onBtnClick}>
+        <PlusCircleOutlined /> Add New Student
       </Button>
       <Modal
         title="Add New Student"
@@ -110,6 +160,7 @@ export default function AddNewMentee(props) {
             form={menteeForm}
             onFormChange={onFormChange}
             onSelectChange={onSelectChange}
+            onFormSubmit={onFormSubmit}
           />
         )}
       </Modal>

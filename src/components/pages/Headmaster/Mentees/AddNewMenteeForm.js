@@ -310,18 +310,50 @@ const countries = {
 const countriesArr = Object.values(countries);
 
 export default function AddNewMenteeForm(props) {
-  const { form, onFormChange, onSelectChange } = props;
+  const { form, onFormChange, onSelectChange, onFormSubmit } = props;
 
   const onSubmitFailed = errorInfo => {
     console.log(`Failed: ${errorInfo}`);
   };
 
   const countryCodePrefix = (
-    <Form.Item name="countryCode" noStyle>
+    <Form.Item
+      name="countryCode"
+      label="Country Code"
+      rules={[
+        {
+          required: true,
+          message: 'Country Code is required.',
+        },
+        ({ getFieldValue }) => ({
+          validator(_, value) {
+            const cleanedCode = parseInt(value);
+            if (
+              (typeof value === 'string' && value.length < 1) ||
+              value.length > 3
+            ) {
+              return Promise.reject('Country Code must be 1 to 3 characters.');
+            } else {
+              if (cleanedCode.toString() === 'NaN') {
+                return Promise.reject(
+                  'Country code must contain only numbers.'
+                );
+              } else if (cleanedCode === 0) {
+                return Promise.reject(
+                  'Country code must be a number greater than 0'
+                );
+              } else {
+                return Promise.resolve();
+              }
+            }
+          },
+        }),
+      ]}
+      noStyle
+    >
       <Input
         style={{ width: 70 }}
-        placeholder="CC"
-        defaultValue="+1"
+        placeholder="1"
         name="phone_code"
         value={form['phone_code']}
         onChange={onFormChange}
@@ -336,6 +368,7 @@ export default function AddNewMenteeForm(props) {
       size="large"
       initialValues={{ email: form.email }}
       onSubmitFailed={onSubmitFailed}
+      onFinish={onFormSubmit}
     >
       <Row gutter={16}>
         <Col span={12}>
@@ -404,12 +437,24 @@ export default function AddNewMenteeForm(props) {
         <Col span={12}>
           <Form.Item
             name="phone"
-            label="Phone"
+            label="Country Code & Phone"
             rules={[
               {
                 required: true,
                 message: 'Phone Number is required.',
               },
+              ({ getFieldValue }) => ({
+                validator(_, value) {
+                  const cleanedValue = parseInt(value);
+                  if (cleanedValue.toString() === 'NaN') {
+                    return Promise.reject(
+                      'Please put numbers only for the phone field'
+                    );
+                  } else {
+                    return Promise.resolve();
+                  }
+                },
+              }),
             ]}
           >
             <Input

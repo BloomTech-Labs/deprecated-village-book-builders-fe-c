@@ -1,9 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { axiosWithAuth } from '../../../../utils/axiosWithAuth';
-<<<<<<< HEAD
-import { Button, Divider, Input, Modal, List, Avatar, Select } from 'antd';
 import { PlusOutlined } from '@ant-design/icons';
-=======
 import {
   InfoCircleOutlined,
   EditOutlined,
@@ -11,7 +8,6 @@ import {
 } from '@ant-design/icons';
 import { Divider, Input, Modal, List, Avatar, Select } from 'antd';
 import Button from '../../../common/Button';
->>>>>>> main
 import { connect } from 'react-redux';
 import {
   checkToken,
@@ -20,11 +16,7 @@ import {
 } from '../../../../state/actions/index';
 import MenteeForm from './MenteeForm';
 import MenteeProfile from './MenteeProfile';
-<<<<<<< HEAD
 import AddNewMentee from './AddNewMentee';
-=======
-
->>>>>>> main
 const Mentees = props => {
   let menteesSelection = [...props.mentees];
   const [search, setSearch] = useState('');
@@ -41,7 +33,7 @@ const Mentees = props => {
       webkitLetterSpacing: '2px',
       mozLetterSpacing: '2px',
       msLetterSpacing: '2px',
-      height: 'none',
+      height: '48px',
       letterSpacing: '2px',
       fontWeight: '400',
       fontSize: '22px',
@@ -191,23 +183,6 @@ const Mentees = props => {
     <div className="menteeContainer">
       <h1 id="menteeTittle">Mentee Management</h1>
       <div className="exploreWrapper">
-<<<<<<< HEAD
-        <Button
-          style={{ width: '80%', marginBottom: '10pt', alignSelf: 'center' }}
-          align="center"
-        >
-          <PlusOutlined /> Create New Library
-        </Button>
-        <AddNewMentee />
-        <Input.Search
-          data-testid="search-bar"
-          addonBefore={selectBefore}
-          value={search}
-          placeholder={searchBy}
-          style={{ width: '80%', alignSelf: 'center' }}
-          onChange={searchHandler}
-        />
-=======
         <div style={{ display: 'flex', justifyContent: 'space-between' }}>
           <Input.Search
             data-testid="search-bar"
@@ -217,16 +192,16 @@ const Mentees = props => {
             style={{ width: '80%', alignSelf: 'center' }}
             onChange={searchHandler}
           />
-          <button
+          {/* <button
             className="l2-btn btn"
             style={menteeStyles.newMentee}
             onClick={e => console.log(e)}
-          >
-            {/* Create New Mentee  */}
-            Create New Mentee <PlusCircleOutlined />
-          </button>
+          > */}
+          {/* Create New Mentee  */}
+          {/* Create New Mentee <PlusCircleOutlined />
+          </button> */}
+          <AddNewMentee btnStyle={menteeStyles.newMentee} />
         </div>
->>>>>>> main
         <Divider />
         <List
           itemLayout="horizontal"
