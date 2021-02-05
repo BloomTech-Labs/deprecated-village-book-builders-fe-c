@@ -18,7 +18,7 @@ export const checkToken = data => dispatch => {
 // -------------------------
 export const login = data => dispatch => {
   axios
-    .post(`${baseURL}/users/login`, data)
+    .post(`${URL}/users/login`, data)
     .then(res => {
       // console.log('LOGIN ACTION SUCCESS --> token', res.data);
       window.localStorage.setItem('token', res.data.token); // replacing access_token
@@ -31,7 +31,7 @@ export const login = data => dispatch => {
       console.log(
         'LOGIN ACTION FAILURE--> with this data & baseURL:',
         data,
-        baseURL
+        URL
       );
       console.dir(err);
     });

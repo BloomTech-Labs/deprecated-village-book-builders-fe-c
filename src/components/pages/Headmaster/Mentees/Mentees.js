@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { axiosWithAuth } from '../../../../utils/axiosWithAuth';
+import { PlusOutlined } from '@ant-design/icons';
 import {
   InfoCircleOutlined,
   EditOutlined,
@@ -15,7 +16,7 @@ import {
 } from '../../../../state/actions/index';
 import MenteeForm from './MenteeForm';
 import MenteeProfile from './MenteeProfile';
-
+import AddNewMentee from './AddNewMentee';
 const Mentees = props => {
   let menteesSelection = [...props.mentees];
   const [search, setSearch] = useState('');
@@ -32,7 +33,7 @@ const Mentees = props => {
       webkitLetterSpacing: '2px',
       mozLetterSpacing: '2px',
       msLetterSpacing: '2px',
-      height: 'none',
+      height: '48px',
       letterSpacing: '2px',
       fontWeight: '400',
       fontSize: '22px',
@@ -191,14 +192,15 @@ const Mentees = props => {
             style={{ width: '80%', alignSelf: 'center' }}
             onChange={searchHandler}
           />
-          <button
+          {/* <button
             className="l2-btn btn"
             style={menteeStyles.newMentee}
             onClick={e => console.log(e)}
-          >
-            {/* Create New Mentee  */}
-            Create New Mentee <PlusCircleOutlined />
-          </button>
+          > */}
+          {/* Create New Mentee  */}
+          {/* Create New Mentee <PlusCircleOutlined />
+          </button> */}
+          <AddNewMentee btnStyle={menteeStyles.newMentee} />
         </div>
         <Divider />
         <List
