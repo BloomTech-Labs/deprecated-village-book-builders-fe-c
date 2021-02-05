@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import ComponentTitles from '../../../components/common/ComponentTitles';
-import { Divider, Input, Modal, List, Avatar, Select } from 'antd';
+import { Divider, Input, Modal, List, Avatar, DatePicker } from 'antd';
 import { connect } from 'react-redux';
 import {
   checkToken,
@@ -14,10 +14,8 @@ const StudentOnboarding = props => {
   const [search, setSearch] = useState('');
   const [showModal, setShowModal] = useState(false);
   const [currentMentee, setCurrentMentee] = useState({});
-  const [searchBy, setSearchBy] = useState(
-    'Search for mentees by birthdate in YYYY-MM-DD format...'
-  );
-  const searchHandler = e => setSearch(e.target.value);
+
+  const searchHandler = e => setSearch(e);
 
   const menteeStyles = {
     newMentee: {
@@ -108,13 +106,13 @@ const StudentOnboarding = props => {
   return (
     <div>
       <ComponentTitles titleText="Student Onboarding" />
-      <Input.Search
+      <DatePicker
         data-testid="search-bar"
-        addonBefore={<p3>YYYY-MM-DD</p3>}
         value={search}
-        placeholder={searchBy}
-        style={{ width: '80%', alignSelf: 'center' }}
+        placeholder="Select your Date of Birth"
+        style={{ width: '20%', alignSelf: 'center' }}
         onChange={searchHandler}
+        format={'DD/MM/YYYY'}
       />
       <List
         itemLayout="horizontal"
@@ -126,13 +124,16 @@ const StudentOnboarding = props => {
                 <List.Item.Meta
                   avatar={<Avatar src={item.mentee_picture} />}
                   title={
-                    <a
-                      onClick={e => {
-                        moreInfoHandler(e, item);
-                      }}
-                    >
-                      {item.first_name + ' ' + item.last_name}
-                    </a>
+                    ((
+                      <a
+                        onClick={e => {
+                          moreInfoHandler(e, item);
+                        }}
+                      >
+                        {item.first_name + ' ' + item.last_name}
+                      </a>
+                    ),
+                    (<p>{item.d}</p>))
                   }
                   description={item.academic_description}
                 />
