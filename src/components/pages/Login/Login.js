@@ -69,6 +69,9 @@ const Login = ({ login, loggedIn }) => {
           <Button buttonText="Log In" type="submit" />
         </Form.Item>
       </Form>
+      <p>
+        New student? <a href="student-onboarding">Click here!</a>
+      </p>
       <h2>Temporary logins:</h2>
       <p>Account info for testing:</p>
       <p>"admin@admin.com" - "password"</p>
