@@ -1,22 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { axiosWithAuth } from '../../../utils/axiosWithAuth';
-import moment from 'moment';
-import {
-  InfoCircleOutlined,
-  EditOutlined,
-  PlusCircleOutlined,
-  CheckOutlined,
-  CloseOutlined,
-} from '@ant-design/icons';
+import { CheckOutlined, CloseOutlined } from '@ant-design/icons';
 import { Divider, Input, Modal, List, Avatar, Select, DatePicker } from 'antd';
-import Button from '../../common/Button';
 import { connect } from 'react-redux';
 import {
   checkToken,
   fetchMentees,
   editMentee,
 } from '../../../state/actions/index';
-import MenteeForm from '../Headmaster/Mentees/MenteeForm';
 import MenteeProfile from '../Headmaster/Mentees/MenteeProfile';
 import { useHistory } from 'react-router-dom';
 
@@ -68,7 +58,6 @@ const StudentOnboarding = props => {
   };
 
   const confirmStudent = async () => {
-    console.log('confirming student', currentMentee);
     const menteeToConfirm = JSON.parse(JSON.stringify(currentMentee));
     // menteeToConfirm.active = true
     // console.log(menteeToConfirm)
@@ -88,14 +77,14 @@ const StudentOnboarding = props => {
       5,
       7
     )}/${item.dob.slice(0, 4)}`;
-    console.log(formattedDob, search._i);
+    // console.log(formattedDob, search._i);
     return formattedDob === search._i;
   });
 
   useEffect(() => {
     props.fetchMentees();
-    console.log('showmodal', showModal);
-    console.log(currentMentee);
+    // console.log('showmodal', showModal);
+    // console.log(currentMentee);
   }, [showModal]);
 
   return (
@@ -130,7 +119,6 @@ const StudentOnboarding = props => {
                   <div className="listItemButtonWrapper">
                     <button
                       onClick={e => {
-                        console.log('Confirming student...');
                         moreInfoHandler(e, item);
                       }}
                       style={menteeStyles.confirmOnboarding}
